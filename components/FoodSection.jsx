@@ -1,0 +1,261 @@
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import food1 from "../images/food1.png";
+
+import {
+  ChefHat,
+  Utensils,
+  Heart,
+  UserCheck,
+  Clock,
+  Leaf,
+  Scale,
+  ArrowRight,
+} from "lucide-react";
+import { CTAModal } from "./CTAModal";
+import AnimatedCTAButton from "./AnimatedCTAButton";
+
+export default function FoodSection() {
+  const [isExploreOpen, setIsExploreOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("featured");
+
+  const topMeals = [
+    {
+      id: "highProtein",
+      title: "High Protein Power Bowl",
+      description: "Packed with lean proteins and essential nutrients",
+      calories: 450,
+      preparationTime: "25 mins",
+      rating: 4.9,
+      reviewCount: 128,
+      macros: { protein: 35, carbs: 30, fat: 15 },
+      image: food1,
+      tags: ["Muscle Gain", "High Protein"],
+      bestFor: "Strength Training",
+    },
+    {
+      id: "balancedMeal",
+      title: "Balanced Nutrition Plate",
+      description: "Perfect macronutrient balance for optimal health",
+      calories: 500,
+      preparationTime: "20 mins",
+      rating: 4.8,
+      reviewCount: 96,
+      macros: { protein: 25, carbs: 40, fat: 20 },
+      image: food1,
+      tags: ["Balanced Diet", "Weight Management"],
+      bestFor: "Overall Wellness",
+    },
+    {
+      id: "veggiePower",
+      title: "Plant-Powered Delight",
+      description: "Nutrient-rich vegetarian meal with complete proteins",
+      calories: 400,
+      preparationTime: "15 mins",
+      rating: 4.7,
+      reviewCount: 84,
+      macros: { protein: 20, carbs: 50, fat: 12 },
+      image: food1,
+      tags: ["Vegetarian", "Low Calorie"],
+      bestFor: "Plant-Based Goals",
+    },
+  ];
+
+  const benefits = [
+    {
+      icon: <Utensils className="w-6 h-6" />,
+      title: "Custom Prepared",
+      description:
+        "Every meal tailored to your specific nutritional needs and preferences",
+    },
+    {
+      icon: <Heart className="w-6 h-6" />,
+      title: "Health Focused",
+      description:
+        "Scientifically balanced nutrition supporting your wellness journey",
+    },
+    {
+      icon: <UserCheck className="w-6 h-6" />,
+      title: "Expert Designed",
+      description: "Crafted by certified nutritionists and professional chefs",
+    },
+    {
+      icon: <Clock className="w-6 h-6" />,
+      title: "Fresh & Timely",
+      description: "Made fresh daily and delivered according to your schedule",
+    },
+    {
+      icon: <Leaf className="w-6 h-6" />,
+      title: "Quality Ingredients",
+      description: "Premium, locally-sourced ingredients for optimal nutrition",
+    },
+    {
+      icon: <Scale className="w-6 h-6" />,
+      title: "Portion Control",
+      description: "Precisely measured portions to meet your goals",
+    },
+  ];
+
+  return (
+    <section id="kitchen" className="py-20 ">
+      <div className="container mx-auto px-4">
+        {/* Enhanced Header Section */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-6">
+            <ChefHat className="w-10 h-10 text-primary" />
+          </div>
+          <h2 className="text-5xl font-bold mb-6 ">HopeFit Wellness Kitchen</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+            Experience the perfect fusion of science and culinary artistry at
+            HopeFit Wellness. Our in-house kitchen crafts personalized meals
+            that not only tantalize your taste buds but fuel your fitness
+            journey with precision.
+          </p>
+
+          {/* Benefits Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto overflow-hidden">
+            {benefits.map((benefit, index) => (
+              <div
+                key={index}
+                className="p-6 bg-purple-50 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="bg-purple-100  flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-primary/10 text-purple-600">
+                    {benefit.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm">
+                      {benefit.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Featured Meals Section */}
+        <div className="mb-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-4">Featured Meal Plans</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Discover our chef-crafted meal plans, each designed to support
+              different fitness goals while delivering exceptional taste and
+              nutrition.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 overflow-hidden">
+            {topMeals.map((meal) => (
+              <div
+                key={meal.id}
+                className="  rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              >
+                <div className="relative h-48 w-full group">
+                  <Image
+                    src={meal.image.src}
+                    alt={meal.title}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <p className="font-medium">Best For:</p>
+                      <p className="text-sm">{meal.bestFor}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-semibold flex-1">
+                      {meal.title}
+                    </h3>
+                    <span className="flex items-center gap-1 text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
+                      <Clock className="w-4 h-4" />
+                      {meal.preparationTime}
+                    </span>
+                  </div>
+
+                  <p className="text-gray-600 mb-4">{meal.description}</p>
+
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex items-center gap-1">
+                      <span className="text-yellow-400">★</span>
+                      <span className="font-medium">{meal.rating}</span>
+                    </div>
+                    <span className="text-gray-400">|</span>
+                    <span className="text-sm text-gray-500">
+                      {meal.reviewCount} reviews
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-3 text-center bg-gray-50 rounded-lg p-4">
+                    <div className="border-r border-gray-200">
+                      <span className="font-bold block text-lg">
+                        {meal.macros.protein}g
+                      </span>
+                      <span className="text-xs text-gray-500">Protein</span>
+                    </div>
+                    <div className="border-r border-gray-200">
+                      <span className="font-bold block text-lg">
+                        {meal.macros.carbs}g
+                      </span>
+                      <span className="text-xs text-gray-500">Carbs</span>
+                    </div>
+                    <div>
+                      <span className="font-bold block text-lg">
+                        {meal.macros.fat}g
+                      </span>
+                      <span className="text-xs text-gray-500">Fat</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Enhanced Final Call to Action */}
+        <div className="text-center bg-gradient-to-r from-primary/5 to-primary/10 py-16 px-6 rounded-3xl">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+            <AnimatedCTAButton
+              showModal={true}
+              sectionName="Learn About Our Kitchen"
+              className="bg-white hover:bg-gray-50 text-primary border-2 border-primary group relative overflow-hidden"
+              size="lg"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Learn More
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </span>
+            </AnimatedCTAButton>
+            <AnimatedCTAButton
+              showModal={true}
+              sectionName="Start Your Meal Plan"
+              className="bg-primary hover:bg-primary/90 group relative overflow-hidden"
+              size="lg"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Start Your Meal Plan
+                <Utensils className="w-5 h-5 transition-transform group-hover:rotate-12" />
+              </span>
+            </AnimatedCTAButton>
+          </div>
+          <h3 className="text-3xl font-bold mb-6">
+            Ready to Transform Your Nutrition?
+          </h3>
+          <p className="text-gray-600 mb-10 max-w-2xl mx-auto">
+            Join HopeFit Wellness today and experience the perfect balance of
+            taste and nutrition. Our expert team is ready to craft your
+            personalized meal plan.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
