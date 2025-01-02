@@ -1,12 +1,11 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { ChefHat, Clock, Search, Filter, X } from "lucide-react";
+import { ChefHat, Search } from "lucide-react";
 
 export default function KitchenPage() {
   const [activeTab, setActiveTab] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [showFilters, setShowFilters] = useState(false);
 
   const meals = {
     breakfast: [
@@ -132,20 +131,20 @@ export default function KitchenPage() {
   const filteredMeals = useMemo(() => {
     let filtered = activeTab === "all" ? allMeals : meals[activeTab];
 
-    // Filter by category
-    if (selectedCategory !== "all") {
-      filtered = filtered.filter((meal) => meal.category === selectedCategory);
-    }
-
-    // Filter by search query
-    if (searchQuery) {
+    // Filter by category and search query
+    if (searchQuery || selectedCategory !== "all") {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(
-        (meal) =>
+      filtered = filtered.filter((meal) => {
+        const matchesCategory =
+          selectedCategory === "all" || meal.category === selectedCategory;
+        const matchesSearch =
+          !searchQuery ||
           meal.title.toLowerCase().includes(query) ||
           meal.description.toLowerCase().includes(query) ||
-          meal.tags.some((tag) => tag.toLowerCase().includes(query))
-      );
+          meal.tags.some((tag) => tag.toLowerCase().includes(query));
+
+        return matchesCategory && matchesSearch;
+      });
     }
 
     return filtered;
@@ -178,7 +177,6 @@ export default function KitchenPage() {
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-xl font-semibold">{meal.title}</h3>
           <span className="flex items-center gap-1 text-sm bg-purple-100 text-purple-600 px-3 py-1 rounded-full">
-            <Clock className="w-4 h-4" />
             {meal.preparationTime}
           </span>
         </div>
@@ -236,46 +234,28 @@ export default function KitchenPage() {
         </div>
       </div>
 
-      {/* Search and Filter Section */}
+      {/* Unified Search and Filter Section */}
       <div className="container mx-auto px-4 py-8">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row gap-4 mb-6 justify-center items-center">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search meals..."
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+        <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search meals..."
+                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
             </div>
-            <button
-              className={`flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 ${
-                showFilters ? "bg-purple-50 border-purple-200" : ""
-              }`}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              {showFilters ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Filter className="w-5 h-5" />
-              )}
-              {showFilters ? "Close Filters" : "Filters"}
-            </button>
-          </div>
-        </div>
-
-        {/* Filter Options */}
-        {showFilters && (
-          <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
-            <h3 className="font-medium mb-3">Dietary Preferences</h3>
             <div className="flex flex-wrap gap-2">
-              {["all", "vegan", "vegetarian", "non-vegetarian", "custom"].map(
+              {["all", "vegan", "vegetarian", "non-vegetarian"].map(
                 (category) => (
                   <button
                     key={category}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                    className={`px-6 py-3 rounded-lg text-sm font-medium transition-colors duration-200 ${
                       selectedCategory === category
                         ? "bg-purple-600 text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -290,7 +270,7 @@ export default function KitchenPage() {
               )}
             </div>
           </div>
-        )}
+        </div>
 
         {/* Tabs Section */}
         <div className="mb-8">

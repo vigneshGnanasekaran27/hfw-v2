@@ -135,24 +135,28 @@ const FounderSection = () => {
                 <a
                   href={founderInfo.social.linkedin}
                   className="p-2 rounded-full bg-gray-100 hover:bg-primary/10 transition-colors"
+                  title="LinkedIn"
                 >
                   <Linkedin className="w-6 h-6 text-gray-600 hover:text-primary" />
                 </a>
                 <a
                   href={founderInfo.social.twitter}
                   className="p-2 rounded-full bg-gray-100 hover:bg-primary/10 transition-colors"
+                  title="Twitter"
                 >
                   <X className="w-6 h-6 text-gray-600 hover:text-primary" />
                 </a>
                 <a
                   href={founderInfo.social.instagram}
                   className="p-2 rounded-full bg-gray-100 hover:bg-primary/10 transition-colors"
+                  title="Instagram"
                 >
                   <Instagram className="w-6 h-6 text-gray-600 hover:text-primary" />
                 </a>
                 <a
                   href={founderInfo.social.youtube}
                   className="p-2 rounded-full bg-gray-100 hover:bg-primary/10 transition-colors"
+                  title="Youtube"
                 >
                   <Youtube className="w-6 h-6 text-gray-600 hover:text-primary" />
                 </a>
