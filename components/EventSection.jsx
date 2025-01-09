@@ -70,7 +70,10 @@ export default function EventSection() {
                 }
               `}
             >
-              <div className="  rounded-lg shadow-2xl flex h-[400px] overflow-hidden border-2 border-white">
+              <div
+                className=" rounded-lg shadow-2xl flex h-[400px] overflow-hidden dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]
+  "
+              >
                 {/* Left Side - Icon and Description */}
                 <div className="w-1/2 p-8 flex flex-col justify-center">
                   <div className="mb-6 flex items-center">
@@ -110,7 +113,7 @@ export default function EventSection() {
               >
                 <button
                   className="
-                    px-12 py-4 bg-primary   
+                    px-12 py-4     
                     rounded-full text-lg font-semibold
                     hover:bg-primary-dark transition duration-300
                     flex items-center justify-center mx-auto

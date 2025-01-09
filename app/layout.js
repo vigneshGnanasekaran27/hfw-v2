@@ -3,6 +3,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import Home from "@/components/Home";
+import ConstructionBanner from "@/components/ConstructionBanner";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
           />
           <ThemeToggle />
           <ScrollToTopButton />
+          <ConstructionBanner />
           {children}
         </div>
       </body>

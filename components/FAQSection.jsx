@@ -35,8 +35,10 @@ const FAQSection = () => {
         </div>
         {faqs.slice(0, showMore ? faqs.length : 3).map((faq, index) => (
           <div
-            className={`faqItem border-b border-gray-300 py-4 transition-all duration-300 ${
-              expandedFAQ.includes(index) ? "  shadow-md rounded-md p-4" : ""
+            className={`faqItem   py-5 transition-all duration-300  border-b-2 border-purple-100 ${
+              expandedFAQ.includes(index)
+                ? "  shadow-md rounded-md p-4 dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]"
+                : " rounded-md my-2 px-4 dark:border-gray-900"
             }`}
             key={index}
           >

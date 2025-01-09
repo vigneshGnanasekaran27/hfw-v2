@@ -117,27 +117,27 @@ const TrainingTypesSection = () => {
           <h2 className="text-5xl font-bold mb-6 ">
             Transform Your Fitness Journey
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-xl  max-w-3xl mx-auto mb-12 leading-relaxed">
             Choose from our diverse range of training programs, each designed to
             deliver exceptional results while fitting perfectly into your
             lifestyle.
           </p>
 
           {/* Features Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto overflow-hidden">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto overflow-hidden  ">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="p-6 bg-purple-100 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 dark:bg-gray-900"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-50 text-purple-600 mb-4">
                     {feature.icon}
                   </div>
                   <h3 className="font-semibold text-lg mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                  <p className=" text-sm">{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -145,11 +145,12 @@ const TrainingTypesSection = () => {
         </div>
 
         {/* Training Types Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16 overflow-hidden">
+        <div className="grid md:grid-cols-3 gap-8 mb-16 overflow-hidden py-6">
           {trainingTypes.map((type) => (
             <div
               key={type.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              className="rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]
+"
             >
               <div className="relative h-48 w-full group">
                 <Image
@@ -159,7 +160,7 @@ const TrainingTypesSection = () => {
                   objectFit="cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute top-4 left-4 bg-white/90 rounded-full p-2">
+                  <div className="absolute top-4 left-4 bg-purple-100 rounded-full p-2 dark:bg-gray-900">
                     {type.icon}
                   </div>
                   {type.popular && (
@@ -179,47 +180,48 @@ const TrainingTypesSection = () => {
                 <h3 className="text-2xl font-semibold mb-3 flex items-center gap-2">
                   {type.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{type.description}</p>
+                <p className="  mb-4">{type.description}</p>
 
                 <div className="space-y-3 mb-6">
                   {type.benefits.map((benefit, index) => (
                     <div key={index} className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">{benefit}</span>
+                      <span className="">{benefit}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                <div className="bg-purple-100 rounded-lg p-4 mb-6 dark:bg-gray-900">
                   <div className="grid grid-cols-2 gap-4">
                     {Object.entries(type.stats).map(([key, value]) => (
                       <div key={key} className="text-center">
                         <div className="font-bold text-lg">{value}</div>
-                        <div className="text-xs text-gray-500 capitalize">
+                        <div className="text-xs   capitalize">
                           {key.replace(/([A-Z])/g, " $1").trim()}
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-
-                <Link href={`/training/${type.id}`}>
-                  <div className="w-full bg-primary text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors group">
-                    Learn More
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </Link>
+                <div className="flex items-center justify-center">
+                  <Link href={`/training/${type.id}`}>
+                    <div className="w-fit  border-2 border-purple-700 py-3 px-6 rounded-lg flex items-center justify-center gap-2  transition-colors group">
+                      Learn More
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Enhanced Call to Action */}
-        <div className="text-center bg-gradient-to-r from-primary/5 to-primary/10 py-16 px-6 rounded-3xl">
+        <div className="text-center bg-purple-100 py-16 px-6 rounded-3xl dark:bg-gray-900">
           <h3 className="text-3xl font-bold mb-6">
             Ready to Begin Your Transformation?
           </h3>
-          <p className="text-gray-600 mb-10 max-w-2xl mx-auto">
+          <p className=" mb-10 max-w-2xl mx-auto">
             Join HopeFit Wellness today and experience the perfect training
             program for your goals. Our expert team is ready to guide you on
             your fitness journey.

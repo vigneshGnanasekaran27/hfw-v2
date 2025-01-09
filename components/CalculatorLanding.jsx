@@ -23,18 +23,18 @@ const CalculatorLanding = () => {
       previewContent: (
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Daily Target</p>
+            <div className="  bg-purple-100 dark:bg-gray-900 p-4 rounded-lg">
+              <p className="text-sm   ">Daily Target</p>
               <p className="text-xl font-bold text-blue-600">2,500 kcal</p>
             </div>
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Weight Goal</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg">
+              <p className="text-sm   ">Weight Goal</p>
               <p className="text-xl font-bold text-green-600">-0.5 kg/week</p>
             </div>
           </div>
-          <div className="bg-gray-100 p-4 rounded-lg">
+          <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg">
             <div className="flex justify-between mb-2">
-              <span className="text-sm text-gray-600">Progress</span>
+              <span className="text-sm   ">Progress</span>
               <span className="text-sm font-medium">75%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
@@ -55,18 +55,18 @@ const CalculatorLanding = () => {
         "Calculate your Basal Metabolic Rate to understand your base energy needs",
       previewContent: (
         <div className="space-y-4">
-          <div className="bg-gray-100 p-4 rounded-lg text-center">
-            <p className="text-sm text-gray-600">Your BMR</p>
+          <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg text-center">
+            <p className="text-sm   ">Your BMR</p>
             <p className="text-3xl font-bold text-blue-600">1,785</p>
-            <p className="text-sm text-gray-600">calories/day</p>
+            <p className="text-sm   ">calories/day</p>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Activity Level</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg">
+              <p className="text-sm   ">Activity Level</p>
               <p className="text-lg font-medium">Moderate</p>
             </div>
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Age Factor</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg">
+              <p className="text-sm   ">Age Factor</p>
               <p className="text-lg font-medium">+120 cal</p>
             </div>
           </div>
@@ -111,12 +111,12 @@ const CalculatorLanding = () => {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Category</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg">
+              <p className="text-sm   ">Category</p>
               <p className="text-lg font-medium">Fitness</p>
             </div>
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Status</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg">
+              <p className="text-sm   ">Status</p>
               <p className="text-lg font-medium text-green-600">Healthy</p>
             </div>
           </div>
@@ -131,22 +131,22 @@ const CalculatorLanding = () => {
         "Find your Total Daily Energy Expenditure for optimal nutrition",
       previewContent: (
         <div className="space-y-4">
-          <div className="bg-gray-100 p-4 rounded-lg text-center">
-            <p className="text-sm text-gray-600">Daily Energy Expenditure</p>
+          <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg text-center">
+            <p className="text-sm   ">Daily Energy Expenditure</p>
             <p className="text-3xl font-bold text-blue-600">2,450</p>
-            <p className="text-sm text-gray-600">calories/day</p>
+            <p className="text-sm   ">calories/day</p>
           </div>
           <div className="grid grid-cols-3 gap-2">
-            <div className="bg-gray-100 p-3 rounded-lg text-center">
-              <p className="text-xs text-gray-600">BMR</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-3 rounded-lg text-center">
+              <p className="text-xs   ">BMR</p>
               <p className="text-sm font-bold">1,785</p>
             </div>
-            <div className="bg-gray-100 p-3 rounded-lg text-center">
-              <p className="text-xs text-gray-600">Activity</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-3 rounded-lg text-center">
+              <p className="text-xs   ">Activity</p>
               <p className="text-sm font-bold">+545</p>
             </div>
-            <div className="bg-gray-100 p-3 rounded-lg text-center">
-              <p className="text-xs text-gray-600">Exercise</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-3 rounded-lg text-center">
+              <p className="text-xs   ">Exercise</p>
               <p className="text-sm font-bold">+120</p>
             </div>
           </div>
@@ -161,18 +161,18 @@ const CalculatorLanding = () => {
         "Track pregnancy milestones and get personalized nutrition guidance",
       previewContent: (
         <div className="space-y-4">
-          <div className="bg-gray-100 p-4 rounded-lg text-center">
-            <p className="text-sm text-gray-600">Current Week</p>
+          <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg text-center">
+            <p className="text-sm   ">Current Week</p>
             <p className="text-3xl font-bold text-pink-600">Week 24</p>
-            <p className="text-sm text-gray-600">Second Trimester</p>
+            <p className="text-sm   ">Second Trimester</p>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Due Date</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg">
+              <p className="text-sm   ">Due Date</p>
               <p className="text-lg font-medium">Aug 15</p>
             </div>
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Weight Gain</p>
+            <div className="  bg-purple-100  dark:bg-gray-900 p-4 rounded-lg">
+              <p className="text-sm   ">Weight Gain</p>
               <p className="text-lg font-medium">+12.5 lbs</p>
             </div>
           </div>
@@ -198,7 +198,7 @@ const CalculatorLanding = () => {
             <Calculator className="w-10 h-10  " />
           </div>
           <h1 className="text-5xl font-bold mb-6">Smart Health Calculators</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl    max-w-2xl mx-auto">
             Make informed decisions about your health and fitness with our suite
             of intelligent calculators. Simple, accurate, and personalized just
             for you.
@@ -208,7 +208,7 @@ const CalculatorLanding = () => {
         {/* Main Content */}
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Left Side - Calculator Preview */}
-          <div className="bg-white rounded-xl p-6 shadow-lg">
+          <div className="rounded-xl p-6 shadow-lg dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]">
             {/* Calculator Tabs */}
             <div className="flex flex-wrap gap-2 mb-6">
               {calculators.map((calc) => (
@@ -217,8 +217,8 @@ const CalculatorLanding = () => {
                   onClick={() => setSelectedCalculator(calc.id)}
                   className={`p-3 rounded-lg transition-all ${
                     selectedCalculator === calc.id
-                      ? "bg-blue-100 scale-105"
-                      : "bg-gray-100 hover:bg-gray-200"
+                      ? "bg-cyan-300  dark:bg-cyan-800 scale-105"
+                      : "  bg-purple-100  dark:bg-gray-900 hover:bg-gray-200"
                   }`}
                 >
                   {calc.icon}
@@ -232,32 +232,28 @@ const CalculatorLanding = () => {
                 calc.id === selectedCalculator && (
                   <div key={calc.id} className="space-y-6">
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="bg-blue-500 w-16 h-16 rounded-2xl flex items-center justify-center text-white">
+                      <div className="bg-blue-500 w-16 h-16 rounded-2xl flex items-center justify-center ">
                         {calc.icon}
                       </div>
                       <div>
-                        <h2 className="text-2xl font-bold text-gray-900">
-                          {calc.title}
-                        </h2>
-                        <p className="text-gray-600">{calc.description}</p>
+                        <h2 className="text-2xl font-bold ">{calc.title}</h2>
+                        <p className="  ">{calc.description}</p>
                       </div>
                     </div>
 
                     {/* Preview Content */}
-                    <div className="p-4 rounded-lg bg-white">
-                      {calc.previewContent}
-                    </div>
+                    <div className="p-4 rounded-lg ">{calc.previewContent}</div>
                     <div className="flex justify-center gap-2">
                       <button
                         onClick={() => handleCalculatorClick()}
-                        className="bg-purple-50 text-purple-600 px-6 py-3 rounded-lg hover:bg-purple-100 transition-colors duration-300 flex items-center"
+                        className="bg-purple-50 text-purple-600 px-6 py-3 rounded-lg hover: bg-purple-100  dark:bg-gray-900 transition-colors duration-300 flex items-center"
                       >
                         view all our calculator
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </button>
                       <button
                         onClick={() => handleCalculatorClickId(calc)}
-                        className="w-fit bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                        className="w-fit bg-blue-600  py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                       >
                         {`try ${calc.title}`}
                       </button>
@@ -269,12 +265,12 @@ const CalculatorLanding = () => {
 
           {/* Right Side - Features */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-8">
+            <h3 className="text-2xl font-semibold  mb-8">
               Why Choose Our Calculators?
             </h3>
 
             <div className="space-y-4">
-              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div className=" p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 p-3 rounded-lg">
                     <Calculator className="w-6 h-6 text-blue-600" />
@@ -283,7 +279,7 @@ const CalculatorLanding = () => {
                     <h4 className="font-semibold text-lg mb-2">
                       Scientific Accuracy
                     </h4>
-                    <p className="text-gray-600">
+                    <p className="  ">
                       Our calculators use proven scientific formulas and
                       methodologies to provide accurate results.
                     </p>
@@ -291,7 +287,10 @@ const CalculatorLanding = () => {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div
+                className=" p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]
+"
+              >
                 <div className="flex items-start gap-4">
                   <div className="bg-green-100 p-3 rounded-lg">
                     <Activity className="w-6 h-6 text-green-600" />
@@ -300,7 +299,7 @@ const CalculatorLanding = () => {
                     <h4 className="font-semibold text-lg mb-2">
                       Personalized Results
                     </h4>
-                    <p className="text-gray-600">
+                    <p className="  ">
                       Get customized recommendations based on your unique body
                       composition and goals.
                     </p>
@@ -308,14 +307,17 @@ const CalculatorLanding = () => {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div
+                className=" p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]
+"
+              >
                 <div className="flex items-start gap-4">
-                  <div className="bg-purple-100 p-3 rounded-lg">
+                  <div className=" bg-purple-100  dark:bg-gray-900 p-3 rounded-lg">
                     <Heart className="w-6 h-6 text-purple-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg mb-2">Easy to Use</h4>
-                    <p className="text-gray-600">
+                    <p className="  ">
                       Simple interface with clear instructions makes it easy to
                       get the information you need.
                     </p>

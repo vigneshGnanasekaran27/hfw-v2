@@ -70,32 +70,29 @@ const WorkoutSchedulesSection = () => {
           {workoutPrograms.map((program) => (
             <div
               key={program.id}
-              className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300"
+              className="  rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]"
             >
               <div className="flex items-center justify-between mb-6">
                 <div>{program.icon}</div>
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm ">
                   <Clock className="w-4 h-4 mr-1" />
                   {program.duration} • {program.sessionsPerWeek}x/week
                 </div>
               </div>
 
               <h3 className="text-2xl font-semibold mb-3">{program.title}</h3>
-              <p className="text-gray-600 mb-6">{program.description}</p>
+              <p className=" mb-6">{program.description}</p>
 
               <div className="space-y-3 mb-6">
                 {program.features.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center text-sm text-gray-600"
-                  >
+                  <div key={index} className="flex items-center text-sm ">
                     <ArrowRight className="w-4 h-4 mr-2 text-purple-500" />
                     {feature}
                   </div>
                 ))}
               </div>
 
-              <button className="w-full bg-purple-50 text-purple-600 py-2 rounded-lg hover:bg-purple-100 transition-colors duration-300 flex items-center justify-center">
+              <button className="w-fit  border-2 border-purple-600 text-purple-600 py-2 px-2 rounded-lg hover:bg-purple-100 transition-colors duration-300 flex items-center justify-center">
                 View Program Details
                 <ArrowRight className="w-4 h-4 ml-2" />
               </button>
@@ -109,7 +106,7 @@ const WorkoutSchedulesSection = () => {
               <h3 className="text-3xl font-bold mb-4">
                 Get Your Custom Program
               </h3>
-              <p className="text-xl text-gray-600 mb-6">
+              <p className="text-xl  mb-6">
                 Follow our plans independently or add professional guidance from
                 our trainers - the choice is yours
               </p>

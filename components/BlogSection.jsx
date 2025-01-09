@@ -35,7 +35,7 @@ const LandingBlogSection = () => {
           {blogPosts.slice(0, visiblePosts).map((post) => (
             <div
               key={post.id}
-              className="  rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl"
+              className="  rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]"
             >
               <div className="relative h-48 w-full">
                 <Image

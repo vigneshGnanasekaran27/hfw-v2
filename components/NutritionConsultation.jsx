@@ -8,6 +8,8 @@ import {
   BookOpen,
   Salad,
 } from "lucide-react";
+import nutrition from "../images/bg-nutrition.jpeg";
+import Image from "next/image";
 
 const NutritionConsultation = () => {
   return (
@@ -22,7 +24,7 @@ const NutritionConsultation = () => {
           <h2 className="text-4xl font-bold mb-6">
             Expert Nutrition Consultation
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl   max-w-3xl mx-auto">
             Get a personalized nutrition plan designed by our expert
             nutritionists, with the flexibility to prepare meals yourself or
             order from our kitchen.
@@ -31,34 +33,58 @@ const NutritionConsultation = () => {
 
         {/* Process Flow */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-purple-50 rounded-xl p-8 text-center">
-            <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+          <div className=" bg-purple-100 rounded-xl p-5 text-center dark:bg-gray-900 ">
+            <Image
+              src={nutrition.src}
+              alt="Nutrition background"
+              width={500}
+              height={300}
+              className="w-full h-auto rounded-xl mb-6"
+              priority
+            />
+            <div className="bg-purple-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
               <BookOpen className="w-8 h-8 text-purple-600" />
             </div>
             <h3 className="text-xl font-semibold mb-4">1. Consultation</h3>
-            <p className="text-gray-600">
+            <p className="">
               Meet with our nutritionists to discuss your goals, preferences,
               and lifestyle
             </p>
           </div>
 
-          <div className="bg-purple-50 rounded-xl p-8 text-center">
-            <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+          <div className=" bg-purple-100 rounded-xl p-5 text-center dark:bg-gray-900 ">
+            <Image
+              src={nutrition.src}
+              alt="Nutrition background"
+              width={500}
+              height={300}
+              className="w-full h-auto rounded-xl mb-6"
+              priority
+            />
+            <div className="bg-purple-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
               <ClipboardCheck className="w-8 h-8 text-purple-600" />
             </div>
             <h3 className="text-xl font-semibold mb-4">2. Custom Plan</h3>
-            <p className="text-gray-600">
+            <p>
               Receive your personalized nutrition plan tailored to your specific
               needs
             </p>
           </div>
 
-          <div className="bg-purple-50 rounded-xl p-8 text-center">
-            <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+          <div className=" bg-purple-100 rounded-xl p-5 text-center dark:bg-gray-900 ">
+            <Image
+              src={nutrition.src}
+              alt="Nutrition background"
+              width={500}
+              height={300}
+              className="w-full h-auto rounded-xl mb-6"
+              priority
+            />
+            <div className="bg-purple-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
               <Utensils className="w-8 h-8 text-purple-600" />
             </div>
             <h3 className="text-xl font-semibold mb-4">3. Meal Options</h3>
-            <p className="text-gray-600">
+            <p className="">
               Choose to prepare meals yourself or order from our kitchen
             </p>
           </div>
@@ -66,7 +92,7 @@ const NutritionConsultation = () => {
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white rounded-xl p-8 shadow-lg">
+          <div className="rounded-xl p-8 shadow-lg dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]">
             <h3 className="text-2xl font-semibold mb-6 flex items-center">
               <Users className="w-6 h-6 mr-3 text-purple-600" />
               Personalized Consultation
@@ -87,7 +113,7 @@ const NutritionConsultation = () => {
             </ul>
           </div>
 
-          <div className="bg-white rounded-xl p-8 shadow-lg">
+          <div className=" rounded-xl p-8 shadow-lg dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]">
             <h3 className="text-2xl font-semibold mb-6 flex items-center">
               <ChefHat className="w-6 h-6 mr-3 text-purple-600" />
               Kitchen Services
@@ -110,11 +136,11 @@ const NutritionConsultation = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-purple-50 rounded-xl p-12 text-center">
+        <div className="bg-purple-100 rounded-xl p-12 text-center dark:bg-gray-900">
           <h3 className="text-3xl font-bold mb-6">
             Ready to Transform Your Nutrition?
           </h3>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl   mb-8 max-w-2xl mx-auto">
             Start your journey to better health with a personalized nutrition
             consultation
           </p>

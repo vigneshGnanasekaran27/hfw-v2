@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { ArrowRight, Clock, Users, Target, CheckCircle } from "lucide-react";
@@ -258,4 +258,10 @@ const TrainingPage = () => {
   );
 };
 
-export default TrainingPage;
+const Training = () => {
+  <Suspense>
+    <TrainingPage />
+  </Suspense>;
+};
+
+export default Training;

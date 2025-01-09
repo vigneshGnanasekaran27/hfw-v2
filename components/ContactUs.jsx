@@ -60,7 +60,7 @@ export default function ContactUs() {
 
   return (
     <section id="contact" className="py-16">
-      <div className="container mx-auto px-4 border-2 border-white">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-3   rounded-full mb-6">
             <PhoneOutgoing className="w-10 h-10  " />
@@ -73,7 +73,7 @@ export default function ContactUs() {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="p-8 rounded-lg shadow-lg">
+          <div className="p-8 rounded-lg shadow-lg dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block font-semibold mb-2">
@@ -174,7 +174,7 @@ export default function ContactUs() {
           {/* Contact Information Section */}
           <div className="space-y-8">
             {/* Contact Details */}
-            <div className="p-6 rounded-lg shadow-lg">
+            <div className="p-6 rounded-lg shadow-lg dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]">
               <h3 className="text-2xl font-semibold mb-6">
                 Contact Information
               </h3>
@@ -223,7 +223,7 @@ export default function ContactUs() {
             </div> */}
 
             {/* Business Hours */}
-            <div className="p-6 rounded-lg shadow-lg">
+            <div className="p-6 rounded-lg shadow-lg dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]">
               <h3 className="text-2xl font-semibold mb-6">Business Hours</h3>
               <div className="space-y-2">
                 <div className="flex justify-between">

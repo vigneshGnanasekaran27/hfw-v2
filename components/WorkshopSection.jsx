@@ -27,17 +27,17 @@ export default function WorkshopSection() {
         <div className="w-full max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row h-auto md:h-[800px] gap-4">
             {/* Left Large Section - Nutrition */}
-            <div className="w-full md:w-1/3 bg-emerald-50 rounded-lg p-6 flex items-center justify-center">
+            <div className="w-full md:w-1/3 bg-emerald-50 rounded-lg p-6 flex items-center justify-center dark:bg-emerald-900/40">
               <div className="text-center">
                 <BookOpen
                   className="mx-auto mb-4 text-emerald-600"
                   size={64}
                   strokeWidth={1.5}
                 />
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                <h3 className="text-2xl font-bold  mb-3">
                   Nutrition Masterclass
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className=" mb-4">
                   Deep dive into advanced nutrition strategies, meal planning,
                   and metabolic optimization
                 </p>
@@ -55,23 +55,23 @@ export default function WorkshopSection() {
               {/* Right Top Section */}
               <div className="h-1/2 flex gap-4">
                 {/* Strength Training Section */}
-                <div className="w-1/2 bg-blue-50 rounded-lg p-6 flex items-center justify-center">
+                <div className="w-1/2 bg-blue-50 rounded-lg p-6 flex items-center justify-center dark:bg-blue-900/40">
                   <div className="text-center">
                     <Dumbbell
                       className="mx-auto mb-4 text-blue-600"
                       size={48}
                       strokeWidth={1.5}
                     />
-                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                    <h3 className="text-xl font-bold  mb-3">
                       Strength Training
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className=" mb-4">
                       Advanced techniques for muscle building and performance
                       enhancement
                     </p>
                     <a
                       href="/strength-workshop"
-                      className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition"
+                      className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition "
                     >
                       Explore
                     </a>
@@ -79,17 +79,17 @@ export default function WorkshopSection() {
                 </div>
 
                 {/* Performance Clinic Section */}
-                <div className="w-1/2 bg-orange-50 rounded-lg p-6 flex items-center justify-center">
+                <div className="w-1/2 bg-orange-50 rounded-lg p-6 flex items-center justify-center dark:bg-orange-900/40">
                   <div className="text-center">
                     <Rocket
                       className="mx-auto mb-4 text-orange-600"
                       size={48}
                       strokeWidth={1.5}
                     />
-                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                    <h3 className="text-xl font-bold  mb-3">
                       Performance Clinic
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className=" mb-4">
                       Comprehensive training to maximize athletic potential and
                       overcome plateaus
                     </p>
@@ -104,17 +104,17 @@ export default function WorkshopSection() {
               </div>
 
               {/* Right Bottom Section - Mindfulness */}
-              <div className="h-1/2 bg-purple-50 rounded-lg p-6 flex items-center justify-center">
+              <div className="h-1/2 bg-purple-50 rounded-lg p-6 flex items-center justify-center dark:bg-purple-900/40">
                 <div className="text-center">
                   <HeartPulse
                     className="mx-auto mb-4 text-purple-600"
                     size={64}
                     strokeWidth={1.5}
                   />
-                  <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                  <h3 className="text-2xl font-bold  mb-3">
                     Mindfulness in Fitness
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className=" mb-4">
                     Integrating mental wellness with physical training
                     techniques
                   </p>
@@ -128,17 +128,17 @@ export default function WorkshopSection() {
               </div>
             </div>
 
-            <div className="w-full md:w-1/3 bg-emerald-50 rounded-lg p-6 flex items-center justify-center">
+            <div className="w-full md:w-1/3 bg-emerald-50 rounded-lg p-6 flex items-center justify-center dark:bg-emerald-900/40">
               <div className="text-center">
                 <BookOpen
                   className="mx-auto mb-4 text-emerald-600"
                   size={64}
                   strokeWidth={1.5}
                 />
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                <h3 className="text-2xl font-bold  mb-3">
                   Nutrition Masterclass
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className=" mb-4">
                   Deep dive into advanced nutrition strategies, meal planning,
                   and metabolic optimization
                 </p>

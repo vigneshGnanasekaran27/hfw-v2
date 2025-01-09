@@ -122,8 +122,8 @@ export default function FitnessWearShowcase() {
               onClick={() => setActiveCategory(category)}
               className={`px-8 py-3 rounded-full text-lg font-semibold transition duration-300 shadow-md ${
                 activeCategory === category
-                  ? "bg-primary text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
+                  ? "  text-purple-600"
+                  : "  text-gray-700 hover:bg-gray-100"
               }`}
             >
               {category}'s Wear
@@ -150,9 +150,12 @@ export default function FitnessWearShowcase() {
               <p className="  mb-6">{currentCollection.description}</p>
               <div className="grid grid-cols-3 gap-4">
                 {currentCollection.highlights.map((highlight, index) => (
-                  <div key={index} className="text-center">
-                    <div className="mx-auto mb-3 w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                      <highlight.icon className="w-8 h-8 text-primary" />
+                  <div
+                    key={index}
+                    className="text-center  bg-purple-100 rounded-md py-4 px-2 dark:bg-gray-900"
+                  >
+                    <div className="mx-auto mb-3 w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center  text-purple-600">
+                      <highlight.icon className="w-8 h-8 " />
                     </div>
                     <p className="text-sm   font-medium">{highlight.text}</p>
                   </div>

@@ -59,7 +59,7 @@ const Navigation = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-background shadow-md z-50">
+    <nav className="fixed top-0 left-0 w-full bg-purple-100 shadow-md z-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* Logo */}
