@@ -12,11 +12,11 @@ import ContactUs from "../components/ContactUs";
 import Team from "../components/Team";
 import AboutUs from "@/components/AboutUs";
 import FAQSection from "@/components/FAQSection";
-import FitnessCalculator from "@/components/FitnessCalculator";
 import CTAPopup from "@/components/CTAPopup";
 import NutritionConsultation from "../components/NutritionConsultation";
 import WorkoutSchedulesSection from "@/components/WorkoutSchedulesSection";
 import TrainingTypesSection from "@/components/TrainingTypesSection";
+import CalculatorLanding from "@/components/CalculatorLanding";
 export default function Home() {
   const offers = [
     "20% off first purchase",
@@ -37,7 +37,7 @@ export default function Home() {
       <WorkshopSection />
       <EventSection />
       <BlogSection />
-      <FitnessCalculator />
+      <CalculatorLanding />
       <TestimonialSection />
       <Team />
       <AboutUs />

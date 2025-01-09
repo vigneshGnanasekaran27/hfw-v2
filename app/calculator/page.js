@@ -59,19 +59,14 @@ const CalculatorPage = () => {
         description: "Calculate your running pace",
       },
       {
-        name: "Army Body Fat Calculator",
-        slug: "army-body-fat",
-        description: "Military body fat calculation method",
-      },
-      {
         name: "Lean Body Mass Calculator",
         slug: "lean-body-mass",
         description: "Calculate your lean body mass",
       },
       {
-        name: "Healthy Weight Calculator",
-        slug: "healthy-weight",
-        description: "Find your healthy weight range",
+        name: "Body Frame",
+        slug: "body-frame",
+        description: "Find your Body Frame",
       },
       {
         name: "Calories Burned Calculator",
@@ -166,6 +161,11 @@ const CalculatorPage = () => {
         name: "BAC Calculator",
         slug: "bac",
         description: "Calculate Blood Alcohol Content",
+      },
+      {
+        name: "Heart Rate Calculator",
+        slug: "hrc",
+        description: "Calculate your Target Heart Rate Zones",
       },
     ],
   };

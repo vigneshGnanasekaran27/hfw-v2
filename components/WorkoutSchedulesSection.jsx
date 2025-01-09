@@ -103,26 +103,30 @@ const WorkoutSchedulesSection = () => {
           ))}
         </div>
 
-        <div className="bg-white rounded-xl p-8 text-center shadow-lg">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-3xl font-bold mb-4">Get Your Custom Program</h3>
-            <p className="text-xl text-gray-600 mb-6">
-              Follow our plans independently or add professional guidance from
-              our trainers - the choice is yours
-            </p>
-            <div className="flex items-center justify-center gap-6">
-              <button className="bg-purple-50 text-purple-600 px-6 py-3 rounded-lg hover:bg-purple-100 transition-colors duration-300 flex items-center">
-                Browse All Programs
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-              <AnimatedCTAButton
-                showModal={true}
-                sectionName="Custom Program Consultation"
-                className="bg-purple-500 hover:bg-purple-600"
-                size="lg"
-              >
-                Get Started
-              </AnimatedCTAButton>
+        <div className="flex items-center justify-center ">
+          <div className=" rounded-xl p-8 text-center shadow-lg w-fit">
+            <div className="max-w-3xl mx-auto">
+              <h3 className="text-3xl font-bold mb-4">
+                Get Your Custom Program
+              </h3>
+              <p className="text-xl text-gray-600 mb-6">
+                Follow our plans independently or add professional guidance from
+                our trainers - the choice is yours
+              </p>
+              <div className="flex items-center justify-center gap-6">
+                <button className="bg-purple-50 text-purple-600 px-6 py-3 rounded-lg hover:bg-purple-100 transition-colors duration-300 flex items-center">
+                  Browse All Programs
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </button>
+                <AnimatedCTAButton
+                  showModal={true}
+                  sectionName="Custom Program Consultation"
+                  className="bg-purple-500 hover:bg-purple-600"
+                  size="lg"
+                >
+                  Get Started
+                </AnimatedCTAButton>
+              </div>
             </div>
           </div>
         </div>

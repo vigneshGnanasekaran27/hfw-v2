@@ -5,7 +5,7 @@ import AnimatedHamburgerMenu from "./AnimatedHamburgerMenu";
 import Image from "next/image";
 import logo from "../images/logo.png";
 
-export default function Navigation() {
+const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
@@ -13,16 +13,14 @@ export default function Navigation() {
     setIsOpen(!isOpen);
   };
 
-  // Function to handle smooth scrolling
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsOpen(false); // Close mobile menu after clicking
+    setIsOpen(false);
   };
 
-  // Track active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       const sections = [
@@ -61,43 +59,45 @@ export default function Navigation() {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-background shadow-md z-50 overflow-hidden">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Logo */}
-        <div className="text-2xl font-bold flex items-center">
-          <Image
-            src={logo.src}
-            alt="Hope Fit Wellness Logo"
-            width={50}
-            height={50}
-          />
-          <button
-            onClick={() => scrollToSection("banner")}
-            className="hover:text-blue-500 transition duration-300"
-          >
-            Hope Fit Wellness
-          </button>
+    <nav className="fixed top-0 left-0 w-full bg-background shadow-md z-50">
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <div className="text-2xl font-bold flex items-center">
+            <Image
+              src={logo.src}
+              alt="Hope Fit Wellness Logo"
+              width={50}
+              height={50}
+            />
+            <button
+              onClick={() => scrollToSection("banner")}
+              className="hover:text-blue-500 transition duration-300"
+            >
+              Hope Fit Wellness
+            </button>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden flex items-center space-x-4">
+            <EmpathySupport />
+            <AnimatedHamburgerMenu isOpen={isOpen} onClick={toggleMenu} />
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-6">
+            <NavLinks
+              activeSection={activeSection}
+              scrollToSection={scrollToSection}
+            />
+            <EmpathySupport />
+          </div>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center space-x-4 overflow-hidden">
-          <EmpathySupport />
-          <AnimatedHamburgerMenu isOpen={isOpen} onClick={toggleMenu} />
-        </div>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
-          <NavLinks
-            activeSection={activeSection}
-            scrollToSection={scrollToSection}
-          />
-          <EmpathySupport />
-        </div>
-
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Menu - Positioned absolutely */}
         {isOpen && (
-          <div className="absolute top-full left-0 w-full bg-background shadow-lg md:hidden overflow-hidden">
-            <div className="flex flex-col p-4 space-y-2">
+          <div className="md:hidden absolute top-full left-0 w-full bg-background shadow-lg">
+            <div className="p-4">
               <NavLinks
                 mobile={true}
                 activeSection={activeSection}
@@ -109,68 +109,64 @@ export default function Navigation() {
       </div>
     </nav>
   );
-}
+};
 
-function NavLinks({ mobile = false, activeSection, scrollToSection }) {
-  // Primary navigation links that are always visible
+const NavLinks = ({ mobile = false, activeSection, scrollToSection }) => {
+  const [showMore, setShowMore] = useState(false);
+
   const primaryLinks = [
     { id: "kitchen", label: "Kitchen" },
     { id: "nutrition", label: "Nutrition" },
     { id: "training", label: "Training" },
     { id: "schedule", label: "Schedule" },
+    { id: "calculator", label: "Nutrition Calculator" },
     { id: "shop", label: "Shop" },
-    { id: "workshops", label: "Workshops" },
     { id: "events", label: "Events" },
   ];
 
-  // Secondary navigation links in a dropdown
   const moreLinks = [
     { id: "blog", label: "Blog" },
-    { id: "calculator", label: "Nutrition Calculator" },
+    { id: "workshops", label: "Workshops" },
     { id: "leadership", label: "Leadership" },
     { id: "about", label: "About" },
     { id: "faq", label: "FAQ" },
   ];
 
-  const [showMore, setShowMore] = useState(false);
-
   const NavItem = ({ id, label }) => (
-    <div className="relative">
-      <button
-        onClick={() => scrollToSection(id)}
-        className={`
-          ${
-            mobile
-              ? "block py-2 px-4 w-full text-left hover:bg-blue-500"
-              : "hover:text-blue-500 transition duration-300"
-          }
-          ${activeSection === id ? "text-gray-500" : ""}
-          relative
-        `}
-      >
-        {label}
-        {activeSection === id && !mobile && (
-          <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary">
-            <svg
-              className="w-full h-2 text-gray-500"
-              viewBox="0 0 100 3"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,1 Q25,0 50,1 T100,1"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-            </svg>
-          </div>
-        )}
-      </button>
-    </div>
+    <button
+      onClick={() => scrollToSection(id)}
+      className={`
+        ${
+          mobile
+            ? "block w-full text-left py-2 px-4 hover:bg-blue-500"
+            : "hover:text-blue-500 transition duration-300"
+        }
+        ${activeSection === id ? "text-gray-500" : ""}
+        relative
+      `}
+    >
+      {label}
+      {activeSection === id && !mobile && (
+        <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary">
+          <svg
+            className="w-full h-2 text-gray-500"
+            viewBox="0 0 100 3"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,1 Q25,0 50,1 T100,1"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      )}
+    </button>
   );
 
   return (
-    <>
+    <div className={`${mobile ? "space-y-2" : "flex items-center space-x-6"}`}>
       {/* Primary Links */}
       {primaryLinks.map((link) => (
         <NavItem key={link.id} {...link} />
@@ -178,14 +174,14 @@ function NavLinks({ mobile = false, activeSection, scrollToSection }) {
 
       {/* More Dropdown for Desktop */}
       {!mobile && (
-        <div className="relative group">
+        <div className="relative">
           <button
             onClick={() => setShowMore(!showMore)}
             className="hover:text-gray-500 transition duration-300 flex items-center"
           >
             More
             <svg
-              className={`ml-1 h-4 w-4 transition-transform ${
+              className={`ml-1 h-4 w-4 transition-transform duration-200 ${
                 showMore ? "rotate-180" : ""
               }`}
               fill="none"
@@ -201,9 +197,8 @@ function NavLinks({ mobile = false, activeSection, scrollToSection }) {
             </svg>
           </button>
 
-          {/* Dropdown Menu */}
           {showMore && (
-            <div className="absolute top-full right-0 mt-7 w-48  rounded-md shadow-lg py-1 z-50 bg-background">
+            <div className="absolute top-full right-0 mt-2 w-48 bg-background rounded-md shadow-lg py-1 z-50">
               {moreLinks.map((link) => (
                 <button
                   key={link.id}
@@ -221,22 +216,24 @@ function NavLinks({ mobile = false, activeSection, scrollToSection }) {
         </div>
       )}
 
-      {/* More Links for Mobile (displayed directly) */}
+      {/* More Links for Mobile */}
       {mobile && moreLinks.map((link) => <NavItem key={link.id} {...link} />)}
 
       {/* Contact Button */}
       <button
         onClick={() => scrollToSection("contact")}
         className={`
-          ${mobile ? "block w-full" : "ml-4"} 
+          ${mobile ? "w-full" : ""}
           px-4 py-2 rounded-full 
-            text-gray-500
-           transition duration-300
+          text-gray-500
+          transition duration-300
           ${activeSection === "contact" ? "ring-2 ring-primary-dark" : ""}
         `}
       >
         Contact Us
       </button>
-    </>
+    </div>
   );
-}
+};
+
+export default Navigation;
