@@ -210,12 +210,7 @@ const HealthyWeightCalculator = () => {
               {/* <a href="/calculator/period" className="text-sm text-blue-500">
                 To know your Frame, click here
               </a> */}
-              <Link
-                href="/calculator/period"
-                className="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors"
-              >
-                Read More
-              </Link>
+
               <select
                 name="frame"
                 value={formData.frame}

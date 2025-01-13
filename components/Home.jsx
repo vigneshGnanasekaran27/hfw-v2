@@ -52,21 +52,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
-// Add this CSS to your global styles or as a styled component
-// const styles = `
-// @keyframes fadeIn {
-//   from {
-//     opacity: 0;
-//     transform: translateY(10px);
-//   }
-//   to {
-//     opacity: 1;
-//     transform: translateY(0);
-//   }
-// }
-
-// .animate-fade-in {
-//   animation: fadeIn 0.2s ease-out;
-// }
-// `;
