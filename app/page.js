@@ -1,7 +1,6 @@
 import Navigation from "../components/Navigation";
 import SlidingBanner from "../components/SlidingBanner";
 import FoodSection from "../components/FoodSection";
-import TrainingSection from "../components/TrainingSection";
 import ShopSection from "../components/ShopSection";
 import WorkshopSection from "../components/WorkshopSection";
 import EventSection from "../components/EventSection";
@@ -30,7 +29,6 @@ export default function Home() {
       <SlidingBanner />
       <FoodSection />
       <NutritionConsultation />
-      {/* <TrainingSection /> */}
       <TrainingTypesSection />
       <WorkoutSchedulesSection />
       <ShopSection />

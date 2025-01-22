@@ -190,7 +190,7 @@ const CalculatorLanding = () => {
   };
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen" id="calculator">
       <div className="container mx-auto px-10 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16">
