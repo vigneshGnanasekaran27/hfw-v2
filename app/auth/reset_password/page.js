@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useAuth } from "../../../context/AuthContext.jsx";
 import { useSearchParams } from "next/navigation";
 
-export default function ResetPasswordForm() {
+function ResetPasswordFormComponent() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [token, setToken] = useState("");
@@ -43,11 +43,9 @@ export default function ResetPasswordForm() {
       });
 
       setMessage("Password has been reset successfully");
-      // Clear form
       setPassword("");
       setConfirmPassword("");
     } catch (err) {
-      // Handle different error types
       if (err.message.includes("401")) {
         setErrors(["Invalid or expired reset token"]);
       } else if (err.message.includes("422")) {
@@ -108,5 +106,13 @@ export default function ResetPasswordForm() {
         Reset Password
       </button>
     </form>
+  );
+}
+
+export default function ResetPasswordForm() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordFormComponent />
+    </Suspense>
   );
 }
