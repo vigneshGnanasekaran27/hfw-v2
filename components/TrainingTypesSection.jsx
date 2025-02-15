@@ -204,7 +204,7 @@ const TrainingTypesSection = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
-                  <Link href={`/training/${type.id}`}>
+                  <Link href={`/training`}>
                     <div className="w-fit  border-2 border-purple-700 py-3 px-6 rounded-lg flex items-center justify-center gap-2  transition-colors group">
                       Learn More
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

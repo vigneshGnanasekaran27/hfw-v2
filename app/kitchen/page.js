@@ -1,11 +1,13 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { ChefHat, Search } from "lucide-react";
+import { ChefHat, Search, ShoppingCart, CreditCard } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function KitchenPage() {
   const [activeTab, setActiveTab] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const router = useRouter();
 
   const meals = {
     breakfast: [
@@ -21,6 +23,7 @@ export default function KitchenPage() {
         image: "/api/placeholder/400/300",
         tags: ["High Protein", "Vegetarian"],
         category: "vegetarian",
+        price: 250,
       },
       {
         id: "avocado-toast",
@@ -34,6 +37,7 @@ export default function KitchenPage() {
         image: "/api/placeholder/400/300",
         tags: ["Vegetarian", "Healthy Fats"],
         category: "vegetarian",
+        price: 350,
       },
       {
         id: "vegan-smoothie-bowl",
@@ -47,6 +51,7 @@ export default function KitchenPage() {
         image: "/api/placeholder/400/300",
         tags: ["Vegan", "Antioxidants"],
         category: "vegan",
+        price: 550,
       },
     ],
     lunch: [
@@ -62,6 +67,7 @@ export default function KitchenPage() {
         image: "/api/placeholder/400/300",
         tags: ["High Protein", "Balanced"],
         category: "non-vegetarian",
+        price: 500,
       },
       {
         id: "tofu-stir-fry",
@@ -75,6 +81,7 @@ export default function KitchenPage() {
         image: "/api/placeholder/400/300",
         tags: ["Vegan", "High Protein"],
         category: "vegan",
+        price: 250,
       },
     ],
     dinner: [
@@ -90,6 +97,7 @@ export default function KitchenPage() {
         image: "/api/placeholder/400/300",
         tags: ["Omega-3", "High Protein"],
         category: "non-vegetarian",
+        price: 150,
       },
       {
         id: "vegan-curry",
@@ -103,6 +111,7 @@ export default function KitchenPage() {
         image: "/api/placeholder/400/300",
         tags: ["Vegan", "Plant Protein"],
         category: "vegan",
+        price: 185,
       },
     ],
     snacks: [
@@ -118,6 +127,7 @@ export default function KitchenPage() {
         image: "/api/placeholder/400/300",
         tags: ["Quick", "Pre-workout"],
         category: "vegetarian",
+        price: 155,
       },
     ],
   };
@@ -194,7 +204,7 @@ export default function KitchenPage() {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 text-center bg-gray-50 rounded-lg p-4">
+        <div className="grid grid-cols-3 text-center bg-gray-50 rounded-lg p-4 mb-4">
           <div className="border-r border-gray-200">
             <span className="font-bold block text-lg">
               {meal.macros.protein}g
@@ -212,10 +222,31 @@ export default function KitchenPage() {
             <span className="text-xs text-gray-500">Fat</span>
           </div>
         </div>
+
+        <div className="flex items-center justify-between mb-4">
+          <div className="text-2xl font-bold text-gray-900">
+            ${(meal.price / 100).toFixed(2)}
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => router.push("/kitchen/cart")}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+            >
+              <ShoppingCart className="w-4 h-4" />
+              Add to Cart
+            </button>
+            <button
+              onClick={() => router.push("/kitchen/order")}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+            >
+              <CreditCard className="w-4 h-4" />
+              Order Now
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}

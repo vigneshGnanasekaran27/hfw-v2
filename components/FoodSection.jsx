@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import food1 from "../images/food1.png";
-
+import { useRouter } from "next/navigation";
 import {
   ChefHat,
   Utensils,
@@ -19,6 +19,7 @@ import AnimatedCTAButton from "./AnimatedCTAButton";
 export default function FoodSection() {
   const [isExploreOpen, setIsExploreOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("featured");
+  const router = useRouter();
 
   const topMeals = [
     {
@@ -229,7 +230,7 @@ export default function FoodSection() {
               personalized meal plan.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
-              <AnimatedCTAButton
+              {/* <AnimatedCTAButton
                 showModal={true}
                 sectionName="Learn About Our Kitchen"
                 className="bg-white hover:bg-gray-50 border-2 border-primary group relative overflow-hidden"
@@ -239,7 +240,13 @@ export default function FoodSection() {
                   Learn More
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </span>
-              </AnimatedCTAButton>
+              </AnimatedCTAButton> */}
+              <button onClick={() => router.push("/kitchen")}>
+                <span className="relative z-10 flex items-center gap-2">
+                  Learn More
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </button>
               <AnimatedCTAButton
                 showModal={true}
                 sectionName="Start Your Meal Plan"
