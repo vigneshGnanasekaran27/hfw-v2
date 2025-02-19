@@ -2,14 +2,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-// const API_URL = "http://localhost:3000/api/v1/training_enrollment_forms";
-// const token = localStorage.getItem("token");
-
 const JoinForm = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
-  const [isCurrentlyActive, setIsCurrentlyActive] = useState(true);
   const [formData, setFormData] = useState({
     personalInfo: {
       name: "",
@@ -67,6 +63,48 @@ const JoinForm = () => {
     },
   });
 
+  const handleSubmit = async (e) => {
+    if (step < 7) return;
+    e.preventDefault();
+
+    const API_URL = "http://localhost:3000/api/v1/training_enrollment_forms";
+    const token = localStorage.getItem("token");
+
+    // Wrap the formData in a training_enrollment_form object
+    const payload = {
+      training_enrollment_form: {
+        personal_info: formData.personalInfo,
+        fitness_goals: formData.fitnessGoals,
+        activity_level: formData.activityLevel,
+        health_info: formData.healthInfo,
+        nutrition_info: formData.nutritionInfo,
+        lifestyle: formData.lifestyle,
+      },
+    };
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Success:", data);
+      // Handle successful submission
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle error
+    }
+  };
+
   const steps = [
     "Personal Info",
     "Fitness Goals",
@@ -74,6 +112,7 @@ const JoinForm = () => {
     "Health Info",
     "Nutrition",
     "Lifestyle",
+    "Overview",
   ];
 
   // Validation functions
@@ -332,43 +371,41 @@ const JoinForm = () => {
 
   const handleNextStep = () => {
     if (step === 1) {
-      if (validatePersonalInfo()) {
-        setStep(step + 1);
-      } else {
-        scrollToFirstError();
-      }
-    } else if (step === 2) {
-      if (validateFitnessGoals()) {
-        setStep(step + 1);
-      } else {
-        scrollToFirstError();
-      }
-    } else if (step === 3) {
-      if (validateActivityLevel()) {
-        setStep(step + 1);
-      } else {
-        scrollToFirstError();
-      }
-    } else if (step === 4) {
-      if (validateHealthInfo()) {
-        setStep(step + 1);
-      } else {
-        scrollToFirstError();
-      }
-    } else if (step === 5) {
-      if (validateNutritionInfo()) {
-        setStep(step + 1);
-      } else {
-        scrollToFirstError();
-      }
-    } else if (step === 6) {
-      if (validateLifestyle()) {
-        setStep(step + 1);
-      } else {
-        scrollToFirstError();
-      }
-    } else {
+      // if (validatePersonalInfo()) {
       setStep(step + 1);
+      // } else {
+      // scrollToFirstError();
+      // }
+    } else if (step === 2) {
+      // if (validateFitnessGoals()) {
+      setStep(step + 1);
+      // } else {
+      // scrollToFirstError();
+      // }
+    } else if (step === 3) {
+      // if (validateActivityLevel()) {
+      setStep(step + 1);
+      // } else {
+      // scrollToFirstError();
+      // }
+    } else if (step === 4) {
+      // if (validateHealthInfo()) {
+      setStep(step + 1);
+      // } else {
+      // scrollToFirstError();
+      // }
+    } else if (step === 5) {
+      // if (validateNutritionInfo()) {
+      setStep(step + 1);
+      // } else {
+      // scrollToFirstError();
+      // }
+    } else if (step === 6) {
+      // if (validateLifestyle()) {
+      setStep(step + 1);
+      // } else {
+      // scrollToFirstError();
+      // }
     }
   };
 
@@ -425,10 +462,10 @@ const JoinForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   console.log(formData);
+  // };
 
   const commonHealthConditions = [
     "High Blood Pressure",
@@ -1583,13 +1620,213 @@ const JoinForm = () => {
           </div>
         );
 
+      case 7:
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold">Review Your Information</h2>
+            <p className="text-gray-600 mb-4">
+              Please review your information before submitting.
+            </p>
+
+            {/* Personal Information */}
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="text-lg font-semibold">Personal Information</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm font-medium">Name:</p>
+                  <p className="text-gray-600">{formData.personalInfo.name}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Email:</p>
+                  <p className="text-gray-600">{formData.personalInfo.email}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Phone:</p>
+                  <p className="text-gray-600">{formData.personalInfo.phone}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Date of Birth:</p>
+                  <p className="text-gray-600">
+                    {formData.personalInfo.dateOfBirth}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Height:</p>
+                  <p className="text-gray-600">{`${formData.personalInfo.height} ${formData.personalInfo.heightUnit}`}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Weight:</p>
+                  <p className="text-gray-600">{`${formData.personalInfo.weight} ${formData.personalInfo.weightUnit}`}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Street Address:</p>
+                  <p className="text-gray-600">
+                    {formData.personalInfo.streetAddress}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">City:</p>
+                  <p className="text-gray-600">{formData.personalInfo.city}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">State:</p>
+                  <p className="text-gray-600">{formData.personalInfo.state}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Postal Code:</p>
+                  <p className="text-gray-600">
+                    {formData.personalInfo.postalCode}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Country:</p>
+                  <p className="text-gray-600">
+                    {formData.personalInfo.country}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Fitness Goals */}
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="text-lg font-semibold">Fitness Goals</h3>
+              <div className="space-y-2">
+                <div>
+                  <p className="text-sm font-medium">Specific Goals:</p>
+                  <p className="text-gray-600">
+                    {formData.fitnessGoals.specificGoals.join(", ")}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Timeline:</p>
+                  <p className="text-gray-600">
+                    {formData.fitnessGoals.timeline}
+                  </p>
+                </div>
+                {formData.fitnessGoals.targetWeight && (
+                  <div>
+                    <p className="text-sm font-medium">Target Weight:</p>
+                    <p className="text-gray-600">{`${formData.fitnessGoals.targetWeight} ${formData.fitnessGoals.targetWeightUnit}`}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Activity Level */}
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="text-lg font-semibold">Activity Level</h3>
+              <div className="space-y-2">
+                <div>
+                  <p className="text-sm font-medium">Currently Active:</p>
+                  <p className="text-gray-600">
+                    {formData.activityLevel.isCurrentlyActive ? "Yes" : "No"}
+                  </p>
+                </div>
+                {formData.activityLevel.isCurrentlyActive && (
+                  <>
+                    <div>
+                      <p className="text-sm font-medium">Exercise Types:</p>
+                      <p className="text-gray-600">
+                        {formData.activityLevel.exerciseTypes.join(", ")}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Training Days:</p>
+                      <p className="text-gray-600">
+                        {formData.activityLevel.trainingDaysPerWeek}
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* Health Information */}
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="text-lg font-semibold">Health Information</h3>
+              <div className="space-y-2">
+                {!formData.healthInfo.noHealthConditions && (
+                  <div>
+                    <p className="text-sm font-medium">Health Conditions:</p>
+                    <p className="text-gray-600">
+                      {formData.healthInfo.healthConditions.join(", ")}
+                    </p>
+                  </div>
+                )}
+                {formData.healthInfo.pastInjuries && (
+                  <div>
+                    <p className="text-sm font-medium">Past Injuries:</p>
+                    <p className="text-gray-600">
+                      {formData.healthInfo.pastInjuries}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Nutrition */}
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="text-lg font-semibold">Nutrition</h3>
+              <div className="space-y-2">
+                <div>
+                  <p className="text-sm font-medium">Dietary Preference:</p>
+                  <p className="text-gray-600">
+                    {formData.nutritionInfo.dietaryPreference}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Meals per Day:</p>
+                  <p className="text-gray-600">
+                    {formData.nutritionInfo.mealsPerDay}
+                  </p>
+                </div>
+                {formData.nutritionInfo.foodRestrictions && (
+                  <div>
+                    <p className="text-sm font-medium">Food Restrictions:</p>
+                    <p className="text-gray-600">
+                      {formData.nutritionInfo.foodRestrictions}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Lifestyle */}
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="text-lg font-semibold">Lifestyle</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm font-medium">Sleep Duration:</p>
+                  <p className="text-gray-600">
+                    {formData.lifestyle.sleepDuration} hours
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Stress Level:</p>
+                  <p className="text-gray-600">
+                    {formData.lifestyle.stressLevel}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Occupation Type:</p>
+                  <p className="text-gray-600">
+                    {formData.lifestyle.occupationType}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
       default:
         return null;
     }
   };
 
+  console.log("step", step);
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto py-8 px-4">
+    <div className="max-w-3xl mx-auto py-8 px-4">
       <StepIndicator />
       {renderStep()}
       <div className="mt-8 flex justify-between">
@@ -1602,7 +1839,7 @@ const JoinForm = () => {
             Previous
           </button>
         )}
-        {step < 6 ? (
+        {step < 7 ? (
           <button
             type="button"
             onClick={handleNextStep}
@@ -1612,15 +1849,14 @@ const JoinForm = () => {
           </button>
         ) : (
           <button
-            type="submit"
-            onClick={handleNextStep}
+            onClick={handleSubmit}
             className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
           >
             Submit
           </button>
         )}
       </div>
-    </form>
+    </div>
   );
 };
 
