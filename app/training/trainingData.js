@@ -472,7 +472,7 @@ export const trainingData = {
           "Join our energetic group sessions for motivation and results",
         programs: [
           {
-            id: "mobility-stretching",
+            id: "group-mobility-stretching",
             title: "Mobility & Stretching Program",
             description: "Improve flexibility and movement quality",
             mode: "online",

@@ -1,16 +1,23 @@
-// app/training/[program]/page.js
 "use client";
 import React from "react";
 import Image from "next/image";
 import { ArrowRight, Clock, Users, CheckCircle, MapPin } from "lucide-react";
 import { trainingData } from "../trainingData";
-// import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ProgramPage = ({ params }) => {
-  // Find the program from the data
-  const program = findProgramBySlug(params.program);
+  const [program, setProgram] = useState(null);
+  const router = useRouter();
 
-  console.log(program);
+  // Find the program from the data
+  useEffect(() => {
+    if (params?.program) {
+      const fetchedProgram = findProgramBySlug(params.program);
+      setProgram(fetchedProgram);
+    }
+  }, [params]);
+
   if (!program) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -19,10 +26,53 @@ const ProgramPage = ({ params }) => {
     );
   }
 
+  const handleJoinClick = () => {
+    // Check if user is logged in by verifying token in localStorage
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      // User is not logged in, redirect to login page with query parameters
+      const currentPath = window.location.pathname;
+
+      // Build query parameters for the login page
+      const queryParams = new URLSearchParams({
+        redirect: currentPath,
+        programTitle: program.title,
+      }).toString();
+
+      // Redirect to the login page with query parameters
+      router.push(`/auth/signin?${queryParams}`);
+      return;
+    }
+
+    // User is logged in, proceed with normal flow
+    proceedToJoin();
+  };
+
+  const proceedToJoin = () => {
+    // Determine if the program is from online or offline category
+    const mode = program.mode?.includes("online") ? "online" : "offline";
+
+    // Determine if it's group or one-on-one based on program type
+    const type = program.id.toLowerCase().includes("group")
+      ? "group"
+      : "one-on-one";
+
+    // Create the URL with query parameters
+    const queryParams = new URLSearchParams({
+      mode: mode,
+      type: type,
+      program: slugify(program.title),
+    }).toString();
+
+    window.location.href = `/join/${queryParams}`;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Rest of your component remains the same */}
+      {/* ... */}
       <div className="max-w-5xl mx-auto py-12 px-4">
-        {/* <div className="bg-white rounded-2xl shadow-xl overflow-hidden"> */}
         <div>
           <div className="relative h-64">
             <Image
@@ -225,7 +275,7 @@ const ProgramPage = ({ params }) => {
             </div>
 
             <button
-              onClick={() => (window.location.href = `/join/${program.id}`)}
+              onClick={handleJoinClick}
               className="w-full bg-gradient-to-r from-purple-600 to-purple-500 text-white font-bold py-4 px-6 rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
               Start Your Journey
@@ -238,7 +288,7 @@ const ProgramPage = ({ params }) => {
   );
 };
 
-// Helper function to find program by slug
+// Helper functions remain the same
 function findProgramBySlug(slug) {
   const allPrograms = [
     ...trainingData.online.categories.flatMap((cat) => cat.programs),
@@ -247,7 +297,6 @@ function findProgramBySlug(slug) {
   return allPrograms.find((program) => slugify(program.title) === slug);
 }
 
-// Helper function to create URL-friendly slugs
 function slugify(text) {
   return text
     .toLowerCase()

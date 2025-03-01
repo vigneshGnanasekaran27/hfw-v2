@@ -1,11 +1,47 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { EncouragementModal } from "@/components/EncouragementModal";
+import ReviewInformation from "@/form/ReviewInformation";
+import StatusPopup from "@/form/SuccessPopup";
+import ScheduleAssessment from "@/form/ScheduleAssessment";
+
+const parseQueryString = (url) => {
+  try {
+    // Extract the query string part after 'join/'
+    const queryPart = url.split("join/")[1];
+    if (!queryPart) return null;
+
+    // Split the query string into key-value pairs
+    const params = {};
+    queryPart.split("&").forEach((param) => {
+      const [key, value] = param.split("=");
+      if (key && value) {
+        params[key] = decodeURIComponent(value);
+      }
+    });
+
+    return params;
+  } catch (error) {
+    console.error("Error parsing URL:", error);
+    return null;
+  }
+};
 
 const JoinForm = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [showScheduler, setShowScheduler] = useState(false);
+
+  const [popupState, setPopupState] = useState({
+    show: false,
+    status: "success",
+    errorMessage: "",
+    trainingtype: "",
+  });
+
   const [formData, setFormData] = useState({
     personalInfo: {
       name: "",
@@ -61,49 +97,177 @@ const JoinForm = () => {
       alcohol: "",
       occupationType: "",
     },
+    trainingDetails: {
+      mode: "", // online/offline
+      type: "", // group/one-on-one
+      programName: "",
+    },
+    scheduleInfo: {
+      assessmentDate: "",
+      assessmentTime: {
+        utc: "",
+        local: "",
+        ist: "",
+      },
+      timeZone: "",
+      formattedDateTime: "",
+      timeZoneDisplay: "",
+    },
   });
+
+  useEffect(() => {
+    // Get the current URL
+    const currentUrl = window.location.href;
+    // Or use the hardcoded URL for testing
+    // const currentUrl = "http://localhost:3001/join/mode=online&type=group&program=mobility-stretching-program";
+
+    const queryParams = parseQueryString(currentUrl);
+
+    if (queryParams) {
+      setFormData((prevState) => ({
+        ...prevState,
+        trainingDetails: {
+          ...prevState.trainingDetails,
+          mode: queryParams.mode || "",
+          type: queryParams.type || "",
+          programName: queryParams.program || "",
+        },
+      }));
+      if (queryParams.program) {
+        setPopupState((prevState) => ({
+          ...prevState,
+          trainingtype: queryParams.program,
+        }));
+      }
+    }
+  }, []);
+
+  const handleFormSubmit = async (e) => {
+    if (step < 7) return;
+    e.preventDefault();
+
+    setShowScheduler(true);
+  };
 
   const handleSubmit = async (e) => {
     if (step < 7) return;
     e.preventDefault();
+    console.log("Form submitted with training details:", formData);
 
-    const API_URL = "http://localhost:3000/api/v1/training_enrollment_forms";
-    const token = localStorage.getItem("token");
+    setPopupState({
+      show: true,
+      status: "success",
+      errorMessage: "",
+      trainingtype: popupState.trainingtype,
+    });
 
-    // Wrap the formData in a training_enrollment_form object
-    const payload = {
-      training_enrollment_form: {
-        personal_info: formData.personalInfo,
-        fitness_goals: formData.fitnessGoals,
-        activity_level: formData.activityLevel,
-        health_info: formData.healthInfo,
-        nutrition_info: formData.nutritionInfo,
-        lifestyle: formData.lifestyle,
-      },
-    };
+    //  const API_URL = "http://localhost:3000/api/v1/training_enrollment_forms";
+    //  const token = localStorage.getItem("token");
 
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(payload),
-      });
+    //  const payload = {
+    //    training_enrollment_form: {
+    //      personal_info: formData.personalInfo,
+    //      fitness_goals: formData.fitnessGoals,
+    //      activity_level: formData.activityLevel,
+    //      health_info: formData.healthInfo,
+    //      nutrition_info: formData.nutritionInfo,
+    //      lifestyle: formData.lifestyle,
+    //    },
+    //  };
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+    //  try {
+    //    const response = await fetch(API_URL, {
+    //      method: "POST",
+    //      headers: {
+    //        "Content-Type": "application/json",
+    //        Authorization: `Bearer ${token}`,
+    //      },
+    //      body: JSON.stringify(payload),
+    //    });
 
-      const data = await response.json();
-      console.log("Success:", data);
-      // Handle successful submission
-    } catch (error) {
-      console.error("Error:", error);
-      // Handle error
-    }
+    //    if (!response.ok) {
+    //      throw new Error(`Submission failed with status: ${response.status}`);
+    //    }
+
+    //    const data = await response.json();
+    //    console.log("Success:", data);
+    //    setPopupState({
+    //      show: true,
+    //      status: "success",
+    //      errorMessage: "",
+    //    });
+    //  } catch (error) {
+    //    console.error("Error:", error);
+    //    setPopupState({
+    //      show: true,
+    //      status: "error",
+    //      errorMessage: error.message,
+    //    });
+    //  }
   };
+
+  const handleFinalSubmission = async (scheduleInfo) => {
+    console.log("Form submitted with training details:", formData);
+    setPopupState({
+      show: true,
+      status: "success",
+      errorMessage: "",
+      // trainingtype: formData.trainingDetails.type,
+    });
+
+    // try {
+    //   const API_URL = "your-api-endpoint";
+    //   const token = localStorage.getItem("token");
+
+    //   const payload = {
+    //     training_enrollment_form: {
+    //       personal_info: formData.personalInfo,
+    //       fitness_goals: formData.fitnessGoals,
+    //       activity_level: formData.activityLevel,
+    //       health_info: formData.healthInfo,
+    //       nutrition_info: formData.nutritionInfo,
+    //       lifestyle: formData.lifestyle,
+    //       training_details: formData.trainingDetails,
+    //       schedule_info: scheduleInfo,
+    //     },
+    //   };
+
+    //   const response = await fetch(API_URL, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //     body: JSON.stringify(payload),
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error(`Submission failed with status: ${response.status}`);
+    //   }
+
+    //   setPopupState({
+    //     show: true,
+    //     status: "success",
+    //     errorMessage: "",
+    //     trainingtype: formData.trainingDetails.type,
+    //   });
+    // } catch (error) {
+    //   setPopupState({
+    //     show: true,
+    //     status: "error",
+    //     errorMessage: error.message,
+    //     trainingtype: formData.trainingDetails.type,
+    //   });
+    // }
+  };
+  useEffect(() => {
+    // Small delay to ensure smooth mounting
+    const timer = setTimeout(() => {
+      setShowModal(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const steps = [
     "Personal Info",
@@ -112,6 +276,7 @@ const JoinForm = () => {
     "Health Info",
     "Nutrition",
     "Lifestyle",
+    "Schedule",
     "Overview",
   ];
 
@@ -462,11 +627,6 @@ const JoinForm = () => {
     }));
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log(formData);
-  // };
-
   const commonHealthConditions = [
     "High Blood Pressure",
     "Diabetes",
@@ -487,6 +647,9 @@ const JoinForm = () => {
       case 1:
         return (
           <div className="space-y-6">
+            {showModal && (
+              <EncouragementModal onClose={() => setShowModal(false)} />
+            )}
             <h2 className="text-2xl font-bold">Personal Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -1621,203 +1784,17 @@ const JoinForm = () => {
         );
 
       case 7:
+        // New Schedule Assessment step
         return (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold">Review Your Information</h2>
-            <p className="text-gray-600 mb-4">
-              Please review your information before submitting.
-            </p>
-
-            {/* Personal Information */}
-            <div className="border rounded-lg p-4 space-y-3">
-              <h3 className="text-lg font-semibold">Personal Information</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm font-medium">Name:</p>
-                  <p className="text-gray-600">{formData.personalInfo.name}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Email:</p>
-                  <p className="text-gray-600">{formData.personalInfo.email}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Phone:</p>
-                  <p className="text-gray-600">{formData.personalInfo.phone}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Date of Birth:</p>
-                  <p className="text-gray-600">
-                    {formData.personalInfo.dateOfBirth}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Height:</p>
-                  <p className="text-gray-600">{`${formData.personalInfo.height} ${formData.personalInfo.heightUnit}`}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Weight:</p>
-                  <p className="text-gray-600">{`${formData.personalInfo.weight} ${formData.personalInfo.weightUnit}`}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Street Address:</p>
-                  <p className="text-gray-600">
-                    {formData.personalInfo.streetAddress}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">City:</p>
-                  <p className="text-gray-600">{formData.personalInfo.city}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">State:</p>
-                  <p className="text-gray-600">{formData.personalInfo.state}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Postal Code:</p>
-                  <p className="text-gray-600">
-                    {formData.personalInfo.postalCode}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Country:</p>
-                  <p className="text-gray-600">
-                    {formData.personalInfo.country}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Fitness Goals */}
-            <div className="border rounded-lg p-4 space-y-3">
-              <h3 className="text-lg font-semibold">Fitness Goals</h3>
-              <div className="space-y-2">
-                <div>
-                  <p className="text-sm font-medium">Specific Goals:</p>
-                  <p className="text-gray-600">
-                    {formData.fitnessGoals.specificGoals.join(", ")}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Timeline:</p>
-                  <p className="text-gray-600">
-                    {formData.fitnessGoals.timeline}
-                  </p>
-                </div>
-                {formData.fitnessGoals.targetWeight && (
-                  <div>
-                    <p className="text-sm font-medium">Target Weight:</p>
-                    <p className="text-gray-600">{`${formData.fitnessGoals.targetWeight} ${formData.fitnessGoals.targetWeightUnit}`}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Activity Level */}
-            <div className="border rounded-lg p-4 space-y-3">
-              <h3 className="text-lg font-semibold">Activity Level</h3>
-              <div className="space-y-2">
-                <div>
-                  <p className="text-sm font-medium">Currently Active:</p>
-                  <p className="text-gray-600">
-                    {formData.activityLevel.isCurrentlyActive ? "Yes" : "No"}
-                  </p>
-                </div>
-                {formData.activityLevel.isCurrentlyActive && (
-                  <>
-                    <div>
-                      <p className="text-sm font-medium">Exercise Types:</p>
-                      <p className="text-gray-600">
-                        {formData.activityLevel.exerciseTypes.join(", ")}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">Training Days:</p>
-                      <p className="text-gray-600">
-                        {formData.activityLevel.trainingDaysPerWeek}
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Health Information */}
-            <div className="border rounded-lg p-4 space-y-3">
-              <h3 className="text-lg font-semibold">Health Information</h3>
-              <div className="space-y-2">
-                {!formData.healthInfo.noHealthConditions && (
-                  <div>
-                    <p className="text-sm font-medium">Health Conditions:</p>
-                    <p className="text-gray-600">
-                      {formData.healthInfo.healthConditions.join(", ")}
-                    </p>
-                  </div>
-                )}
-                {formData.healthInfo.pastInjuries && (
-                  <div>
-                    <p className="text-sm font-medium">Past Injuries:</p>
-                    <p className="text-gray-600">
-                      {formData.healthInfo.pastInjuries}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Nutrition */}
-            <div className="border rounded-lg p-4 space-y-3">
-              <h3 className="text-lg font-semibold">Nutrition</h3>
-              <div className="space-y-2">
-                <div>
-                  <p className="text-sm font-medium">Dietary Preference:</p>
-                  <p className="text-gray-600">
-                    {formData.nutritionInfo.dietaryPreference}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Meals per Day:</p>
-                  <p className="text-gray-600">
-                    {formData.nutritionInfo.mealsPerDay}
-                  </p>
-                </div>
-                {formData.nutritionInfo.foodRestrictions && (
-                  <div>
-                    <p className="text-sm font-medium">Food Restrictions:</p>
-                    <p className="text-gray-600">
-                      {formData.nutritionInfo.foodRestrictions}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Lifestyle */}
-            <div className="border rounded-lg p-4 space-y-3">
-              <h3 className="text-lg font-semibold">Lifestyle</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm font-medium">Sleep Duration:</p>
-                  <p className="text-gray-600">
-                    {formData.lifestyle.sleepDuration} hours
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Stress Level:</p>
-                  <p className="text-gray-600">
-                    {formData.lifestyle.stressLevel}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Occupation Type:</p>
-                  <p className="text-gray-600">
-                    {formData.lifestyle.occupationType}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ScheduleAssessment
+            formData={formData}
+            setFormData={setFormData}
+            onSchedulingComplete={() => setStep(step + 1)}
+          />
         );
-
+      case 8:
+        // Overview (moved from step 7 to step 8)
+        return <ReviewInformation formData={formData} />;
       default:
         return null;
     }
@@ -1827,35 +1804,49 @@ const JoinForm = () => {
 
   return (
     <div className="max-w-3xl mx-auto py-8 px-4">
-      <StepIndicator />
-      {renderStep()}
-      <div className="mt-8 flex justify-between">
-        {step > 1 && (
-          <button
-            type="button"
-            onClick={() => setStep(step - 1)}
-            className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-          >
-            Previous
-          </button>
-        )}
-        {step < 7 ? (
-          <button
-            type="button"
-            onClick={handleNextStep}
-            className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          >
-            Next
-          </button>
-        ) : (
-          <button
-            onClick={handleSubmit}
-            className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          >
-            Submit
-          </button>
-        )}
-      </div>
+      <>
+        <StepIndicator currentStep={step} steps={steps} />
+        {renderStep()}
+        <div className="mt-8 flex justify-between">
+          {step > 1 && (
+            <button
+              type="button"
+              onClick={() => setStep(step - 1)}
+              className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            >
+              Previous
+            </button>
+          )}
+          {step < 8 ? (
+            <button
+              type="button"
+              onClick={handleNextStep}
+              className={`px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                step === 7 ? "hidden" : ""
+              }`}
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              onClick={handleFormSubmit}
+              className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              Submit
+            </button>
+          )}
+        </div>
+      </>
+
+      <StatusPopup
+        isOpen={popupState.show}
+        status={popupState.status}
+        errorMessage={popupState.errorMessage}
+        trainingtype={popupState.trainingtype}
+        onClose={() =>
+          setPopupState({ show: false, status: "success", errorMessage: "" })
+        }
+      />
     </div>
   );
 };
