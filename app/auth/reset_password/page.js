@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function ResetPasswordPage() {
+// Create a separate component that uses useSearchParams
+function ResetPasswordForm() {
   const [formData, setFormData] = useState({
     password: "",
     password_confirmation: "",
@@ -406,5 +408,44 @@ export default function ResetPasswordPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Loading fallback component for Suspense
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-8 bg-white">
+      <div className="text-center">
+        <div className="inline-block p-3 rounded-full bg-purple-50 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-8 w-8 text-purple-600 animate-spin"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            />
+          </svg>
+        </div>
+        <h2 className="text-2xl font-semibold text-gray-800">Loading...</h2>
+        <p className="text-gray-500 mt-2">
+          Please wait while we set up your password reset form.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// Main component that wraps the form with Suspense
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <ResetPasswordForm />
+    </Suspense>
   );
 }
