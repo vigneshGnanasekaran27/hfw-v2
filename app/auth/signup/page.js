@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import GoogleSignInButton from "@/components/GoogleSignInButton";
 
 // Create a separate client component for the parts that use useSearchParams
 function SignUpForm() {
@@ -75,6 +76,11 @@ function SignUpForm() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleGoogleSignUp = () => {
+    // Google sign-up logic will be implemented later
+    console.log("Google Sign-Up clicked");
   };
 
   return (
@@ -233,6 +239,19 @@ function SignUpForm() {
             Create Account
           </button>
         </div>
+
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-white text-gray-500">
+              Or continue with
+            </span>
+          </div>
+        </div>
+
+        <GoogleSignInButton onClick={handleGoogleSignUp} />
 
         <div className="text-center">
           <p className="text-sm text-gray-600">

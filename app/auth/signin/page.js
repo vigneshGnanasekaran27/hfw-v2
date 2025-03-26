@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import GoogleSignInButton from "@/components/GoogleSignInButton";
 
 // Create a separate client component for parts that use useSearchParams
 function SignInForm() {
@@ -53,6 +54,11 @@ function SignInForm() {
         // Error is handled by AuthContext
       }
     }
+  };
+
+  const handleGoogleSignIn = () => {
+    // Google sign-in logic will be implemented later
+    console.log("Google Sign-In clicked");
   };
 
   return (
@@ -158,6 +164,19 @@ function SignInForm() {
             {redirectPath ? "Sign In & Continue" : "Sign In"}
           </button>
         </div>
+
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-white text-gray-500">
+              Or continue with
+            </span>
+          </div>
+        </div>
+
+        <GoogleSignInButton onClick={handleGoogleSignIn} />
 
         <div className="text-center">
           <p className="text-sm text-gray-600">

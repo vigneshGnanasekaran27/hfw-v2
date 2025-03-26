@@ -28,8 +28,8 @@ export default function Home() {
       <Navigation />
       <SlidingBanner />
       <FoodSection />
-      <NutritionConsultation />
       <TrainingTypesSection />
+      <NutritionConsultation />
       <WorkoutSchedulesSection />
       <ShopSection />
       <WorkshopSection />

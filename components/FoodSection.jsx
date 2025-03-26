@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import food1 from "../images/food1.png";
+import country_chicken from "../images/country_chicken.png";
+import grilled_fish from "../images/grilled_fish.png";
+import garlic_herb_prawns from "../images/garlic_herb_prawns.png";
+
 import { useRouter } from "next/navigation";
 import {
   ChefHat,
@@ -13,53 +17,57 @@ import {
   Scale,
   ArrowRight,
 } from "lucide-react";
-import { CTAModal } from "./CTAModal";
-import AnimatedCTAButton from "./AnimatedCTAButton";
+import Link from "next/link";
+// import { CTAModal } from "./CTAModal";
+// import AnimatedCTAButton from "./AnimatedCTAButton";
 
 export default function FoodSection() {
-  const [isExploreOpen, setIsExploreOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("featured");
+  // const [isExploreOpen, setIsExploreOpen] = useState(false);
+  // const [activeTab, setActiveTab] = useState("featured");
   const router = useRouter();
 
   const topMeals = [
     {
-      id: "highProtein",
-      title: "High Protein Power Bowl",
-      description: "Packed with lean proteins and essential nutrients",
-      calories: 450,
-      preparationTime: "25 mins",
+      id: "grilledFishDiet",
+      title: "Lean Grilled Fish Meal",
+      description:
+        "Perfectly grilled fish with steamed vegetables, rich in Omega-3 and protein.",
+      calories: 380,
+      preparationTime: "Pre-book: Before One Day",
       rating: 4.9,
-      reviewCount: 128,
-      macros: { protein: 35, carbs: 30, fat: 15 },
-      image: food1,
-      tags: ["Muscle Gain", "High Protein"],
-      bestFor: "Strength Training",
+      reviewCount: 150,
+      macros: { protein: 42, carbs: 15, fat: 10 },
+      image: grilled_fish,
+      tags: ["High Protein", "Low Carb", "Omega-3"],
+      bestFor: "Muscle Recovery & Weight Loss",
     },
     {
-      id: "balancedMeal",
-      title: "Balanced Nutrition Plate",
-      description: "Perfect macronutrient balance for optimal health",
-      calories: 500,
-      preparationTime: "20 mins",
-      rating: 4.8,
-      reviewCount: 96,
-      macros: { protein: 25, carbs: 40, fat: 20 },
-      image: food1,
-      tags: ["Balanced Diet", "Weight Management"],
-      bestFor: "Overall Wellness",
-    },
-    {
-      id: "veggiePower",
-      title: "Plant-Powered Delight",
-      description: "Nutrient-rich vegetarian meal with complete proteins",
+      id: "garlicPrawnDiet",
+      title: "Garlic Herb Prawn Meal",
+      description:
+        "Sautéed prawns in light garlic herb sauce with quinoa and greens.",
       calories: 400,
-      preparationTime: "15 mins",
+      preparationTime: "Pre-book: Before One Day",
+      rating: 4.8,
+      reviewCount: 110,
+      macros: { protein: 38, carbs: 20, fat: 12 },
+      image: garlic_herb_prawns,
+      tags: ["Lean Protein", "Low Fat", "Seafood"],
+      bestFor: "Lean Muscle Growth & Energy Boost",
+    },
+    {
+      id: "countryChickenDiet",
+      title: "Country Chicken Bowl",
+      description:
+        "Slow-cooked country chicken with millets and fiber-rich vegetables.",
+      calories: 450,
+      preparationTime: "Pre-book: Before One Day",
       rating: 4.7,
-      reviewCount: 84,
-      macros: { protein: 20, carbs: 50, fat: 12 },
-      image: food1,
-      tags: ["Vegetarian", "Low Calorie"],
-      bestFor: "Plant-Based Goals",
+      reviewCount: 95,
+      macros: { protein: 45, carbs: 30, fat: 15 },
+      image: country_chicken,
+      tags: ["High Protein", "Balanced Diet", "Gut Health"],
+      bestFor: "Strength & Immunity Boost",
     },
   ];
 
@@ -106,8 +114,8 @@ export default function FoodSection() {
           <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-6">
             <ChefHat className="w-10 h-10 text-primary" />
           </div>
-          <h2 className="text-5xl font-bold mb-6 ">HopeFit Wellness Kitchen</h2>
-          <p className="text-xl  max-w-3xl mx-auto mb-10 leading-relaxed">
+          <h2 className="text-3xl font-bold mb-6 ">HopeFit Wellness Kitchen</h2>
+          <p className="text-s  max-w-3xl mx-auto mb-10 leading-relaxed">
             Experience the perfect fusion of science and culinary artistry at
             HopeFit Wellness. Our in-house kitchen crafts personalized meals
             that not only tantalize your taste buds but fuel your fitness
@@ -150,115 +158,79 @@ export default function FoodSection() {
 
           <div className="grid md:grid-cols-3 gap-8 overflow-hidden py-9 px-4">
             {topMeals.map((meal) => (
-              <div
-                key={meal.id}
-                className="  rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]"
-              >
-                <div className="relative h-48 w-full group">
-                  <Image
-                    src={meal.image.src}
-                    alt={meal.title}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <p className="font-medium">Best For:</p>
-                      <p className="text-sm">{meal.bestFor}</p>
+              <Link href={`/kitchen/${meal.id}`}>
+                <div
+                  key={meal.id}
+                  className="rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)] relative group"
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={meal.image.src}
+                      alt={meal.title}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <p className="font-medium">Best For:</p>
+                        <p className="text-sm">{meal.bestFor}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-xl font-semibold flex-1">
+                        {meal.title}
+                      </h3>
+                      <span className="flex items-center gap-1 text-sm  px-3 py-1 rounded-full">
+                        <Clock className="w-4 h-4" />
+                        {meal.preparationTime}
+                      </span>
+                    </div>
+
+                    <p className="  mb-4">{meal.description}</p>
+
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="flex items-center gap-1">
+                        <span className="text-yellow-400">★</span>
+                        <span className="font-medium">{meal.rating}</span>
+                      </div>
+                      <span className="">|</span>
+                      <span className="text-sm ">
+                        {meal.reviewCount} reviews
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-3 text-center bg-purple-100 rounded-lg p-4 dark:bg-gray-900">
+                      <div className="border-r border-gray-200">
+                        <span className="font-bold block text-lg">
+                          {meal.macros.protein}g
+                        </span>
+                        <span className="text-xs ">Protein</span>
+                      </div>
+                      <div className="border-r border-gray-200">
+                        <span className="font-bold block text-lg">
+                          {meal.macros.carbs}g
+                        </span>
+                        <span className="text-xs ">Carbs</span>
+                      </div>
+                      <div>
+                        <span className="font-bold block text-lg">
+                          {meal.macros.fat}g
+                        </span>
+                        <span className="text-xs ">Fat</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <div className="w-fit  py-3 flex items-center justify-center gap-2  transition-colors group">
+                      Learn More
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-semibold flex-1">
-                      {meal.title}
-                    </h3>
-                    <span className="flex items-center gap-1 text-sm  px-3 py-1 rounded-full">
-                      <Clock className="w-4 h-4" />
-                      {meal.preparationTime}
-                    </span>
-                  </div>
-
-                  <p className="  mb-4">{meal.description}</p>
-
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="flex items-center gap-1">
-                      <span className="text-yellow-400">★</span>
-                      <span className="font-medium">{meal.rating}</span>
-                    </div>
-                    <span className="">|</span>
-                    <span className="text-sm ">{meal.reviewCount} reviews</span>
-                  </div>
-
-                  <div className="grid grid-cols-3 text-center bg-purple-100 rounded-lg p-4 dark:bg-gray-900">
-                    <div className="border-r border-gray-200">
-                      <span className="font-bold block text-lg">
-                        {meal.macros.protein}g
-                      </span>
-                      <span className="text-xs ">Protein</span>
-                    </div>
-                    <div className="border-r border-gray-200">
-                      <span className="font-bold block text-lg">
-                        {meal.macros.carbs}g
-                      </span>
-                      <span className="text-xs ">Carbs</span>
-                    </div>
-                    <div>
-                      <span className="font-bold block text-lg">
-                        {meal.macros.fat}g
-                      </span>
-                      <span className="text-xs ">Fat</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </Link>
             ))}
-          </div>
-        </div>
-
-        {/* Enhanced Final Call to Action */}
-        <div className="flex items-center justify-center">
-          <div className="text-center bg-purple-100  py-4 px-6  my-0 rounded-3xl max-w-fit  dark:bg-gray-900 ">
-            {/* CTA Buttons */}
-
-            <h3 className="text-3xl font-bold mb-6">
-              Ready to Transform Your Nutrition?
-            </h3>
-            <p className=" mb-10 max-w-2xl mx-auto">
-              Join HopeFit Wellness today and experience the perfect balance of
-              taste and nutrition. Our expert team is ready to craft your
-              personalized meal plan.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
-              {/* <AnimatedCTAButton
-                showModal={true}
-                sectionName="Learn About Our Kitchen"
-                className="bg-white hover:bg-gray-50 border-2 border-primary group relative overflow-hidden"
-                size="lg"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Learn More
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </AnimatedCTAButton> */}
-              <button onClick={() => router.push("/kitchen")}>
-                <span className="relative z-10 flex items-center gap-2">
-                  Learn More
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </button>
-              <AnimatedCTAButton
-                showModal={true}
-                sectionName="Start Your Meal Plan"
-                className="bg-primary hover:bg-primary/90 group relative overflow-hidden"
-                size="lg"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Start Your Meal Plan
-                  <Utensils className="w-5 h-5 transition-transform group-hover:rotate-12" />
-                </span>
-              </AnimatedCTAButton>
-            </div>
           </div>
         </div>
       </div>

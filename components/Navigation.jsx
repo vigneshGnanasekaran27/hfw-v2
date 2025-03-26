@@ -1,31 +1,50 @@
 "use client";
-import { useState, useEffect } from "react";
-import EmpathySupport from "./EmpathySupport";
+import { useState, useEffect, useRef } from "react";
 import AnimatedHamburgerMenu from "./AnimatedHamburgerMenu";
 import Image from "next/image";
-import { ShoppingCart, User, LogOut, ChevronRight } from "lucide-react";
-import { useAuth } from "../context/AuthContext"; // Import useAuth
-import { useRouter } from "next/navigation"; // Import useRouter
+import { useRouter } from "next/navigation";
 import logo from "../images/logo.png";
 
 const Navigation = () => {
   const router = useRouter();
-  const { user, signout } = useAuth(); // Get auth context
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [cartCount, setCartCount] = useState(12);
+  const [showMore, setShowMore] = useState(false);
+  const moreButtonRef = useRef(null);
+
+  // Close dropdown or mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if more dropdown is open and click is outside
+      if (
+        showMore &&
+        moreButtonRef.current &&
+        !moreButtonRef.current.contains(event.target)
+      ) {
+        setShowMore(false);
+      }
+
+      // Check if mobile menu is open and click is outside
+      if (
+        isOpen &&
+        event.target instanceof HTMLElement &&
+        !event.target.closest("nav")
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMore, isOpen]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleSignIn = () => {
-    router.push("/auth/signin");
-  };
-
-  const handleSignOut = async () => {
-    await signout();
-    router.push("/");
   };
 
   const scrollToSection = (sectionId) => {
@@ -34,6 +53,15 @@ const Navigation = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setIsOpen(false);
+    setShowMore(false);
+  };
+
+  const handleSignIn = () => {
+    router.push("/auth/signin");
+  };
+
+  const handleSignUp = () => {
+    router.push("/auth/signup");
   };
 
   useEffect(() => {
@@ -45,14 +73,14 @@ const Navigation = () => {
         "training",
         "schedule",
         "shop",
-        "workshops",
+        "calculator",
         "events",
         "blog",
-        "calculator",
+        "workshops",
         "leadership",
         "about",
-        "contact",
         "faq",
+        "contact",
       ];
 
       const currentSection = sections.find((section) => {
@@ -73,47 +101,8 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const AuthButtons = ({ isMobile = false }) => (
-    <>
-      {user ? (
-        <div
-          className={`flex items-center ${
-            isMobile ? "space-x-2" : "space-x-4"
-          }`}
-        >
-          <button
-            className="flex items-center space-x-2 hover:text-blue-500 transition-colors"
-            onClick={() => router.push("/dashboard")}
-          >
-            <User size={20} />
-            <span>{user.email}</span>
-            {isMobile && <ChevronRight size={16} />}
-          </button>
-          {!isMobile && (
-            <button
-              onClick={handleSignOut}
-              className="flex items-center space-x-1 hover:text-blue-500"
-            >
-              <LogOut size={20} />
-              <span>Sign Out</span>
-            </button>
-          )}
-        </div>
-      ) : (
-        <button
-          onClick={handleSignIn}
-          className="flex items-center space-x-2 hover:text-blue-500 transition-colors"
-        >
-          <User size={20} />
-          <span>Sign In</span>
-          {isMobile && <ChevronRight size={16} />}
-        </button>
-      )}
-    </>
-  );
-
   return (
-    <nav className="fixed top-0 left-0 w-full bg-purple-100 shadow-md z-50 dark:bg-gray-900">
+    <nav className="fixed top-0 left-0 w-full bg-purple-200 shadow-md z-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 py-2">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -126,7 +115,7 @@ const Navigation = () => {
             />
             <button
               onClick={() => scrollToSection("banner")}
-              className="hover:text-blue-500 transition duration-300 ml-2"
+              className="hover:text-purple-600 transition duration-300 ml-2 text-gray-800 dark:text-gray-100"
             >
               HopeFit Wellness
             </button>
@@ -137,120 +126,74 @@ const Navigation = () => {
             <NavLinks
               activeSection={activeSection}
               scrollToSection={scrollToSection}
+              showMore={showMore}
+              setShowMore={setShowMore}
+              moreButtonRef={moreButtonRef}
             />
-            <EmpathySupport />
           </div>
 
-          {/* Auth and Cart - Desktop */}
-          {/* <div className="hidden md:flex items-center space-x-4">
-            <button className="flex items-center space-x-1 hover:text-blue-500">
-              <User size={20} />
-              <span>Sign In</span>
-            </button>
-            <button className="flex items-center space-x-1 hover:text-blue-500">
-              <ShoppingCart size={20} />
-              {cartCount > 0 && (
-                <span className="bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-          </div> */}
+          {/* Auth Buttons and Mobile Menu Toggle */}
+          <div className="md:flex items-center space-x-4">
+            {/* Desktop Auth Buttons */}
+            <div className="hidden md:flex items-center space-x-2">
+              <button
+                onClick={handleSignIn}
+                className="px-4 py-2 border border-purple-500 text-purple-600 rounded-md hover:bg-purple-500 hover:text-white transition duration-300"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={handleSignUp}
+                className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition duration-300"
+              >
+                Sign Up
+              </button>
+            </div>
 
-          {/* Auth and Cart - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <AuthButtons />
-            <button className="flex items-center space-x-1 hover:text-blue-500">
-              <ShoppingCart size={20} />
-              {cartCount > 0 && (
-                <span className="bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Menu Toggle and Cart */}
-          {/* <div className="md:hidden flex items-center space-x-4">
-            <button className="hover:text-blue-500">
-              <User size={20} />
-            </button>
-            <button className="hover:text-blue-500 relative">
-              <ShoppingCart size={20} />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-            <AnimatedHamburgerMenu isOpen={isOpen} onClick={toggleMenu} />
-          </div>
-        </div> */}
-
-          {/* Mobile Menu Toggle and Cart */}
-          <div className="md:hidden flex items-center space-x-4">
-            <AuthButtons isMobile={true} />
-            <button className="hover:text-blue-500 relative">
-              <ShoppingCart size={20} />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-            <AnimatedHamburgerMenu isOpen={isOpen} onClick={toggleMenu} />
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden">
+              <AnimatedHamburgerMenu isOpen={isOpen} onClick={toggleMenu} />
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu - Left side drawer */}
-        {/* {isOpen && (
-          <div className="md:hidden fixed top-0 left-0 w-4/5 h-screen bg-purple-100 dark:bg-gray-900 shadow-lg transform transition-transform duration-300 ease-in-out z-50">
-            <div className="p-4">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold">Menu</h2>
-                <button onClick={toggleMenu} className="p-2">
-                  ✕
-                </button>
-              </div>
-              <NavLinks
-                mobile={true}
-                activeSection={activeSection}
-                scrollToSection={scrollToSection}
-              />
-              <EmpathySupport />
-            </div>
-          </div>
-        )} */}
-
-        {/* Mobile Menu - Left side drawer */}
         {isOpen && (
-          <div className="md:hidden fixed top-0 left-0 w-4/5 h-screen bg-purple-100 dark:bg-gray-900 shadow-lg transform transition-transform duration-300 ease-in-out z-50">
+          <div className="md:hidden fixed top-0 left-0 w-4/5 h-screen bg-purple-200 dark:bg-gray-900 shadow-lg transform transition-transform duration-300 ease-in-out z-50">
             <div className="p-4">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold">Menu</h2>
-                <button onClick={toggleMenu} className="p-2">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+                  Menu
+                </h2>
+                <button
+                  onClick={toggleMenu}
+                  className="p-2 text-gray-800 dark:text-gray-100"
+                >
                   ✕
                 </button>
               </div>
-              {user && (
-                <div className="mb-4 p-3 bg-blue-500/10 rounded-lg">
-                  <p className="text-sm text-gray-600">Welcome back,</p>
-                  <p className="font-semibold">{user.email}</p>
-                  <button
-                    onClick={handleSignOut}
-                    className="mt-2 flex items-center text-sm text-gray-600 hover:text-blue-500"
-                  >
-                    <LogOut size={16} className="mr-1" />
-                    Sign Out
-                  </button>
-                </div>
-              )}
+
+              {/* Mobile Auth Buttons */}
+              <div className="flex flex-col space-y-2 mb-4">
+                <button
+                  onClick={handleSignIn}
+                  className="w-full px-4 py-2 border border-purple-500 text-purple-600 rounded-md hover:bg-purple-500 hover:text-white transition duration-300"
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={handleSignUp}
+                  className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition duration-300"
+                >
+                  Sign Up
+                </button>
+              </div>
+
               <NavLinks
                 mobile={true}
                 activeSection={activeSection}
                 scrollToSection={scrollToSection}
               />
-              <EmpathySupport />
             </div>
           </div>
         )}
@@ -259,9 +202,14 @@ const Navigation = () => {
   );
 };
 
-const NavLinks = ({ mobile = false, activeSection, scrollToSection }) => {
-  const [showMore, setShowMore] = useState(false);
-
+const NavLinks = ({
+  mobile = false,
+  activeSection,
+  scrollToSection,
+  showMore,
+  setShowMore,
+  moreButtonRef,
+}) => {
   const primaryLinks = [
     { id: "kitchen", label: "Kitchen" },
     { id: "nutrition", label: "Nutrition" },
@@ -280,38 +228,58 @@ const NavLinks = ({ mobile = false, activeSection, scrollToSection }) => {
     { id: "faq", label: "FAQ" },
   ];
 
+  // Check if the active section is in the More links
+  const isMoreSectionActive = moreLinks.some(
+    (link) => link.id === activeSection
+  );
+
   const NavItem = ({ id, label }) => (
     <button
       onClick={() => scrollToSection(id)}
       className={`
         ${
           mobile
-            ? "block w-full text-left py-2 hover:bg-blue-500/10"
-            : "hover:text-blue-500 transition duration-300"
+            ? "block w-full text-left py-2 hover:bg-purple-500/10"
+            : "px-3 py-2 hover:text-purple-600 transition duration-300 whitespace-nowrap"
         }
-        ${activeSection === id ? "text-blue-500" : ""}
+        ${
+          activeSection === id
+            ? "text-purple-600"
+            : "text-gray-700 dark:text-gray-300"
+        }
         relative
       `}
     >
       {label}
       {activeSection === id && !mobile && (
-        <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500" />
+        <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-600" />
       )}
     </button>
   );
-
   return (
-    <div className={`${mobile ? "space-y-2" : "flex items-center space-x-4"}`}>
+    <div
+      className={`
+        ${mobile ? "space-y-2" : "flex items-center space-x-0"}
+        w-full
+      `}
+    >
       {primaryLinks.map((link) => (
         <NavItem key={link.id} {...link} />
       ))}
 
       {/* More Dropdown for Desktop */}
-      {!mobile && (
-        <div className="relative">
+      {!mobile && setShowMore && moreButtonRef && (
+        <div ref={moreButtonRef} className="relative">
           <button
             onClick={() => setShowMore(!showMore)}
-            className="hover:text-blue-500 transition duration-300 flex items-center"
+            className={`
+              px-3 py-2 hover:text-purple-600 transition duration-300 flex items-center whitespace-nowrap
+              ${
+                isMoreSectionActive
+                  ? "text-purple-600"
+                  : "text-gray-700 dark:text-gray-300"
+              }
+            `}
           >
             More
             <svg
@@ -329,6 +297,9 @@ const NavLinks = ({ mobile = false, activeSection, scrollToSection }) => {
                 d="M19 9l-7 7-7-7"
               />
             </svg>
+            {isMoreSectionActive && !showMore && (
+              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-600" />
+            )}
           </button>
 
           {showMore && (
@@ -340,7 +311,7 @@ const NavLinks = ({ mobile = false, activeSection, scrollToSection }) => {
                     scrollToSection(link.id);
                     setShowMore(false);
                   }}
-                  className="block w-full text-left px-4 py-2 hover:bg-blue-500/10"
+                  className="block w-full text-left px-4 py-2 hover:bg-purple-500/10 text-gray-700 dark:text-gray-300"
                 >
                   {link.label}
                 </button>
@@ -351,18 +322,47 @@ const NavLinks = ({ mobile = false, activeSection, scrollToSection }) => {
       )}
 
       {/* More Links for Mobile */}
-      {mobile && moreLinks.map((link) => <NavItem key={link.id} {...link} />)}
+      {mobile && (
+        <>
+          {moreLinks.map((link) => (
+            <NavItem key={link.id} {...link} />
+          ))}
+
+          {/* Contact Us Button for Mobile */}
+          <button
+            onClick={() => scrollToSection("contact")}
+            className={`
+              block w-full px-4 py-2 
+              ${
+                activeSection === "contact"
+                  ? "bg-purple-600 text-white"
+                  : "text-purple-600"
+              }
+              hover:bg-purple-500/10
+              border border-purple-500 rounded-md mt-2
+              hover:bg-purple-600 hover:text-white
+              transition duration-300
+            `}
+          >
+            Contact Us
+          </button>
+        </>
+      )}
 
       {/* Contact Button */}
       {!mobile && (
         <button
           onClick={() => scrollToSection("contact")}
           className={`
-            px-4 py-1.5 rounded-full 
-            border border-blue-500
-            hover:bg-blue-500 hover:text-white
-            transition duration-300
-            ${activeSection === "contact" ? "bg-blue-500 text-white" : ""}
+            px-3 py-2 rounded-full 
+            border border-purple-500
+            hover:bg-purple-600 hover:text-white
+            transition duration-300 whitespace-nowrap
+            ${
+              activeSection === "contact"
+                ? "bg-purple-600 text-white"
+                : "text-purple-600"
+            }
           `}
         >
           Contact Us

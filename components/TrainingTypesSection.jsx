@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import AnimatedCTAButton from "./AnimatedCTAButton";
 import copyimage from "../images/image copy 2.png";
+import groupTraining from "../images/bg-training.png";
 
 const TrainingTypesSection = () => {
   const trainingTypes = [
@@ -24,7 +25,7 @@ const TrainingTypesSection = () => {
       title: "Group Training",
       description:
         "Experience the energy of group fitness with expert guidance and peer motivation",
-      image: copyimage,
+      image: groupTraining,
       alt: "Group fitness class with multiple participants",
       icon: <Users className="w-6 h-6" />,
       benefits: [
