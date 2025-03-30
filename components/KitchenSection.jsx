@@ -1,12 +1,10 @@
 "use client";
-import React, { useState } from "react";
 import Image from "next/image";
-import food1 from "../images/food1.png";
-import country_chicken from "../images/country_chicken.png";
-import grilled_fish from "../images/grilled_fish.png";
-import garlic_herb_prawns from "../images/garlic_herb_prawns.png";
 
-import { useRouter } from "next/navigation";
+import Country_chicken from "..//images/Kitchen/country_chicken.png";
+import Grilled_fish from "..//images/Kitchen/grilled_fish.png";
+import Garlic_herb_prawns from "..//images/Kitchen/garlic_herb_prawns.png";
+
 import {
   ChefHat,
   Utensils,
@@ -16,16 +14,11 @@ import {
   Leaf,
   Scale,
   ArrowRight,
+  Menu,
 } from "lucide-react";
 import Link from "next/link";
-// import { CTAModal } from "./CTAModal";
-// import AnimatedCTAButton from "./AnimatedCTAButton";
 
 export default function FoodSection() {
-  // const [isExploreOpen, setIsExploreOpen] = useState(false);
-  // const [activeTab, setActiveTab] = useState("featured");
-  const router = useRouter();
-
   const topMeals = [
     {
       id: "grilledFishDiet",
@@ -37,7 +30,7 @@ export default function FoodSection() {
       rating: 4.9,
       reviewCount: 150,
       macros: { protein: 42, carbs: 15, fat: 10 },
-      image: grilled_fish,
+      image: Grilled_fish,
       tags: ["High Protein", "Low Carb", "Omega-3"],
       bestFor: "Muscle Recovery & Weight Loss",
     },
@@ -51,7 +44,7 @@ export default function FoodSection() {
       rating: 4.8,
       reviewCount: 110,
       macros: { protein: 38, carbs: 20, fat: 12 },
-      image: garlic_herb_prawns,
+      image: Garlic_herb_prawns,
       tags: ["Lean Protein", "Low Fat", "Seafood"],
       bestFor: "Lean Muscle Growth & Energy Boost",
     },
@@ -65,7 +58,7 @@ export default function FoodSection() {
       rating: 4.7,
       reviewCount: 95,
       macros: { protein: 45, carbs: 30, fat: 15 },
-      image: country_chicken,
+      image: Country_chicken,
       tags: ["High Protein", "Balanced Diet", "Gut Health"],
       bestFor: "Strength & Immunity Boost",
     },
@@ -111,15 +104,14 @@ export default function FoodSection() {
       <div className="container mx-auto px-4">
         {/* Enhanced Header Section */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-6">
-            <ChefHat className="w-10 h-10 text-primary" />
+          <div className="inline-flex items-center justify-center p-2 bg-emerald-100 rounded-full mb-6 shadow-sm border border-emerald-200 dark:bg-emerald-950 dark:border-emerald-800">
+            <ChefHat className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <h2 className="text-3xl font-bold mb-6 ">HopeFit Wellness Kitchen</h2>
-          <p className="text-s  max-w-3xl mx-auto mb-10 leading-relaxed">
-            Experience the perfect fusion of science and culinary artistry at
-            HopeFit Wellness. Our in-house kitchen crafts personalized meals
-            that not only tantalize your taste buds but fuel your fitness
-            journey with precision.
+          <h2 className="text-4xl font-bold mb-6 ">HopeFit Wellness Kitchen</h2>
+          <p className="text-lg max-w-3xl mx-auto mb-10 leading-relaxed">
+            At HopeFit Wellness, we blend nutrition and flavor to create meals
+            that support your fitness journey. Enjoy expertly crafted dishes
+            designed to nourish your body and delight your taste buds.
           </p>
 
           {/* Benefits Grid */}
@@ -130,7 +122,7 @@ export default function FoodSection() {
                 className="p-6 bg-purple-100 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 dark:bg-gray-900"
               >
                 <div className="flex items-center gap-4">
-                  <div className="bg-purple-50  flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full   text-purple-600">
+                  <div className="bg-purple-50 flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-purple-600 dark:bg-purple-900 dark:text-purple-300">
                     {benefit.icon}
                   </div>
                   <div className="flex-1">
@@ -149,20 +141,22 @@ export default function FoodSection() {
         <div className="mb-20">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold mb-4">Featured Meal Plans</h3>
-            <p className=" max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto">
               Discover our chef-crafted meal plans, each designed to support
               different fitness goals while delivering exceptional taste and
               nutrition.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 overflow-hidden py-9 px-4">
-            {topMeals.map((meal) => (
-              <Link href={`/kitchen/${meal.id}`}>
-                <div
-                  key={meal.id}
-                  className="rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)] relative group"
-                >
+          {/* Added spacing adjustments for better mobile display */}
+          <div className="grid md:grid-cols-3 gap-8 sm:gap-6 overflow-hidden py-9 px-4">
+            {topMeals.map((meal, index) => (
+              <Link
+                href={`/kitchen/${meal.id}`}
+                key={meal.id}
+                className="mb-8 md:mb-0"
+              >
+                <div className="rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)] relative group">
                   <div className="relative h-48 w-full">
                     <Image
                       src={meal.image.src}
@@ -182,15 +176,16 @@ export default function FoodSection() {
                       <h3 className="text-xl font-semibold flex-1">
                         {meal.title}
                       </h3>
-                      <span className="flex items-center gap-1 text-sm  px-3 py-1 rounded-full">
+                      <span className="flex items-center gap-1 text-sm px-3 py-1 rounded-full">
                         <Clock className="w-4 h-4" />
                         {meal.preparationTime}
                       </span>
                     </div>
 
-                    <p className="  mb-4">{meal.description}</p>
+                    <p className="mb-4">{meal.description}</p>
 
-                    <div className="flex items-center gap-2 mb-4">
+                    {/* Need to implement once back end is ready */}
+                    {/* <div className="flex items-center gap-2 mb-4">
                       <div className="flex items-center gap-1">
                         <span className="text-yellow-400">★</span>
                         <span className="font-medium">{meal.rating}</span>
@@ -199,38 +194,54 @@ export default function FoodSection() {
                       <span className="text-sm ">
                         {meal.reviewCount} reviews
                       </span>
-                    </div>
+                    </div> */}
 
                     <div className="grid grid-cols-3 text-center bg-purple-100 rounded-lg p-4 dark:bg-gray-900">
-                      <div className="border-r border-gray-200">
+                      <div className="border-r border-gray-200 dark:border-gray-700">
                         <span className="font-bold block text-lg">
                           {meal.macros.protein}g
                         </span>
-                        <span className="text-xs ">Protein</span>
+                        <span className="text-xs">Protein</span>
                       </div>
-                      <div className="border-r border-gray-200">
+                      <div className="border-r border-gray-200 dark:border-gray-700">
                         <span className="font-bold block text-lg">
                           {meal.macros.carbs}g
                         </span>
-                        <span className="text-xs ">Carbs</span>
+                        <span className="text-xs">Carbs</span>
                       </div>
                       <div>
                         <span className="font-bold block text-lg">
                           {meal.macros.fat}g
                         </span>
-                        <span className="text-xs ">Fat</span>
+                        <span className="text-xs">Fat</span>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <div className="w-fit  py-3 flex items-center justify-center gap-2  transition-colors group">
-                      Learn More
+                  <div className="flex items-center justify-center pb-4">
+                    <Link
+                      href={`/kitchen/${meal.id}`}
+                      className="w-fit px-5 py-2 bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-200 flex items-center justify-center gap-2 hover:bg-emerald-100 transition-colors 
+                      dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800 dark:hover:bg-emerald-900"
+                    >
+                      Order Fresh Meal
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </Link>
             ))}
+          </div>
+
+          {/* View All Button */}
+          <div className="flex justify-center mt-8">
+            <Link
+              href="/kitchen/all-meals"
+              className="px-6 py-3 bg-purple-50 text-purple-700 rounded-lg border border-purple-200 flex items-center justify-center gap-2 hover:bg-purple-100 transition-colors shadow-sm
+              dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800 dark:hover:bg-purple-900"
+            >
+              View All Meal Plans
+              <Menu className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </div>

@@ -178,8 +178,10 @@ const TestimonialSection = () => {
           </div>
         )}
         <div className="flex flex-col justify-center">
-          <div className="inline-flex items-center justify-center p-3   rounded-full mb-6">
-            <Star className="w-10 h-10  " />
+          <div className="text-center mb-7">
+            <div className="inline-flex items-center justify-center p-2 bg-pink-100 rounded-full mb-6 shadow-sm border border-pink-200">
+              <Star className="w-10 h-10 text-pink-600  " />
+            </div>
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-center  mb-8">
             Testimonials

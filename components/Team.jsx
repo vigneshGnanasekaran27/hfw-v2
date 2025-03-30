@@ -56,8 +56,8 @@ const FounderSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-6">
-            <Medal className="w-10 h-10 text-primary" />
+          <div className="inline-flex items-center justify-center p-2 bg-teal-100 rounded-full mb-6 shadow-sm border border-teal-200">
+            <Medal className="w-10 h-10 text-teal-600  " />
           </div>
           <h2 className="text-5xl font-bold mb-6 ">Leadership & Vision</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">

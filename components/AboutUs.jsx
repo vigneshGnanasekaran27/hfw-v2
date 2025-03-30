@@ -106,8 +106,8 @@ const AboutUs = () => {
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-3   rounded-full mb-6">
-            <Building2 className="w-10 h-10  " />
+          <div className="inline-flex items-center justify-center p-2 bg-emerald-100 rounded-full mb-6 shadow-sm border border-emerald-200">
+            <Building2 className="w-10 h-10 text-emerald-600  " />
           </div>
           <h2 className="text-3xl md:text-5xl font-bold   mb-4">About Us</h2>
           <p className="text-base md:text-xl   max-w-3xl mx-auto">

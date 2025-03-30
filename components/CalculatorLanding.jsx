@@ -194,8 +194,8 @@ const CalculatorLanding = () => {
       <div className="container mx-auto px-10 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-3   rounded-full mb-6">
-            <Calculator className="w-10 h-10  " />
+          <div className="inline-flex items-center justify-center p-2 bg-sky-100 rounded-full mb-6 shadow-sm border border-sky-200">
+            <Calculator className="w-8 h-8 text-sky-600" />
           </div>
           <h1 className="text-5xl font-bold mb-6">Smart Health Calculators</h1>
           <p className="text-xl    max-w-2xl mx-auto">

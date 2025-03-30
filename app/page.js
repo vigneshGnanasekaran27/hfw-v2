@@ -1,6 +1,6 @@
 import Navigation from "../components/Navigation";
 import SlidingBanner from "../components/SlidingBanner";
-import FoodSection from "../components/FoodSection";
+import KitchenSection from "../components/KitchenSection";
 import ShopSection from "../components/ShopSection";
 import WorkshopSection from "../components/WorkshopSection";
 import EventSection from "../components/EventSection";
@@ -14,7 +14,7 @@ import FAQSection from "@/components/FAQSection";
 import CTAPopup from "@/components/CTAPopup";
 import NutritionConsultation from "../components/NutritionConsultation";
 import WorkoutSchedulesSection from "@/components/WorkoutSchedulesSection";
-import TrainingTypesSection from "@/components/TrainingTypesSection";
+import TrainingSection from "@/components/TrainingSection";
 import CalculatorLanding from "@/components/CalculatorLanding";
 export default function Home() {
   const offers = [
@@ -27,18 +27,18 @@ export default function Home() {
     <>
       <Navigation />
       <SlidingBanner />
-      <FoodSection />
-      <TrainingTypesSection />
+      <KitchenSection />
+      <TrainingSection />
       <NutritionConsultation />
       <WorkoutSchedulesSection />
+      <CalculatorLanding />
       <ShopSection />
       <WorkshopSection />
       <EventSection />
       <BlogSection />
-      <CalculatorLanding />
       <TestimonialSection />
-      <Team />
       <AboutUs />
+      <Team />
       <ContactUs />
       <FAQSection />
       <CTAPopup offers={offers} />

@@ -52,8 +52,8 @@ const WorkoutSchedulesSection = () => {
     <div id="schedule" className="py-16 mt-12">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-3   rounded-full mb-6">
-            <UserPen className="w-10 h-10  " />
+          <div className="inline-flex items-center justify-center p-2 bg-indigo-100 rounded-full mb-6 shadow-sm border border-indigo-200">
+            <UserPen className="w-8 h-8 text-indigo-600" />
           </div>
           <div className="">
             <h2 className="text-4xl font-bold mb-4">
@@ -115,14 +115,14 @@ const WorkoutSchedulesSection = () => {
                   Browse All Programs
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </button>
-                <AnimatedCTAButton
+                {/* <AnimatedCTAButton
                   showModal={true}
                   sectionName="Custom Program Consultation"
                   className="bg-purple-500 hover:bg-purple-600"
                   size="lg"
                 >
                   Get Started
-                </AnimatedCTAButton>
+                </AnimatedCTAButton> */}
               </div>
             </div>
           </div>

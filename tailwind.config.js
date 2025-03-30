@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Montserrat"],
+        sans: ["Montserrat", "Poppins"],
       },
       colors: {
         background: "hsl(var(--background))",

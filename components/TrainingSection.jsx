@@ -1,22 +1,23 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 import {
   ArrowRight,
   Users,
   PersonStanding,
   Globe,
   Target,
-  Clock,
-  Calendar,
+  ClipboardList,
   CheckCircle2,
   Trophy,
   Flame,
   Activity,
 } from "lucide-react";
-import AnimatedCTAButton from "./AnimatedCTAButton";
-import copyimage from "../images/image copy 2.png";
-import groupTraining from "../images/bg-training.png";
+
+import Group_training from "..//images/Training/group_training.png";
+import One_on_one_training from "..//images/Training/one_on_one_training.jpg";
+import Online_traing from "..//images/Training/online_training.jpeg";
 
 const TrainingTypesSection = () => {
   const trainingTypes = [
@@ -25,7 +26,7 @@ const TrainingTypesSection = () => {
       title: "Group Training",
       description:
         "Experience the energy of group fitness with expert guidance and peer motivation",
-      image: groupTraining,
+      image: Group_training,
       alt: "Group fitness class with multiple participants",
       icon: <Users className="w-6 h-6" />,
       benefits: [
@@ -46,7 +47,7 @@ const TrainingTypesSection = () => {
       title: "One-on-One Training",
       description:
         "Get personalized attention and customized programs with our expert trainers",
-      image: copyimage,
+      image: One_on_one_training,
       alt: "Personal trainer working with client",
       icon: <PersonStanding className="w-6 h-6" />,
       benefits: [
@@ -67,7 +68,7 @@ const TrainingTypesSection = () => {
       title: "Online Training",
       description:
         "Access professional guidance and workout plans from anywhere, anytime",
-      image: copyimage,
+      image: Online_traing,
       alt: "Person doing online fitness training",
       icon: <Globe className="w-6 h-6" />,
       benefits: [
@@ -108,17 +109,17 @@ const TrainingTypesSection = () => {
   ];
 
   return (
-    <section id="training" className="py-20 mt-12">
+    <section id="training" className="py-20 mt-20">
       <div className="container mx-auto px-4">
         {/* Enhanced Header Section */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-6">
-            <Activity className="w-10 h-10 text-primary" />
+          <div className="inline-flex items-center justify-center p-2 bg-blue-100 rounded-full mb-6 shadow-sm border border-blue-200">
+            <Activity className="w-8 h-8 text-blue-600" />
           </div>
-          <h2 className="text-5xl font-bold mb-6 ">
+          <h2 className="text-4xl font-bold mb-6 ">
             Transform Your Fitness Journey
           </h2>
-          <p className="text-xl  max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg  max-w-3xl mx-auto mb-12 leading-relaxed">
             Choose from our diverse range of training programs, each designed to
             deliver exceptional results while fitting perfectly into your
             lifestyle.
@@ -159,13 +160,14 @@ const TrainingTypesSection = () => {
                   alt={type.alt}
                   layout="fill"
                   objectFit="cover"
+                  objectPosition="top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute top-4 left-4 bg-purple-100 rounded-full p-2 dark:bg-gray-900">
                     {type.icon}
                   </div>
                   {type.popular && (
-                    <div className="absolute top-4 right-4 bg-primary text-white text-sm px-3 py-1 rounded-full">
+                    <div className="absolute top-4 right-4 bg-red-400 text-white text-sm px-3 py-1 rounded-full">
                       Most Popular
                     </div>
                   )}
@@ -192,7 +194,7 @@ const TrainingTypesSection = () => {
                   ))}
                 </div>
 
-                <div className="bg-purple-100 rounded-lg p-4 mb-6 dark:bg-gray-900">
+                {/* <div className="bg-purple-100 rounded-lg p-4 mb-6 dark:bg-gray-900">
                   <div className="grid grid-cols-2 gap-4">
                     {Object.entries(type.stats).map(([key, value]) => (
                       <div key={key} className="text-center">
@@ -203,41 +205,30 @@ const TrainingTypesSection = () => {
                       </div>
                     ))}
                   </div>
-                </div>
-                <div className="flex items-center justify-center">
-                  <Link href={`/training`}>
-                    <div className="w-fit  border-2 border-purple-700 py-3 px-6 rounded-lg flex items-center justify-center gap-2  transition-colors group">
-                      Learn More
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </div>
+                </div> */}
+                <div className="flex items-center justify-center pb-4">
+                  <Link
+                    href={`/training/${type.id}`}
+                    className="w-fit px-5 py-2 bg-blue-50 text-blue-700 rounded-lg border border-blue-200 flex items-center justify-center gap-2 hover:bg-blue-100 transition-colors 
+                      dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 dark:hover:bg-blue-900"
+                  >
+                    Start Training
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Enhanced Call to Action */}
-        <div className="text-center bg-purple-100 py-16 px-6 rounded-3xl dark:bg-gray-900">
-          <h3 className="text-3xl font-bold mb-6">
-            Ready to Begin Your Transformation?
-          </h3>
-          <p className=" mb-10 max-w-2xl mx-auto">
-            Join HopeFit Wellness today and experience the perfect training
-            program for your goals. Our expert team is ready to guide you on
-            your fitness journey.
-          </p>
-          <AnimatedCTAButton
-            showModal={true}
-            sectionName="Training Consultation"
-            className="bg-primary hover:bg-primary/90 group"
-            size="lg"
+        <div className="flex justify-center mt-8">
+          <Link
+            href="/training"
+            className="px-6 py-3 bg-purple-50 text-purple-700 rounded-lg border border-purple-200 flex items-center justify-center gap-2 hover:bg-purple-100 transition-colors shadow-sm
+              dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800 dark:hover:bg-purple-900"
           >
-            <span className="flex items-center gap-2">
-              Start Your Fitness Journey
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </span>
-          </AnimatedCTAButton>
+            Explore Training Plans
+            <ClipboardList className="w-5 h-5" />
+          </Link>
         </div>
       </div>
     </section>

@@ -1,61 +1,51 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import AnimatedCTAButton from "./AnimatedCTAButton";
+import Link from "next/link";
 
-import bgKitchen1 from "../images/bg-kitchen1.jpeg";
-import bgNutrition from "../images/bg-nutrition.jpeg";
-import bgTraining from "../images/bg-training.png";
-import bgSchedule from "../images/bg-schedule.jpeg";
-import bgGroup from "../images/bg-groupT.jpeg";
-import bgCal from "../images/bg-cal.png";
-import bgKitchen2 from "../images/bg-kitchen2.png";
+import { ArrowRight } from "lucide-react";
+
+import Kitchen from "..//images/SlidingBanner/kitchen.jpeg";
+import Kitchen_mobile from "..//images/SlidingBanner/kitchen_mobile.png";
+import Training from "..//images/SlidingBanner/training.png";
+import Cal from "..//images/SlidingBanner/cal.png";
+import Shop from "..//images/SlidingBanner/shop.jpeg";
 
 export default function SlidingBanner() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
-      image: bgKitchen1,
+      image: Kitchen,
+      mobileImage: Kitchen_mobile,
       title: "HopeFit Wellness Kitchen",
-      subtitle: "Healthy Meals Tailored for You",
-      cta: "Discover Our Kitchen",
+      subtitle: "Nutritious & Delicious Meals for Your Health",
+      cta: "Explore Our Menu",
+      link: "/kitchen",
     },
     {
-      image: bgNutrition,
-      title: "Personalized Nutrition Plans",
-      subtitle: "Fuel Your Goals with Expert Guidance",
-      cta: "View Meal Plans",
+      image: Training,
+      mobileImage: Training,
+      title: "Personalized Fitness Training",
+      subtitle: "Achieve Your Goals with Expert Coaching",
+      cta: "Start Your Journey",
+      link: "/training",
     },
     {
-      image: bgTraining,
-      title: "Holistic Fitness Training",
-      subtitle: "Transform Your Mind, Body, and Spirit",
-      cta: "Get Started Now",
+      image: Cal,
+      mobileImage: Cal,
+      title: "Smart Fitness Calculator",
+      subtitle: "Know Your Numbers, Reach Your Goals",
+      cta: "Check Your Stats",
+      link: "/calculator",
     },
     {
-      image: bgSchedule,
-      title: "Customized Workout Schedules",
-      subtitle: "Plan Your Path to Peak Fitness",
-      cta: "Build Your Schedule",
-    },
-    {
-      image: bgGroup,
-      title: "Group Training Sessions",
-      subtitle: "Achieve More Together",
-      cta: "Join a Class",
-    },
-    {
-      image: bgCal,
-      title: "Fitness Calculator",
-      subtitle: "Track Your Progress with Precision",
-      cta: "Calculate Now",
-    },
-    {
-      image: bgKitchen2,
-      title: "Nutritious Meals Delivered",
-      subtitle: "Delicious, Healthy, and Convenient",
-      cta: "Order Your Meal",
+      image: Shop,
+      mobileImage: Shop,
+      title: "HopeFit Activewear",
+      subtitle: "Stylish & Comfortable Gear for Every Workout",
+      cta: "Shop Now",
+      link: "/shope",
     },
   ];
 
@@ -63,7 +53,7 @@ export default function SlidingBanner() {
   useEffect(() => {
     const slideInterval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 3000); // Change slide every 5 seconds
+    }, 7000); // Change slide every 7 seconds
 
     return () => clearInterval(slideInterval);
   }, []);
@@ -87,45 +77,57 @@ export default function SlidingBanner() {
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
-          {/* Background Image */}
-          <Image
-            src={slide.image}
-            alt={slide.title}
-            layout="fill"
-            objectFit="cover"
-            priority={index === 0}
-            className="absolute z-10"
-          />
+          {/* Background Image - Responsive */}
+          <>
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              layout="fill"
+              objectFit="cover"
+              priority={index === 0}
+              className="absolute z-10 hidden md:block"
+            />
+            <Image
+              src={slide.mobileImage}
+              alt={slide.title}
+              layout="fill"
+              objectFit="cover"
+              priority={index === 0}
+              className="absolute z-10 md:hidden"
+            />
+          </>
 
           {/* Overlay */}
-          {/* <div className="absolute inset-0 bg-black opacity-50 z-20"></div> */}
-          <div className="absolute inset-0v"></div>
+          {/* <div className="absolute inset-0v"></div> */}
 
           {/* Content */}
-          <div className="relative z-30 flex items-center justify-center h-full text-center text-rose-500 px-4">
-            <div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fadeIn">
+          <div className="relative z-30 flex items-center justify-center h-full text-center px-4 py-12 overflow-hidden">
+            {/* Background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 opacity-50 dark:from-gray-900 dark:via-slate-800 dark:to-black dark:opacity-80"></div>
+
+            {/* Abstract elements */}
+            <div className="absolute -top-24 -left-24 w-64 h-64 bg-yellow-400 dark:bg-blue-900 rounded-full filter blur-lg opacity-30 dark:opacity-20 animate-pulse"></div>
+            <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-pink-500 dark:bg-purple-900 rounded-full filter blur-lg opacity-30 dark:opacity-20 animate-pulse"></div>
+
+            {/* Additional background elements */}
+            <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-cyan-400 dark:bg-indigo-900 rounded-full filter blur-md opacity-20 dark:opacity-15 animate-pulse"></div>
+            <div className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-indigo-500 dark:bg-violet-900 rounded-full filter blur-md opacity-25 dark:opacity-15"></div>
+
+            <div className="flex flex-col items-center relative z-10">
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-6 animate-fadeIn text-white dark:text-gray-200 drop-shadow-lg">
                 {slide.title}
               </h1>
-              <p className="text-xl md:text-2xl mb-6 animate-fadeIn">
+
+              <p className="text-xl md:text-2xl mb-8 animate-fadeIn text-white/90 dark:text-gray-300/90 max-w-2xl font-medium drop-shadow-md">
                 {slide.subtitle}
               </p>
-              {/* <a
-                href="mailto:info@fitnesshub.com?subject=Fitness Journey Inquiry"
-                className="bg-primary text-white px-8 py-3 rounded-full text-lg hover:bg-primary-dark transition duration-300 animate-bounce"
-              >
-                {slide.cta}
-              </a> */}
-              <div>
-                <AnimatedCTAButton
-                  showModal={true}
-                  sectionName="Fitness Consultation"
-                  className="bg-purple-500 hover:bg-purple-600" // Custom styling
-                  size="lg"
-                >
-                  {slide.cta}
-                </AnimatedCTAButton>
-              </div>
+
+              <Link href={slide.link}>
+                <button className="bg-gradient-to-r from-purple-400 to-violet-500 dark:from-emerald-700 dark:to-green-900 text-white dark:text-gray-200 font-bold px-8 py-4 rounded-lg flex items-center justify-center space-x-2 transition-all duration-300 animate-fadeIn shadow-xl hover:shadow-violet-500/50 dark:hover:shadow-emerald-600/30 transform hover:-translate-y-1 hover:scale-105 dark:border dark:border-emerald-800">
+                  <span className="text-lg">{slide.cta}</span>
+                  <ArrowRight className="w-6 h-6" />
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -134,13 +136,13 @@ export default function SlidingBanner() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-40 text-white bg-black/50 p-2 rounded-full"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-40 text-purple-200 bg-emerald-900 dark:bg-emerald-500 p-2 rounded-full"
       >
         &#10094;
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-40 text-white bg-black/50 p-2 rounded-full"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-40 text-purple-200 bg-emerald-900 dark:bg-emerald-500 p-2 rounded-full"
       >
         &#10095;
       </button>

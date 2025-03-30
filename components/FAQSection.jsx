@@ -26,8 +26,10 @@ const FAQSection = () => {
     <section className="faq py-10 px-4">
       <div className="faq-content max-w-4xl mx-auto">
         <div className="flex flex-col">
-          <div className="inline-flex items-center justify-center p-3   rounded-full mb-6">
-            <ShieldQuestion className="w-10 h-10  " />
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center p-2 bg-zinc-100 rounded-full mb-6 shadow-sm border border-zinc-200">
+              <ShieldQuestion className="w-10 h-10 text-zinc-600  " />
+            </div>
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-center  mb-8">
             Frequently Asked Questions

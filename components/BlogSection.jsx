@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { blogPosts } from "../data/blogPosts";
-// import FitnessCTAButton from './CTAButton';
-import FitnessCTAButton from "./FitnessCTAButton";
-import AnimatedCTAButton from "./AnimatedCTAButton";
 import { Rss } from "lucide-react";
 
 const LandingBlogSection = () => {
@@ -21,8 +18,8 @@ const LandingBlogSection = () => {
     <section id="blog" className="py-16 ">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-3   rounded-full mb-6">
-            <Rss className="w-10 h-10  " />
+          <div className="inline-flex items-center justify-center p-2 bg-fuchsia-100 rounded-full mb-6 shadow-sm border border-fuchsia-200">
+            <Rss className="w-10 h-10 text-fuchsia-600  " />
           </div>
           <h2 className="text-3xl font-bold  mb-4">Latest Fitness Insights</h2>
           <p className="  max-w-2xl mx-auto">
@@ -79,28 +76,12 @@ const LandingBlogSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          {/* <button 
+          <button
             onClick={handleViewMore}
             className="px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
           >
             View All Blog Posts
-          </button> */}
-
-          {/* <FitnessCTAButton
-            onClick={() => handleViewMore()}
-            variant="workshop"
-            size="lg"
-          >
-            View All Blog Posts
-          </FitnessCTAButton> */}
-
-          <AnimatedCTAButton
-            size="lg"
-            customAction={() => handleViewMore()}
-            className="bg-green-500 hover:bg-green-600"
-          >
-            View All Blog Posts
-          </AnimatedCTAButton>
+          </button>
         </div>
       </div>
     </section>
