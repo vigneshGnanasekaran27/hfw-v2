@@ -15,7 +15,7 @@ const LandingBlogSection = () => {
 
   return (
     // <section id="blog" className="py-16 bg-gray-50">
-    <section id="blog" className="py-16 ">
+    <section id="blog" className="py-16  mt-28">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-fuchsia-100 rounded-full mb-6 shadow-sm border border-fuchsia-200">
@@ -80,7 +80,8 @@ const LandingBlogSection = () => {
         <div className="text-center mt-12">
           <button
             onClick={handleViewMore}
-            className="px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
+            className="px-6 py-3 bg-white text-blue-700 rounded-lg border border-blue-200 flex items-center mx-auto justify-center gap-2 hover:bg-blue-50 transition-colors shadow-sm
+              dark:bg-black dark:text-blue-300 dark:border-blue-800 dark:hover:bg-gray-900"
           >
             View All Blog Posts
           </button>

@@ -190,15 +190,15 @@ const CalculatorLanding = () => {
   };
 
   return (
-    <div className="min-h-screen" id="calculator">
+    <div className="min-h-screen mt-28" id="calculator">
       <div className="container mx-auto px-10 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center p-2 bg-sky-100 rounded-full mb-6 shadow-sm border border-sky-200">
             <Calculator className="w-8 h-8 text-sky-600" />
           </div>
-          <h1 className="text-5xl font-bold mb-6">Smart Health Calculators</h1>
-          <p className="text-xl    max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold mb-6">Smart Health Calculators</h1>
+          <p className="text-lg  max-w-2xl mx-auto">
             Make informed decisions about your health and fitness with our suite
             of intelligent calculators. Simple, accurate, and personalized just
             for you.
@@ -246,14 +246,16 @@ const CalculatorLanding = () => {
                     <div className="flex justify-center gap-2">
                       <button
                         onClick={() => handleCalculatorClick()}
-                        className="bg-purple-50 text-purple-600 px-6 py-3 rounded-lg hover: bg-purple-100  dark:bg-gray-900 transition-colors duration-300 flex items-center"
+                        className="px-6 py-3 bg-purple-50 text-purple-700 rounded-lg border border-purple-200 flex items-center justify-center gap-2 hover:bg-purple-100 transition-colors shadow-sm
+                        dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800 dark:hover:bg-purple-900"
                       >
                         view all our calculator
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </button>
                       <button
                         onClick={() => handleCalculatorClickId(calc)}
-                        className="w-fit bg-blue-600  py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                        className="px-6 py-3 bg-white text-green-700 rounded-lg border border-green-200 flex items-center justify-center gap-2 hover:bg-green-50 transition-colors shadow-sm
+                        dark:bg-black dark:text-green-300 dark:border-green-800 dark:hover:bg-gray-900"
                       >
                         {`try ${calc.title}`}
                       </button>

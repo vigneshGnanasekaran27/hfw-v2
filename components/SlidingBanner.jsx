@@ -101,9 +101,6 @@ export default function SlidingBanner() {
             />
           </>
 
-          {/* Overlay */}
-          {/* <div className="absolute inset-0v"></div> */}
-
           {/* Content */}
           <div className="relative z-30 flex items-center justify-center h-full text-center px-4 py-12 overflow-hidden">
             {/* Background gradient */}
@@ -118,7 +115,8 @@ export default function SlidingBanner() {
             <div className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-indigo-500 dark:bg-violet-900 rounded-full filter blur-md opacity-25 dark:opacity-15"></div>
 
             <div className="flex flex-col items-center relative z-10">
-              <h1 className="text-4xl md:text-6xl font-extrabold mb-6 animate-fadeIn text-white dark:text-gray-200 drop-shadow-lg">
+              {/* Animated Gradient Title with More Vibrant Colors */}
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-cyan-500 to-blue-500 animate-gradient">
                 {slide.title}
               </h1>
 
@@ -127,7 +125,7 @@ export default function SlidingBanner() {
               </p>
 
               <Link href={slide.link}>
-                <button className="bg-gradient-to-r from-purple-400 to-violet-500 dark:from-emerald-700 dark:to-green-900 text-white dark:text-gray-200 font-bold px-8 py-4 rounded-lg flex items-center justify-center space-x-2 transition-all duration-300 animate-fadeIn shadow-xl hover:shadow-violet-500/50 dark:hover:shadow-emerald-600/30 transform hover:-translate-y-1 hover:scale-105 dark:border dark:border-emerald-800">
+                <button className="bg-gradient-to-r from-green-400 to-blue-500 dark:from-emerald-700 dark:to-green-900 text-white dark:text-gray-200 font-bold px-8 py-4 rounded-lg flex items-center justify-center space-x-2 transition-all duration-300 animate-fadeIn shadow-xl hover:shadow-blue-500/50 dark:hover:shadow-emerald-600/30 transform hover:-translate-y-1 hover:scale-105 dark:border dark:border-emerald-800">
                   <span className="text-lg">{slide.cta}</span>
                   <ArrowRight className="w-6 h-6" />
                 </button>
@@ -140,13 +138,13 @@ export default function SlidingBanner() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-40 text-purple-200 bg-emerald-900 dark:bg-emerald-500 p-2 rounded-full"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-40 text-green-200 bg-emerald-900 dark:bg-emerald-500 p-2 rounded-full"
       >
         &#10094;
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-40 text-purple-200 bg-emerald-900 dark:bg-emerald-500 p-2 rounded-full"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-40 text-green-200 bg-emerald-900 dark:bg-emerald-500 p-2 rounded-full"
       >
         &#10095;
       </button>
@@ -163,6 +161,26 @@ export default function SlidingBanner() {
           />
         ))}
       </div>
+
+      {/* Add this style for the gradient animation */}
+      <style jsx global>{`
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .animate-gradient {
+          background-size: 200% auto;
+          animation: gradient 3s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }

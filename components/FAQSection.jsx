@@ -23,7 +23,7 @@ const FAQSection = () => {
 
   return (
     // <section className="faq bg-gray-100 py-10 px-4">
-    <section className="faq py-10 px-4">
+    <section className="faq py-10 px-4" id="faq">
       <div className="faq-content max-w-4xl mx-auto">
         <div className="flex flex-col">
           <div className="text-center">

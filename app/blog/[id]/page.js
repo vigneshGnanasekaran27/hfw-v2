@@ -4,10 +4,11 @@ import Image from "next/legacy/image";
 import { useParams } from "next/navigation";
 import { getBlogById } from "../../../data/blogPosts";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 
 const BlogPostDetail = () => {
   const params = useParams();
-  const postId = params?.id;
+  const postId = parseInt(params?.id);
 
   if (!postId) {
     return (
@@ -73,8 +74,33 @@ const BlogPostDetail = () => {
       </div>
 
       {/* Blog Content */}
-      <div className="prose lg:prose-xl">
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div className="prose lg:prose-xl max-w-none">
+        <ReactMarkdown
+          components={{
+            h1: ({ node, ...props }) => (
+              <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />
+            ),
+            h2: ({ node, ...props }) => (
+              <h2 className="text-2xl font-bold mt-6 mb-3" {...props} />
+            ),
+            h3: ({ node, ...props }) => (
+              <h3 className="text-xl font-bold mt-5 mb-2" {...props} />
+            ),
+            p: ({ node, ...props }) => <p className="mb-4" {...props} />,
+            ul: ({ node, ...props }) => (
+              <ul className="list-disc ml-6 mb-6" {...props} />
+            ),
+            ol: ({ node, ...props }) => (
+              <ol className="list-decimal ml-6 mb-6" {...props} />
+            ),
+            li: ({ node, ...props }) => <li className="mb-2" {...props} />,
+            strong: ({ node, ...props }) => (
+              <strong className="font-bold" {...props} />
+            ),
+          }}
+        >
+          {post.content}
+        </ReactMarkdown>
       </div>
 
       {/* Topics */}

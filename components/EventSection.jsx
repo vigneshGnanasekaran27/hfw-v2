@@ -1,36 +1,48 @@
 "use client";
 import React, { useState, useEffect } from "react";
+<<<<<<< Updated upstream
 import { Scroll, ArrowRight, Trophy } from "lucide-react";
 import Image from "next/legacy/image";
 import testimg from "../images/image.png";
 import copyimage1 from "../images/image copy 3.png";
 import copyimage2 from "../images/image copy 5.png";
+=======
+import { Scroll, ArrowRight, Trophy, Calendar } from "lucide-react";
+import Image from "next/image";
+
+import Challenge from "..//images/Events/challenge.png";
+import Marathon from "..//images/Events/marathon.png";
+import Cyclists from "..//images/Events/cyclists.png";
+>>>>>>> Stashed changes
 
 export default function EventSection() {
   const events = [
     {
-      title: "Fitness Challenge",
-      type: "Community Fitness",
+      title: "Half Marathon",
+      type: "Endurance Race",
       description:
-        "Push your limits with our comprehensive fitness challenge designed for all skill levels.",
-      icon: <Scroll className="w-16 h-16  " />,
-      image: testimg,
+        "Challenge yourself in our half marathon event—perfect for runners of all levels looking to push their limits.",
+      icon: <Calendar className="w-10 h-10 text-cyan-600" />,
+      image: Marathon,
+      date: "Next Event: April 15, 2025",
     },
     {
-      title: "Wellness Expo",
-      type: "Health Technology",
+      title: "Early Morning Cycling",
+      type: "Outdoor Adventure",
       description:
-        "Explore cutting-edge wellness technologies and innovative health solutions.",
-      icon: <Scroll className="w-16 h-16  " />,
-      image: copyimage1,
+        "Kickstart your day with an invigorating early morning cycling ride through scenic routes.",
+      icon: <Calendar className="w-10 h-10 text-cyan-600" />,
+      image: Cyclists,
+      date: "Next Event: April 15, 2025",
     },
     {
-      title: "Charity Run",
-      type: "Community Impact",
+      title: "Fitness Challenges",
+      type: "Strength & Endurance",
       description:
-        "Make a difference while staying fit. Join our charity run supporting local health initiatives.",
-      icon: <Scroll className="w-16 h-16  " />,
-      image: copyimage2,
+        "Test your strength and stamina with our exciting fitness challenges designed for all fitness enthusiasts.",
+      icon: <Calendar className="w-10 h-10 text-cyan-600" />,
+      image: Challenge,
+      date: "Next Event: April 15, 2025",
     },
   ];
 
@@ -39,25 +51,30 @@ export default function EventSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveCard((prev) => (prev + 1) % events.length);
-    }, 5000); // Auto-scroll every 5 seconds
-
+    }, 10000);
     return () => clearInterval(interval);
   }, [events.length]);
 
   return (
-    // <section className="py-16 bg-gray-50 relative">
-    <section id="events" className="py-16  relative mt-12">
+    <section id="events" className="py-20 relative mt-28 ">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-2 bg-cyan-100 rounded-full mb-6 shadow-sm border border-cyan-200">
-            <Trophy className="w-10 h-10  text-cyan-600  " />
+        {/* Improved Header Section */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center justify-center p-3 bg-cyan-100 rounded-full mb-6 shadow-md border border-cyan-200 dark:bg-cyan-900 dark:border-cyan-800">
+            <Trophy className="w-10 h-10 text-cyan-600 dark:text-cyan-400" />
           </div>
 
-          <h2 className="text-4xl font-bold   mb-4">Our Fitness Events</h2>
-          <p className="text-xl  ">Discover Engaging Community Experiences</p>
+          <h2 className="text-4xl font-bold mb-4 text-gray-800 dark:text-white">
+            Our Fitness Events
+          </h2>
+          <p className="text-lg    max-w-2xl mx-auto">
+            Discover Engaging Community Experiences That Transform Your Fitness
+            Journey
+          </p>
         </div>
 
-        <div className="relative w-full max-w-4xl mx-auto h-[500px] overflow-hidden">
+        {/* Improved Card Carousel */}
+        <div className="relative w-full max-w-5xl mx-auto h-[520px] overflow-hidden">
           {events.map((event, index) => (
             <div
               key={index}
@@ -67,46 +84,64 @@ export default function EventSection() {
                 ${
                   activeCard === index
                     ? "opacity-100 translate-x-0 z-20"
+                    : activeCard > index
+                    ? "opacity-0 -translate-x-full -z-10"
                     : "opacity-0 translate-x-full -z-10"
                 }
               `}
             >
               <div
-                className=" rounded-lg shadow-2xl flex h-[400px] overflow-hidden dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]
-  "
+                className="rounded-xl shadow-lg flex flex-col md:flex-row h-[420px] overflow-hidden
+                  bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700
+                  transform hover:scale-[1.01] transition-all duration-300"
               >
-                {/* Left Side - Icon and Description */}
-                <div className="w-1/2 p-8 flex flex-col justify-center">
-                  <div className="mb-6 flex items-center">
-                    {event.icon}
-                    <h3 className="text-3xl font-bold ml-4  ">{event.title}</h3>
+                {/* Left Side - Content */}
+                <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+                  <div className="inline-flex items-center p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg mb-6 self-start">
+                    <span className="text-sm font-semibold text-cyan-600 dark:text-cyan-400">
+                      {event.type}
+                    </span>
                   </div>
-                  <p className="  text-lg mb-6">{event.description}</p>
-                  <div className="flex items-center">
-                    <span className="mr-4   font-semibold">{event.type}</span>
-                    <div className="h-px   flex-grow"></div>
+
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-white">
+                    {event.title}
+                  </h3>
+
+                  <p className="text-gray-600 dark:text-gray-300 text-lg mb-8 leading-relaxed">
+                    {event.description}
+                  </p>
+
+                  <div className="flex items-center mt-auto">
+                    {event.icon}
+                    <span className="ml-2 text-gray-500 dark:text-gray-400 text-sm">
+                      {event.date}
+                    </span>
                   </div>
                 </div>
 
                 {/* Right Side - Event Image */}
-                <div className="w-1/2 relative ">
+                <div className="w-full md:w-1/2 h-48 md:h-auto relative">
                   <Image
                     src={event.image}
                     alt={`${event.title} image`}
                     fill
+<<<<<<< Updated upstream
                     width={500}
                     height={300}
                     className="absolute inset-0 object-cover "
+=======
+                    className="absolute inset-0 object-cover"
+>>>>>>> Stashed changes
                     priority={index === 0}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-light opacity-30"></div>
+                  <div className="absolute inset-0 bg-black opacity-20"></div>
                 </div>
               </div>
 
-              {/* Call to Action Button Below the Card */}
+              {/* Improved Call to Action Button */}
               <div
                 className={`
-                  mt-4 text-center transition-all duration-700 ease-in-out
+                  mt-6 text-center transition-all duration-700 ease-in-out
                   ${
                     activeCard === index
                       ? "opacity-100 translate-y-0"
@@ -115,32 +150,33 @@ export default function EventSection() {
                 `}
               >
                 <button
-                  className="
-                    px-12 py-4     
-                    rounded-full text-lg font-semibold
-                    hover:bg-primary-dark transition duration-300
-                    flex items-center justify-center mx-auto
-                  "
+                  className="px-6 py-3 bg-white text-green-700 rounded-lg border border-green-200 flex items-center justify-center mx-auto   hover:bg-green-50 transition-colors shadow-sm
+              dark:bg-black dark:text-green-300 dark:border-green-800 dark:hover:bg-gray-900"
                 >
-                  Enroll in {event.title} <ArrowRight className="ml-2" />
+                  Enroll in {event.title}{" "}
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </button>
               </div>
             </div>
           ))}
-
-          {/* Navigation Dots */}
-          <div className="absolute bottom-0 left-0 right-0 flex justify-center">
-            {events.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveCard(index)}
-                className={`
-                  w-3 h-3 rounded-full mx-2 transition-all duration-300
-                  ${activeCard === index ? "bg-primary w-6" : " "}
+        </div>
+        {/* Fixed Navigation Dots - Now Visible */}
+        <div className="absolute   left-0 right-0 flex justify-center z-30">
+          {events.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveCard(index)}
+              className={`
+                  h-3 rounded-full mx-2 transition-all duration-300
+                  ${
+                    activeCard === index
+                      ? "bg-cyan-600 w-10"
+                      : "bg-gray-300 dark:bg-gray-600 w-3 hover:bg-gray-400 dark:hover:bg-gray-500"
+                  }
                 `}
-              />
-            ))}
-          </div>
+              aria-label={`View event ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>

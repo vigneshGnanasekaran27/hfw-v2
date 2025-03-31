@@ -1,12 +1,16 @@
 import React from "react";
 import { Dumbbell, Heart, Clock, Zap, ArrowRight, UserPen } from "lucide-react";
-import AnimatedCTAButton from "./AnimatedCTAButton";
+import Bginner_friendly from "..//images/WorkoutSchedule/beginner_friendly.png";
+import High_intensity from "..//images/WorkoutSchedule/high_intensity.png";
+import Strength_training from "..//images/WorkoutSchedule/strength_training.png";
+import Link from "next/link";
 
 const WorkoutSchedulesSection = () => {
   const workoutPrograms = [
     {
       id: "beginner",
       title: "Beginner Fitness",
+      image: Bginner_friendly,
       icon: <Heart className="w-8 h-8 text-green-500" />,
       duration: "4 weeks",
       sessionsPerWeek: 3,
@@ -21,6 +25,7 @@ const WorkoutSchedulesSection = () => {
     {
       id: "strength",
       title: "Strength & Power",
+      image: Strength_training,
       icon: <Dumbbell className="w-8 h-8 text-blue-500" />,
       duration: "8 weeks",
       sessionsPerWeek: 4,
@@ -35,6 +40,7 @@ const WorkoutSchedulesSection = () => {
     {
       id: "hiit",
       title: "HIIT & Conditioning",
+      image: High_intensity,
       icon: <Zap className="w-8 h-8 text-red-500" />,
       duration: "6 weeks",
       sessionsPerWeek: 5,
@@ -49,7 +55,7 @@ const WorkoutSchedulesSection = () => {
   ];
 
   return (
-    <div id="schedule" className="py-16 mt-12">
+    <div id="schedule" className="py-16 mt-28">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-indigo-100 rounded-full mb-6 shadow-sm border border-indigo-200">
@@ -59,7 +65,7 @@ const WorkoutSchedulesSection = () => {
             <h2 className="text-4xl font-bold mb-4">
               Personalized Workout Plans
             </h2>
-            <p className="text-xl max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto">
               Expert-designed programs to achieve your fitness goals, with clear
               instructions and video guides
             </p>
@@ -70,59 +76,79 @@ const WorkoutSchedulesSection = () => {
           {workoutPrograms.map((program) => (
             <div
               key={program.id}
-              className="  rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]"
+              className="rounded-xl shadow-lg overflow-hidden relative hover:shadow-xl transition-all duration-300 dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]"
             >
-              <div className="flex items-center justify-between mb-6">
-                <div>{program.icon}</div>
-                <div className="flex items-center text-sm ">
-                  <Clock className="w-4 h-4 mr-1" />
-                  {program.duration} • {program.sessionsPerWeek}x/week
-                </div>
-              </div>
+              {/* Background image */}
+              <div
+                className="absolute inset-0 z-0"
+                style={{
+                  backgroundImage: `url(${program.image.src})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
 
-              <h3 className="text-2xl font-semibold mb-3">{program.title}</h3>
-              <p className=" mb-6">{program.description}</p>
+              {/* Dark overlay - darker in dark mode */}
+              <div className="absolute inset-0 bg-black opacity-50 dark:opacity-70 z-1"></div>
 
-              <div className="space-y-3 mb-6">
-                {program.features.map((feature, index) => (
-                  <div key={index} className="flex items-center text-sm ">
-                    <ArrowRight className="w-4 h-4 mr-2 text-purple-500" />
-                    {feature}
+              {/* Content with relative positioning to appear above the background */}
+              <div className="relative z-10 p-6 text-white">
+                <div className="flex items-center justify-between mb-6">
+                  <div>{program.icon}</div>
+                  <div className="flex items-center text-sm text-white">
+                    <Clock className="w-4 h-4 mr-1" />
+                    {program.duration} • {program.sessionsPerWeek}x/week
                   </div>
-                ))}
-              </div>
+                </div>
 
-              <button className="w-fit  border-2 border-purple-600 text-purple-600 py-2 px-2 rounded-lg hover:bg-purple-100 transition-colors duration-300 flex items-center justify-center">
-                View Program Details
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
+                <h3 className="text-2xl font-semibold mb-3 text-white">
+                  {program.title}
+                </h3>
+                <p className="mb-6 text-white">{program.description}</p>
+
+                <div className="space-y-3 mb-6">
+                  {program.features.map((feature, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center text-sm text-white"
+                    >
+                      <ArrowRight className="w-4 h-4 mr-2 text-purple-200 dark:text-purple-300" />
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  className="px-4 py-2 bg-white text-green-700 rounded-lg border border-green-200 flex items-center justify-center gap-2 hover:bg-green-50 transition-colors shadow-sm
+              dark:bg-black dark:text-green-300 dark:border-green-800 dark:hover:bg-gray-900"
+                >
+                  View Program Details
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </button>
+              </div>
             </div>
           ))}
         </div>
 
         <div className="flex items-center justify-center ">
-          <div className=" rounded-xl p-8 text-center shadow-lg w-fit">
+          <div className=" rounded-xl p-8 text-center shadow-lg w-fit dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]">
             <div className="max-w-3xl mx-auto">
               <h3 className="text-3xl font-bold mb-4">
                 Get Your Custom Program
               </h3>
-              <p className="text-xl  mb-6">
+              <p className="text-lg  mb-6">
                 Follow our plans independently or add professional guidance from
                 our trainers - the choice is yours
               </p>
               <div className="flex items-center justify-center gap-6">
-                <button className="bg-purple-50 text-purple-600 px-6 py-3 rounded-lg hover:bg-purple-100 transition-colors duration-300 flex items-center">
+                <Link
+                  href="/workout-schedules"
+                  className="px-6 py-3 bg-purple-50 text-purple-700 rounded-lg border border-purple-200 flex items-center justify-center gap-2 hover:bg-purple-100 transition-colors shadow-sm
+              dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800 dark:hover:bg-purple-900"
+                >
                   Browse All Programs
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
-                {/* <AnimatedCTAButton
-                  showModal={true}
-                  sectionName="Custom Program Consultation"
-                  className="bg-purple-500 hover:bg-purple-600"
-                  size="lg"
-                >
-                  Get Started
-                </AnimatedCTAButton> */}
+                </Link>
               </div>
             </div>
           </div>

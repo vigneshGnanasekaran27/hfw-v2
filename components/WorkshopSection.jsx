@@ -10,7 +10,7 @@ import {
 export default function WorkshopSection() {
   return (
     // <section className="py-16 bg-white">
-    <section id="workshops" className="py-16 mt-12">
+    <section id="workshops" className="py-16 mt-28">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-yellow-100 rounded-full mb-6 shadow-sm border border-yellow-200">
@@ -19,7 +19,7 @@ export default function WorkshopSection() {
           <h2 className="text-4xl font-bold  mb-4">
             Elevate Your Fitness Journey
           </h2>
-          <p className="text-xl  max-w-2xl mx-auto">
+          <p className="text-lg  max-w-2xl mx-auto">
             Transform your potential with our comprehensive workshop series
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function WorkshopSection() {
             <div className="w-full md:w-2/3 flex flex-col gap-4">
               {/* Right Top Section */}
               <div className="h-1/2 flex gap-4">
-                {/* Strength Training Section */}
+                {/* Strength & Conditioning Section */}
                 <div className="w-1/2 bg-blue-50 rounded-lg p-6 flex items-center justify-center dark:bg-blue-900/40">
                   <div className="text-center">
                     <Dumbbell
@@ -63,7 +63,7 @@ export default function WorkshopSection() {
                       strokeWidth={1.5}
                     />
                     <h3 className="text-xl font-bold  mb-3">
-                      Strength Training
+                      Strength & Conditioning
                     </h3>
                     <p className=" mb-4">
                       Advanced techniques for muscle building and performance
@@ -78,7 +78,7 @@ export default function WorkshopSection() {
                   </div>
                 </div>
 
-                {/* Performance Clinic Section */}
+                {/* Rehabilitation Section */}
                 <div className="w-1/2 bg-orange-50 rounded-lg p-6 flex items-center justify-center dark:bg-orange-900/40">
                   <div className="text-center">
                     <Rocket
@@ -86,12 +86,9 @@ export default function WorkshopSection() {
                       size={48}
                       strokeWidth={1.5}
                     />
-                    <h3 className="text-xl font-bold  mb-3">
-                      Performance Clinic
-                    </h3>
+                    <h3 className="text-xl font-bold  mb-3">Rehabilitation</h3>
                     <p className=" mb-4">
-                      Comprehensive training to maximize athletic potential and
-                      overcome plateaus
+                      Specialized training for injury recovery and prevention
                     </p>
                     <a
                       href="/performance-workshop"
@@ -135,12 +132,10 @@ export default function WorkshopSection() {
                   size={64}
                   strokeWidth={1.5}
                 />
-                <h3 className="text-2xl font-bold  mb-3">
-                  Nutrition Masterclass
-                </h3>
+                <h3 className="text-2xl font-bold  mb-3">Personal Training</h3>
                 <p className=" mb-4">
-                  Deep dive into advanced nutrition strategies, meal planning,
-                  and metabolic optimization
+                  Customized one-on-one training programs to meet your specific
+                  goals
                 </p>
                 <a
                   href="/nutrition-workshop"

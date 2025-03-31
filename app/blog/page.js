@@ -85,18 +85,39 @@ const BlogPage = () => {
                     Read More
                   </Link>
                 </div>
-                {/* Topics */}
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {post.topics.map((topic) => (
-                    <span
-                      key={topic}
-                      className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs"
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <span className="text-sm text-gray-500">
+                        {post.author}
+                      </span>
+                      <span className="mx-2 text-gray-300">|</span>
+                      <span className="text-sm text-gray-500">{post.date}</span>
+                    </div>
+                    <Link
+                      href={`/blog/${post.id}`}
+                      className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
                     >
-                      {topic}
-                    </span>
-                  ))}
+                      Read More
+                    </Link>
+                  </div>
+                  {/* Topics */}
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {post.topics.map((topic) => (
+                      <span
+                        key={topic}
+                        className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs"
+                      >
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))
         ) : (

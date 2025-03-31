@@ -19,7 +19,7 @@ import Link from "next/link";
 
 const NutritionConsultation = () => {
   return (
-    <div id="nutrition" className="container mx-auto px-4 py-16 mt-24">
+    <div id="nutrition" className="container mx-auto px-4 py-16 mt-28">
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
@@ -29,7 +29,7 @@ const NutritionConsultation = () => {
           <h2 className="text-4xl font-bold mb-6">
             Expert Nutrition Consultation
           </h2>
-          <p className="text-xl max-w-3xl mx-auto">
+          <p className="text-lg max-w-3xl mx-auto">
             Get a personalized nutrition plan designed by our expert
             nutritionists, with the flexibility to prepare meals yourself or
             order from our kitchen.
@@ -48,7 +48,7 @@ const NutritionConsultation = () => {
                 height={300}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div>
+              {/* <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div> */}
               <div className="absolute bottom-4 left-4 bg-white dark:bg-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
                 <BookOpen className="w-6 h-6 text-purple-600" />
               </div>
@@ -74,7 +74,7 @@ const NutritionConsultation = () => {
                 height={300}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div>
+              {/* <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div> */}
               <div className="absolute bottom-4 left-4 bg-white dark:bg-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
                 <ClipboardCheck className="w-6 h-6 text-purple-600" />
               </div>
@@ -100,7 +100,7 @@ const NutritionConsultation = () => {
                 height={300}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div>
+              {/* <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div> */}
               <div className="absolute bottom-4 left-4 bg-white dark:bg-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
                 <Utensils className="w-6 h-6 text-purple-600" />
               </div>
@@ -128,19 +128,19 @@ const NutritionConsultation = () => {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <span className="w-3 h-3 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
+                <span className="w-2 h-2 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
                 <span className="text-gray-700 dark:text-gray-300">
                   Initial assessment of your health and fitness goals
                 </span>
               </li>
               <li className="flex items-start">
-                <span className="w-3 h-3 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
+                <span className="w-2 h-2 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
                 <span className="text-gray-700 dark:text-gray-300">
                   Detailed discussion of dietary preferences and restrictions
                 </span>
               </li>
               <li className="flex items-start">
-                <span className="w-3 h-3 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
+                <span className="w-2 h-2 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
                 <span className="text-gray-700 dark:text-gray-300">
                   Regular follow-ups to track progress and adjust plans
                 </span>
@@ -157,19 +157,19 @@ const NutritionConsultation = () => {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <span className="w-3 h-3 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
+                <span className="w-2 h-2 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
                 <span className="text-gray-700 dark:text-gray-300">
                   Fresh, healthy meals prepared according to your plan
                 </span>
               </li>
               <li className="flex items-start">
-                <span className="w-3 h-3 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
+                <span className="w-2 h-2 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
                 <span className="text-gray-700 dark:text-gray-300">
                   Flexible ordering options that fit your schedule
                 </span>
               </li>
               <li className="flex items-start">
-                <span className="w-3 h-3 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
+                <span className="w-2 h-2 bg-purple-600 rounded-full mr-3 mt-1.5"></span>
                 <span className="text-gray-700 dark:text-gray-300">
                   Dietary restrictions and preferences accommodated
                 </span>
