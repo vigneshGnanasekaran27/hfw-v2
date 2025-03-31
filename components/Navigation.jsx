@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import AnimatedHamburgerMenu from "./AnimatedHamburgerMenu";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
 import logo from "../images/logo.png";
 import {

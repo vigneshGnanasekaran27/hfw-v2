@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, Suspense, useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { ArrowRight, Clock, Users, MapPin, Check } from "lucide-react";
 
 import { trainingData } from ".//trainingData";
@@ -72,6 +72,8 @@ const CategoryCard = ({ category }) => {
                   src={program.image}
                   alt={program.title}
                   fill
+                  width={500}
+                  height={300}
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />

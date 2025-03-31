@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useParams } from "next/navigation";
 import { getBlogById } from "../../../data/blogPosts";
 import Link from "next/link";
@@ -64,6 +64,8 @@ const BlogPostDetail = () => {
             src={post.image.src}
             alt={post.title}
             fill
+            width={500}
+            height={300}
             className="object-cover rounded-lg"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
           />

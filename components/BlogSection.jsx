@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { blogPosts } from "../data/blogPosts";
 import { Rss } from "lucide-react";
@@ -39,6 +39,8 @@ const LandingBlogSection = () => {
                   src={post.image.src}
                   alt={post.title}
                   fill
+                  width={500}
+                  height={300}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover hover:scale-105 transition-transform duration-300"
                 />

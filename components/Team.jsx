@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import profil from "../images/image copy 5.png";
 import {
   Linkedin,
@@ -76,6 +76,8 @@ const FounderSection = () => {
                   src={founderInfo.image.src}
                   alt={founderInfo.name}
                   layout="fill"
+                  width={500}
+                  height={300}
                   objectFit="cover"
                   className="transform hover:scale-105 transition-transform duration-500"
                 />

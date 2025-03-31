@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Scroll, ArrowRight, Trophy } from "lucide-react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import testimg from "../images/image.png";
 import copyimage1 from "../images/image copy 3.png";
 import copyimage2 from "../images/image copy 5.png";
@@ -94,6 +94,8 @@ export default function EventSection() {
                     src={event.image}
                     alt={`${event.title} image`}
                     fill
+                    width={500}
+                    height={300}
                     className="absolute inset-0 object-cover "
                     priority={index === 0}
                   />

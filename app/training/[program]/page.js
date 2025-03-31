@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { ArrowRight, Clock, Users, CheckCircle, MapPin } from "lucide-react";
 import { trainingData } from "../trainingData";
 import { useEffect, useState } from "react";
@@ -79,6 +79,8 @@ const ProgramPage = ({ params }) => {
               src={program.image}
               alt={program.title}
               fill
+              width={500}
+              height={300}
               className="object-cover"
               sizes="100vw"
             />

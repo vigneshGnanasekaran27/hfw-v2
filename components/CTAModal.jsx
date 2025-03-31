@@ -106,7 +106,6 @@ export const CTAModal = ({
       >
         {buttonText}
       </button>
-
       {/* Modal Overlay */}
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
@@ -137,7 +136,7 @@ export const CTAModal = ({
                 </div>
               ) : (
                 // Submission Form
-                <form onSubmit={handleSubmit} className="space-y-4">
+                (<form onSubmit={handleSubmit} className="space-y-4">
                   {/* Email Field */}
                   <div>
                     <label 
@@ -175,7 +174,6 @@ export const CTAModal = ({
                       </p>
                     )}
                   </div>
-
                   {/* Mobile Field */}
                   <div>
                     <label 
@@ -212,7 +210,6 @@ export const CTAModal = ({
                       </p>
                     )}
                   </div>
-
                   {/* Description Field */}
                   <div>
                     <label 
@@ -231,7 +228,6 @@ export const CTAModal = ({
                       rows={3}
                     />
                   </div>
-
                   {/* Global Error Message */}
                   {submitError && (
                     <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md flex items-center">
@@ -239,7 +235,6 @@ export const CTAModal = ({
                       {submitError}
                     </div>
                   )}
-
                   {/* Submit Button */}
                   <button 
                     type="submit" 
@@ -258,7 +253,7 @@ export const CTAModal = ({
                       'Send Inquiry'
                     )}
                   </button>
-                </form>
+                </form>)
               )}
             </div>
           </div>

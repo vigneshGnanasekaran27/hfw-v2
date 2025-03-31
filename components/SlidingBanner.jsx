@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
@@ -83,6 +83,8 @@ export default function SlidingBanner() {
               src={slide.image}
               alt={slide.title}
               layout="fill"
+              width={500}
+              height={300}
               objectFit="cover"
               priority={index === 0}
               className="absolute z-10 hidden md:block"
@@ -91,6 +93,8 @@ export default function SlidingBanner() {
               src={slide.mobileImage}
               alt={slide.title}
               layout="fill"
+              width={500}
+              height={300}
               objectFit="cover"
               priority={index === 0}
               className="absolute z-10 md:hidden"

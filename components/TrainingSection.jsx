@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 import {
@@ -159,6 +159,8 @@ const TrainingTypesSection = () => {
                   src={type.image}
                   alt={type.alt}
                   layout="fill"
+                  width={500}
+                  height={300}
                   objectFit="cover"
                   objectPosition="top"
                 />

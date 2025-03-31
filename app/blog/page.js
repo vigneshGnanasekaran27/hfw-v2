@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { blogPosts, searchBlogs } from "../../data/blogPosts";
 
@@ -60,6 +60,8 @@ const BlogPage = () => {
                 <Image
                   src={post.image.src}
                   alt={post.title}
+                  width={500}
+                  height={300}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover hover:scale-105 transition-transform duration-300"

@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import Country_chicken from "..//images/Kitchen/country_chicken.png";
 import Grilled_fish from "..//images/Kitchen/grilled_fish.png";
@@ -162,6 +162,8 @@ export default function FoodSection() {
                       src={meal.image.src}
                       alt={meal.title}
                       layout="fill"
+                      width={500}
+                      height={300}
                       objectFit="cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">

@@ -9,7 +9,7 @@ import {
   Shirt,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import menimage from "../images/image copy 8.png";
 // import womenimage from "../images/image copy 7.png";
 import womenModle from "../images/femalemodel.jpeg";
@@ -143,6 +143,8 @@ export default function FitnessWearShowcase() {
                 src={currentCollection.heroImage.src}
                 alt={`${activeCategory} Fitness Wear`}
                 fill
+                width={500}
+                height={300}
                 className="object-cover object-top"
               />
             </div>

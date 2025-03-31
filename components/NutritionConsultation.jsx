@@ -14,7 +14,7 @@ import Consultation from "..//images/Nutrition/consultation.jpeg";
 import Custom_plan from "..//images/Nutrition/Custom_plan.jpeg";
 import Meal_options from "..//images/Nutrition/meal_options.jpeg";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 const NutritionConsultation = () => {
