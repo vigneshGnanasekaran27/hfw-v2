@@ -56,34 +56,15 @@ const BlogPage = () => {
               key={post.id}
               className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl"
             >
-              <div className="relative h-48 w-full">
-                <Image
-                  src={post.image.src}
-                  alt={post.title}
-                  width={500}
-                  height={300}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                  {post.title}
-                </h3>
-                <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-sm text-gray-500">{post.author}</span>
-                    <span className="mx-2 text-gray-300">|</span>
-                    <span className="text-sm text-gray-500">{post.date}</span>
-                  </div>
-                  <Link
-                    href={`/blog/${post.id}`}
-                    className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
-                  >
-                    Read More
-                  </Link>
+              <Link href={`/blog/${post.id}`}>
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={post.image.src}
+                    alt={post.title}
+                    layout="fill"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800 mb-3">
@@ -98,12 +79,9 @@ const BlogPage = () => {
                       <span className="mx-2 text-gray-300">|</span>
                       <span className="text-sm text-gray-500">{post.date}</span>
                     </div>
-                    <Link
-                      href={`/blog/${post.id}`}
-                      className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
-                    >
+                    <div className="text-blue-600 hover:text-blue-800 font-medium transition-colors">
                       Read More
-                    </Link>
+                    </div>
                   </div>
                   {/* Topics */}
                   <div className="flex flex-wrap gap-2 mt-4">

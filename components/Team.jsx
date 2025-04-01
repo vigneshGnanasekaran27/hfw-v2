@@ -76,8 +76,6 @@ const FounderSection = () => {
                   src={founderInfo.image.src}
                   alt={founderInfo.name}
                   layout="fill"
-                  width={500}
-                  height={300}
                   objectFit="cover"
                   className="transform hover:scale-105 transition-transform duration-500"
                 />

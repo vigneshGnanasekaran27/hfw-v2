@@ -159,8 +159,6 @@ const TrainingTypesSection = () => {
                   src={type.image}
                   alt={type.alt}
                   layout="fill"
-                  width={500}
-                  height={300}
                   objectFit="cover"
                   objectPosition="top"
                 />

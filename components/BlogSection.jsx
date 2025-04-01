@@ -34,45 +34,42 @@ const LandingBlogSection = () => {
               key={post.id}
               className="  rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl dark:shadow-[0px_4px_12px_rgba(102,126,234,0.4)]"
             >
-              <div className="relative h-48 w-full">
-                <Image
-                  src={post.image.src}
-                  alt={post.title}
-                  fill
-                  width={500}
-                  height={300}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold   mb-3">{post.title}</h3>
-                <p className="  mb-4">{post.excerpt}</p>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-sm  0">{post.author}</span>
-                    <span className="mx-2  ">|</span>
-                    <span className="text-sm  ">{post.date}</span>
+              <Link href={`/blog/${post.id}`}>
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={post.image.src}
+                    alt={post.title}
+                    layout="fill"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold   mb-3">{post.title}</h3>
+                  <p className="  mb-4">{post.excerpt}</p>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <span className="text-sm  0">{post.author}</span>
+                      <span className="mx-2  ">|</span>
+                      <span className="text-sm  ">{post.date}</span>
+                    </div>
+                    <button className="text-blue-600 hover:text-blue-800 font-medium transition-colors">
+                      Read More
+                    </button>
                   </div>
-                  <Link
-                    href={`/blog/${post.id}`}
-                    className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
-                  >
-                    Read More
-                  </Link>
+                  {/* Topics */}
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {post.topics.map((topic) => (
+                      <span
+                        key={topic}
+                        className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs"
+                      >
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                {/* Topics */}
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {post.topics.map((topic) => (
-                    <span
-                      key={topic}
-                      className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs"
-                    >
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

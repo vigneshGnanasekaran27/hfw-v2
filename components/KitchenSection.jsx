@@ -162,8 +162,6 @@ export default function FoodSection() {
                       src={meal.image.src}
                       alt={meal.title}
                       layout="fill"
-                      width={500}
-                      height={300}
                       objectFit="cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -220,14 +218,13 @@ export default function FoodSection() {
                     </div>
                   </div>
                   <div className="flex items-center justify-center pb-4">
-                    <Link
-                      href={`/kitchen/${meal.id}`}
+                    <div
                       className="w-fit px-5 py-2 bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-200 flex items-center justify-center gap-2 hover:bg-emerald-100 transition-colors 
                       dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800 dark:hover:bg-emerald-900"
                     >
                       Order Fresh Meal
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
+                    </div>
                   </div>
                 </div>
               </Link>

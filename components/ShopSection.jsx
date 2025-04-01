@@ -10,15 +10,7 @@ import {
   Zap,
   ArrowRight,
 } from "lucide-react";
-<<<<<<< Updated upstream
-import Image from "next/legacy/image";
-import menimage from "../images/image copy 8.png";
-// import womenimage from "../images/image copy 7.png";
-import womenModle from "../images/femalemodel.jpeg";
-import AnimatedCTAButton from "./AnimatedCTAButton";
-=======
 import Image from "next/image";
->>>>>>> Stashed changes
 
 import Female_model from "..//images/Shop/female_model.jpeg";
 import male_model from "..//images/Shop/male_model.jpeg";
@@ -143,32 +135,6 @@ export default function FitnessWearShowcase() {
         {/* Main Content Area */}
         <div className="grid md:grid-cols-2 gap-10 items-stretch">
           {/* Left Side - Hero Image and Highlights */}
-<<<<<<< Updated upstream
-          <div className="  rounded-2xl shadow-xl overflow-hidden flex flex-col">
-            <div className="relative w-full h-96">
-              <Image
-                src={currentCollection.heroImage.src}
-                alt={`${activeCategory} Fitness Wear`}
-                fill
-                width={500}
-                height={300}
-                className="object-cover object-top"
-              />
-            </div>
-            <div className="p-8 flex-grow">
-              <h3 className="text-3xl font-bold   mb-4">
-                {currentCollection.title}
-              </h3>
-              <p className="  mb-6">{currentCollection.description}</p>
-              <div className="grid grid-cols-3 gap-4">
-                {currentCollection.highlights.map((highlight, index) => (
-                  <div
-                    key={index}
-                    className="text-center  bg-purple-100 rounded-md py-4 px-2 dark:bg-gray-900"
-                  >
-                    <div className="mx-auto mb-3 w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center  text-purple-600">
-                      <highlight.icon className="w-8 h-8 " />
-=======
           <Link href={"/shop"}>
             <div className="  rounded-2xl shadow-xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
               <div className="relative w-full h-96 ">
@@ -194,7 +160,6 @@ export default function FitnessWearShowcase() {
                         <highlight.icon className="w-8 h-8 " />
                       </div>
                       <p className="text-sm   font-medium">{highlight.text}</p>
->>>>>>> Stashed changes
                     </div>
                   ))}
                 </div>

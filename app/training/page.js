@@ -71,9 +71,7 @@ const CategoryCard = ({ category }) => {
                 <Image
                   src={program.image}
                   alt={program.title}
-                  fill
-                  width={500}
-                  height={300}
+                  layout="fill"
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />

@@ -64,9 +64,7 @@ const BlogPostDetail = () => {
           <Image
             src={post.image.src}
             alt={post.title}
-            fill
-            width={500}
-            height={300}
+            layout="fill"
             className="object-cover rounded-lg"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
           />

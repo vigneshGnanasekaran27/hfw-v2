@@ -1,19 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-<<<<<<< Updated upstream
-import { Scroll, ArrowRight, Trophy } from "lucide-react";
 import Image from "next/legacy/image";
-import testimg from "../images/image.png";
-import copyimage1 from "../images/image copy 3.png";
-import copyimage2 from "../images/image copy 5.png";
-=======
+
 import { Scroll, ArrowRight, Trophy, Calendar } from "lucide-react";
-import Image from "next/image";
 
 import Challenge from "..//images/Events/challenge.png";
 import Marathon from "..//images/Events/marathon.png";
 import Cyclists from "..//images/Events/cyclists.png";
->>>>>>> Stashed changes
 
 export default function EventSection() {
   const events = [
@@ -124,14 +117,8 @@ export default function EventSection() {
                   <Image
                     src={event.image}
                     alt={`${event.title} image`}
-                    fill
-<<<<<<< Updated upstream
-                    width={500}
-                    height={300}
+                    layout="fill"
                     className="absolute inset-0 object-cover "
-=======
-                    className="absolute inset-0 object-cover"
->>>>>>> Stashed changes
                     priority={index === 0}
                   />
                   <div className="absolute inset-0 bg-black opacity-20"></div>
