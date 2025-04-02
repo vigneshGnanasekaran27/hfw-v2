@@ -109,7 +109,7 @@ const TrainingTypesSection = () => {
   ];
 
   return (
-    <section id="training" className="py-20 mt-20">
+    <section id="training" className="py-20 mt-18">
       <div className="container mx-auto px-4">
         {/* Enhanced Header Section */}
         <div className="text-center mb-20">

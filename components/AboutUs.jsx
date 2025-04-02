@@ -10,8 +10,10 @@ import {
   PieChart,
   Building2,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const AboutUs = () => {
+  const router = useRouter();
   const [activeService, setActiveService] = useState(null);
   const [rotation, setRotation] = useState(0);
   const [isRotating, setIsRotating] = useState(false);
@@ -19,68 +21,69 @@ const AboutUs = () => {
 
   const services = [
     {
-      title: "Performance Tracking",
+      title: "HopeFit Wellness Kitchen",
       icon: PieChart,
       description:
-        "Comprehensive fitness analysis and progress monitoring to help you understand and optimize your fitness journey.",
-      ringColor: "border-blue-500",
+        "Nutritious and delicious meals crafted to support your fitness goals, whether for weight loss, muscle gain, or overall wellness.",
       iconColor: "text-blue-600",
+      link: "/kitchen",
     },
     {
-      title: "Personalized Training",
+      title: "Lifestyle Fitness Training",
       icon: Target,
       description:
-        "Tailored workout plans designed specifically for your unique body, goals, and fitness level.",
-      ringColor: "border-green-500",
+        "Customized workout programs tailored to fit your daily routine, helping you stay active and achieve long-term health goals.",
       iconColor: "text-green-600",
+      link: "/training",
     },
     {
-      title: "Nutrition Guidance",
+      title: "Fitness Apparel",
       icon: Heart,
       description:
-        "Holistic nutrition consultancy that complements your fitness routine and supports overall wellness.",
-      ringColor: "border-red-500",
+        "Premium-quality fitness wear designed for comfort, style, and peak performance during workouts and daily activities.",
       iconColor: "text-red-600",
+      link: "/shop",
     },
     {
-      title: "Community Support",
+      title: "Fitness Calculators",
       icon: Users,
       description:
-        "Join a supportive network of individuals committed to personal growth and collective success.",
-      ringColor: "border-purple-500",
+        "Smart fitness tools to calculate calories, macros, BMI, and more, helping you track and optimize your fitness progress.",
       iconColor: "text-purple-600",
+      link: "/calculator",
     },
     {
-      title: "High-Intensity Workouts",
-      icon: Zap,
-      description:
-        "Dynamic, challenging workout programs that push your limits and unlock your potential.",
-      ringColor: "border-yellow-500",
-      iconColor: "text-yellow-600",
-    },
-    {
-      title: "Wellness Workshops",
+      title: "Health & Fitness Workshops",
       icon: Award,
       description:
-        "Educational sessions designed to empower you with knowledge about fitness, nutrition, and holistic health.",
-      ringColor: "border-teal-500",
+        "Informative sessions led by experts, covering nutrition, exercise, mental well-being, and sustainable fitness habits.",
       iconColor: "text-teal-600",
+      link: "/workshop",
+    },
+    {
+      title: "Fitness Events",
+      icon: Zap,
+      description:
+        "Exciting community-driven fitness challenges, marathons, and workshops to keep you motivated and engaged.",
+      iconColor: "text-yellow-600",
+      link: "/events",
     },
   ];
+  
 
   useEffect(() => {
-    // Start automatic rotation
+    // Start automatic rotation at a slower speed
     rotationIntervalRef.current = setInterval(() => {
-      setRotation((prevRotation) => (prevRotation + 3) % 360);
-    }, 50);
-
-    // Cleanup interval on component unmount
+      setRotation((prevRotation) => (prevRotation + 1) % 360); // Slower speed (2 degrees instead of 3)
+    }, 100); // 100ms interval instead of 50ms
+  
     return () => {
       if (rotationIntervalRef.current) {
         clearInterval(rotationIntervalRef.current);
       }
     };
   }, []);
+  
 
   const handleMouseEnter = (serviceTitle) => {
     // Pause rotation when hovering
@@ -92,25 +95,31 @@ const AboutUs = () => {
   };
 
   const handleMouseLeave = () => {
-    // Resume rotation
-    rotationIntervalRef.current = setInterval(() => {
-      setRotation((prevRotation) => (prevRotation + 3) % 360);
-    }, 100);
-    setIsRotating(true);
+    if (!isRotating) {
+      rotationIntervalRef.current = setInterval(() => {
+        setRotation((prevRotation) => (prevRotation + 2) % 360);
+      }, 100); // Maintain the same 100ms speed
+      setIsRotating(true);
+    }
     setActiveService(null);
   };
+  
+
+  const handleServiceClick = (service) => {
+    router.push(service.link);
+  }
 
   return (
     // <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50 overflow-hidden">
-    <section className="py-16 overflow-hidden" id="about">
+    <section className="py-16 overflow-hidden mt-28" id="about">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-emerald-100 rounded-full mb-6 shadow-sm border border-emerald-200">
-            <Building2 className="w-10 h-10 text-emerald-600  " />
+            <Building2 className="w-8 h-8 text-emerald-600  " />
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold   mb-4">About Us</h2>
-          <p className="text-base md:text-xl   max-w-3xl mx-auto">
+          <h2 className="text-4xl   font-bold   mb-4">About Us</h2>
+          <p className="text-base md:text-lg   max-w-3xl mx-auto">
             Discover the heart and soul of HOPE FIT WELLNESS
           </p>
         </div>
@@ -168,6 +177,7 @@ const AboutUs = () => {
                       className={`cursor-pointer hover:scale-110 transition-transform duration-300 flex flex-col items-center`}
                       onMouseEnter={() => handleMouseEnter(service.title)}
                       onMouseLeave={handleMouseLeave}
+                      onClick={() => handleServiceClick(service)}
                     >
                       <service.icon
                         size={40}
@@ -202,7 +212,7 @@ const AboutUs = () => {
                       HOPE FIT WELLNESS
                     </h3>
                     <p className="text-xs md:text-sm   mt-1">
-                      Hover to explore our services
+                      Click to explore our services
                     </p>
                   </div>
                 )}

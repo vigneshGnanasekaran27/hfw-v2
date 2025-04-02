@@ -54,7 +54,7 @@ export default function EventSection() {
         {/* Improved Header Section */}
         <div className="text-center mb-14">
           <div className="inline-flex items-center justify-center p-3 bg-cyan-100 rounded-full mb-6 shadow-md border border-cyan-200 dark:bg-cyan-900 dark:border-cyan-800">
-            <Trophy className="w-10 h-10 text-cyan-600 dark:text-cyan-400" />
+            <Trophy className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />
           </div>
 
           <h2 className="text-4xl font-bold mb-4 text-gray-800 dark:text-white">

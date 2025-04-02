@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/legacy/image";
-import profil from "../images/image copy 5.png";
 import {
   Linkedin,
   X,
@@ -16,7 +15,7 @@ const FounderSection = () => {
   const founderInfo = {
     name: "Vignesh Gnanasekaran",
     role: "Founder & CEO",
-    image: profil,
+    image: "",
     bio: "Passionate about transforming lives through fitness and wellness. With expertise in personal training and nutrition, I founded HopeFit Wellness to help people achieve their health goals through personalized, science-based approaches.",
     achievements: [
       "Certified Personal Trainer",
@@ -57,10 +56,10 @@ const FounderSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center p-2 bg-teal-100 rounded-full mb-6 shadow-sm border border-teal-200">
-            <Medal className="w-10 h-10 text-teal-600  " />
+            <Medal className="w-8 h-8 text-teal-600  " />
           </div>
-          <h2 className="text-5xl font-bold mb-6 ">Leadership & Vision</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-6 ">Leadership & Vision</h2>
+          <p className="text-lg text-black  dark:text-white max-w-3xl mx-auto">
             Building a community of health and wellness through expert guidance
             and personalized care.
           </p>
@@ -92,7 +91,7 @@ const FounderSection = () => {
               <div>
                 <h3 className="text-3xl font-bold mb-2">{founderInfo.name}</h3>
                 <p className="text-xl text-primary mb-6">{founderInfo.role}</p>
-                <p className="text-gray-600 leading-relaxed mb-8">
+                <p className="text-black  dark:text-white leading-relaxed mb-8">
                   {founderInfo.bio}
                 </p>
               </div>
@@ -106,7 +105,9 @@ const FounderSection = () => {
                   {founderInfo.achievements.map((achievement, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <Medal className="w-5 h-5 text-primary" />
-                      <span className="text-gray-700">{achievement}</span>
+                      <span className="text-black  dark:text-white">
+                        {achievement}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -123,7 +124,9 @@ const FounderSection = () => {
                       </div>
                       <div>
                         <h5 className="font-semibold mb-1">{value.title}</h5>
-                        <p className="text-gray-600">{value.description}</p>
+                        <p className="text-black  dark:text-white">
+                          {value.description}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -134,31 +137,31 @@ const FounderSection = () => {
               <div className="flex items-center gap-4 pt-4">
                 <a
                   href={founderInfo.social.linkedin}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-primary/10 transition-colors"
+                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
                   title="LinkedIn"
                 >
-                  <Linkedin className="w-6 h-6 text-gray-600 hover:text-primary" />
+                  <Linkedin className="w-6 h-6 text-blue-600 dark:text-blue-500 hover:text-blue-700" />
                 </a>
                 <a
                   href={founderInfo.social.twitter}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-primary/10 transition-colors"
+                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
                   title="Twitter"
                 >
-                  <X className="w-6 h-6 text-gray-600 hover:text-primary" />
+                  <X className="w-6 h-6 text-black dark:text-gray-200 hover:text-blue-500" />
                 </a>
                 <a
                   href={founderInfo.social.instagram}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-primary/10 transition-colors"
+                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors"
                   title="Instagram"
                 >
-                  <Instagram className="w-6 h-6 text-gray-600 hover:text-primary" />
+                  <Instagram className="w-6 h-6 text-pink-600 dark:text-pink-500 hover:text-pink-700" />
                 </a>
                 <a
                   href={founderInfo.social.youtube}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-primary/10 transition-colors"
+                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
                   title="Youtube"
                 >
-                  <Youtube className="w-6 h-6 text-gray-600 hover:text-primary" />
+                  <Youtube className="w-6 h-6 text-red-600 dark:text-red-500 hover:text-red-700" />
                 </a>
               </div>
             </div>
@@ -167,7 +170,7 @@ const FounderSection = () => {
           {/* Future Growth Note */}
           <div className="mt-20 text-center bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-8">
             <h3 className="text-2xl font-bold mb-4">Growing Together</h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-black  dark:text-white max-w-2xl mx-auto">
               As HopeFit Wellness continues to grow, we're excited about
               building a team of passionate professionals dedicated to
               transforming lives through fitness and wellness. Stay tuned for
