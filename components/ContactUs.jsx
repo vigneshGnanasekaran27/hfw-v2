@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import { Send, mobileOutgoing, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, PhoneOutgoing, CheckCircle, AlertCircle } from "lucide-react";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -118,7 +118,7 @@ export default function ContactUs() {
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center p-3 bg-blue-50 dark:bg-blue-900/30 rounded-full mb-6">
-            <mobileOutgoing className="w-8 h-8 text-blue-500 dark:text-blue-400" />
+            <PhoneOutgoing className="w-8 h-8 text-blue-500 dark:text-blue-400" />
           </div>
           <h2 className="text-3xl font-bold mb-3 text-gray-800 dark:text-gray-100">Get in Touch</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">

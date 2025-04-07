@@ -6,7 +6,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import Kitchen from "..//images/SlidingBanner/kitchen.jpeg";
-import Kitchen_mobile from "..//images/SlidingBanner/kitchen_mobile.png";
 import Training from "..//images/SlidingBanner/training.png";
 import Cal from "..//images/SlidingBanner/cal.png";
 import Shop from "..//images/SlidingBanner/shop.jpeg";
@@ -17,7 +16,7 @@ export default function SlidingBanner() {
   const slides = [
     {
       image: Kitchen,
-      mobileImage: Kitchen_mobile,
+      mobileImage: Kitchen,
       title: "HopeFit Wellness Kitchen",
       subtitle: "Nutritious & Delicious Meals for Your Health",
       cta: "Explore Our Menu",

@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">Hope Fit Wellness</h3>
+            <h3 className="text-2xl font-bold mb-4">HopeFit Wellness</h3>
             <p className="text-gray-400 mb-4">
               Empowering individuals to achieve their fitness and wellness goals
               through personalized coaching and comprehensive programs.
@@ -45,15 +45,15 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/kitchen"
                   className="text-gray-400 hover:text-white"
                 >
-                  Services
+                  Kitchen 
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-400 hover:text-white">
-                  Blog
+                <Link href="/training" className="text-gray-400 hover:text-white">
+                  Training
                 </Link>
               </li>
               <li>
@@ -79,20 +79,13 @@ const Footer = () => {
                   Personal Training
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/nutrition-coaching"
-                  className="text-gray-400 hover:text-white"
-                >
-                  Nutrition Coaching
-                </Link>
-              </li>
+             
               <li>
                 <Link
                   href="/group-classes"
                   className="text-gray-400 hover:text-white"
                 >
-                  Group Classes
+                  Group Training
                 </Link>
               </li>
               <li>
@@ -100,7 +93,23 @@ const Footer = () => {
                   href="/online-programs"
                   className="text-gray-400 hover:text-white"
                 >
-                  Online Programs
+                  Online Training
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/nutrition-coaching"
+                  className="text-gray-400 hover:text-white"
+                >
+                  Kitchen 
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/nutrition-coaching"
+                  className="text-gray-400 hover:text-white"
+                >
+                  Shop
                 </Link>
               </li>
               <li>
@@ -120,15 +129,15 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-center">
                 <i className="fas fa-map-marker-alt mr-2 text-gray-400"></i>
-                <span>123 Fitness Street, Wellness City</span>
+                <span>Old Mahabalipuram Road, Rajiv Gandhi Salai, Padur</span>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-phone mr-2 text-gray-400"></i>
-                <span>(555) 123-4567</span>
+                <span>7397355404</span>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-envelope mr-2 text-gray-400"></i>
-                <span>support@fitlifeacademy.com</span>
+                <span>hopefitwellness@gmail.com</span>
               </li>
             </ul>
 

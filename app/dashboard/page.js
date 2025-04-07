@@ -10,8 +10,10 @@ import {
   Settings,
   Users,
   FileText,
+  LogOut,
 } from "lucide-react";
-import { jwtDecode } from "jwt-decode";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 import TrainingDashboard from "@/dashboard/user/TrainingDashboard";
 import KitchenDashboard from "@/dashboard/user/KitchenDashboard";
@@ -20,56 +22,39 @@ import HomeOverview from "@/dashboard/user/HomeOverview";
 import AdminHomeOverview from "@/dashboard/admin/AdminHomeOverview";
 import AdminTrainingDashboard from "@/dashboard/admin/AdminTrainingDashboard";
 import AdminKitchenDashboard from "@/dashboard/admin/AdminKitchenDashboard";
-import LoginPopup from "@/dashboard/LoginPopup"; // Adjust the import path based on your file structure
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [activeModule, setActiveModule] = useState("home");
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const { user, loading, hasRole, signout } = useAuth();
+  const router = useRouter();
 
+  // Redirect to sign-in if not authenticated
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem("token");
+    if (!loading && !user) {
+      router.push("/auth/signin");
+    }
+  }, [user, loading, router]);
 
-      if (!token) {
-        // Show the login popup if no token is found
-        setShowLoginPopup(true);
-        return;
-      }
-
-      try {
-        const decodedToken = jwtDecode(token);
-        setIsAdmin(decodedToken.is_admin ?? false);
-      } catch (error) {
-        console.error("Invalid token:", error);
-        setIsAdmin(false);
-        // Show the login popup if token is invalid
-        setShowLoginPopup(true);
-      }
-    };
-
-    checkAuth();
-
-    // Listen for storage changes (e.g., if token is removed in another tab)
-    window.addEventListener("storage", checkAuth);
-
-    return () => {
-      window.removeEventListener("storage", checkAuth);
-    };
-  }, []);
-
-  const handleNavigateToLogin = () => {
-    window.location.href = "/auth/signin"; // Replace with your login page URL
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await signout();
+      router.push("/auth/signin");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
   };
 
-  const handleNavigateToRoot = () => {
-    window.location.href = "/"; // Navigate to root page
-  };
+  // Wait for loading to finish
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  const handleClosePopup = () => {
-    setShowLoginPopup(false);
-  };
+  // If no user, render nothing (middleware or useEffect will redirect)
+  if (!user) {
+    return null;
+  }
 
   const userModules = [
     { id: "home", name: "Home", icon: Home },
@@ -85,7 +70,7 @@ const DashboardLayout = () => {
     { id: "settings", name: "Settings", icon: Settings },
   ];
 
-  const modules = isAdmin ? adminModules : userModules;
+  const modules = hasRole("admin") ? adminModules : userModules;
 
   // Access Denied component for non-admin users trying to access admin routes
   const AccessDenied = () => (
@@ -95,7 +80,7 @@ const DashboardLayout = () => {
       </div>
       <h2 className="text-2xl font-bold text-gray-800 mb-2">Access Denied</h2>
       <p className="text-gray-600">
-        You don't have permission to access this page.
+        You don&apos;t have permission to access this page.
       </p>
       <button
         onClick={() => setActiveModule("home")}
@@ -109,17 +94,25 @@ const DashboardLayout = () => {
   const renderContent = () => {
     switch (activeModule) {
       case "home":
-        return isAdmin ? <AdminHomeOverview /> : <HomeOverview />;
+        return hasRole("admin") ? <AdminHomeOverview /> : <HomeOverview />;
       case "training":
-        return isAdmin ? <AdminTrainingDashboard /> : <TrainingDashboard />;
+        return hasRole("admin") ? (
+          <AdminTrainingDashboard />
+        ) : (
+          <TrainingDashboard />
+        );
       case "kitchen":
-        return isAdmin ? <AdminKitchenDashboard /> : <KitchenDashboard />;
+        return hasRole("admin") ? (
+          <AdminKitchenDashboard />
+        ) : (
+          <KitchenDashboard />
+        );
       case "users":
-        return isAdmin ? <div>User Management</div> : <AccessDenied />;
+        return hasRole("admin") ? <div>User Management</div> : <AccessDenied />;
       case "reports":
-        return isAdmin ? <div>Reports</div> : <AccessDenied />;
+        return hasRole("admin") ? <div>Reports</div> : <AccessDenied />;
       case "settings":
-        return isAdmin ? <div>Settings</div> : <AccessDenied />;
+        return hasRole("admin") ? <div>Settings</div> : <AccessDenied />;
       default:
         return <div>Module under development</div>;
     }
@@ -127,20 +120,11 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Login Popup */}
-      {showLoginPopup && (
-        <LoginPopup
-          onClose={handleClosePopup}
-          onNavigateToLogin={handleNavigateToLogin}
-          onNavigateToRoot={handleNavigateToRoot}
-        />
-      )}
-
       {/* Sidebar */}
       <div
         className={`${
           isSidebarOpen ? "w-64" : "w-20"
-        } bg-gray-900 text-white transition-all duration-300 ease-in-out`}
+        } bg-gray-900 text-white transition-all duration-300 ease-in-out flex flex-col`}
       >
         <div className="p-4 flex justify-between items-center">
           <h2
@@ -148,7 +132,7 @@ const DashboardLayout = () => {
               isSidebarOpen ? "block" : "hidden"
             } font-bold text-xl`}
           >
-            {isAdmin ? "Admin Dashboard" : "Dashboard"}
+            {hasRole("admin") ? "Admin Dashboard" : "Dashboard"}
           </h2>
           <button
             onClick={() => setSidebarOpen(!isSidebarOpen)}
@@ -163,15 +147,15 @@ const DashboardLayout = () => {
           <div className="px-4 py-2">
             <div
               className={`rounded-md p-2 text-sm ${
-                isAdmin ? "bg-green-800" : "bg-gray-800"
+                hasRole("admin") ? "bg-green-800" : "bg-gray-800"
               }`}
             >
-              Status: {isAdmin ? "Admin" : "User"}
+              Status: {hasRole("admin") ? "Admin" : "User"}
             </div>
           </div>
         )}
 
-        <nav className="mt-6">
+        <nav className="mt-6 flex-grow">
           {modules.map((module) => (
             <button
               key={module.id}
@@ -187,6 +171,19 @@ const DashboardLayout = () => {
             </button>
           ))}
         </nav>
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className={`w-full flex items-center p-3 hover:bg-red-800 transition-colors ${
+            isSidebarOpen ? "mt-auto" : "mt-auto"
+          }`}
+        >
+          <LogOut size={20} />
+          <span className={`${isSidebarOpen ? "ml-4" : "hidden"}`}>
+            Logout
+          </span>
+        </button>
       </div>
 
       {/* Main Content */}

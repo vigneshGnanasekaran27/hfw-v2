@@ -5,10 +5,12 @@ import { ArrowRight, Clock, Users, CheckCircle, MapPin } from "lucide-react";
 import { trainingData } from "../trainingData";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const ProgramPage = ({ params }) => {
   const [program, setProgram] = useState(null);
   const router = useRouter();
+  const { user, loading } = useAuth();
 
   // Find the program from the data
   useEffect(() => {
@@ -27,10 +29,8 @@ const ProgramPage = ({ params }) => {
   }
 
   const handleJoinClick = () => {
-    // Check if user is logged in by verifying token in localStorage
-    const token = localStorage.getItem("token");
-
-    if (!token) {
+    // Check if user is logged in using AuthContext
+    if (!user) {
       // User is not logged in, redirect to login page with query parameters
       const currentPath = window.location.pathname;
 

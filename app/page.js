@@ -1,3 +1,7 @@
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 import Navigation from "../components/Navigation";
 import SlidingBanner from "../components/SlidingBanner";
 import KitchenSection from "../components/KitchenSection";
@@ -16,7 +20,28 @@ import NutritionConsultation from "../components/NutritionConsultation";
 import WorkoutSchedulesSection from "@/components/WorkoutSchedulesSection";
 import TrainingSection from "@/components/TrainingSection";
 import CalculatorLanding from "@/components/CalculatorLanding";
+
 export default function Home() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  // Redirect logged-in users to dashboard
+  useEffect(() => {
+    if (!loading && user) {
+      router.push("/dashboard");
+    }
+  }, [user, loading, router]);
+
+  // Show loading state while checking auth
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // If user is logged in, don't render the page (redirect will happen)
+  if (user) {
+    return null;
+  }
+
   const offers = [
     "20% off first purchase",
     "Free shipping on orders over $50",

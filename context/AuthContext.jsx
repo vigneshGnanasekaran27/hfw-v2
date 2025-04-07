@@ -12,27 +12,29 @@ export function AuthProvider({ children }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Check if user is already logged in (e.g., check token in localStorage)
-    const token = localStorage.getItem("token");
-    if (token) {
-      // Validate token with your backend if needed
-      // For now, we'll just set a basic user object
-      setUser({ token });
-    }
-    setLoading(false);
+    checkSession();
   }, []);
 
-  const signup = async (userData) => {
+  const checkSession = async () => {
+    try {
+      setLoading(true);
+      const response = await authService.checkSession();
+      setUser(response.user || null);
+    } catch (err) {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signup = async (credentials) => {
     try {
       setError(null);
-      const response = await authService.signup(userData);
-      if (response.token) {
-        localStorage.setItem("token", response.token);
-        setUser(response.user);
-      }
+      const response = await authService.signup(credentials);
+      setUser(response.user);
       return response;
     } catch (err) {
-      setError(err.message);
+      setError(err.message); // err.message is now a string
       throw err;
     }
   };
@@ -41,20 +43,22 @@ export function AuthProvider({ children }) {
     try {
       setError(null);
       const response = await authService.signin(credentials);
-      if (response.token) {
-        localStorage.setItem("token", response.token);
-        setUser(response.user);
-      }
+      setUser(response.user);
       return response;
     } catch (err) {
-      setError(err.message);
+      setError(err.message); // err.message is now a string
       throw err;
     }
   };
 
-  const signout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
+  const signout = async () => {
+    try {
+      await authService.signout();
+      setUser(null);
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
   };
 
   const changePassword = async (passwordData) => {
@@ -87,6 +91,8 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const hasRole = (role) => user?.role === role;
+
   const value = {
     user,
     loading,
@@ -97,6 +103,8 @@ export function AuthProvider({ children }) {
     changePassword,
     forgotPassword,
     resetPassword,
+    checkSession,
+    hasRole,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

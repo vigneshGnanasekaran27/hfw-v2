@@ -2,85 +2,49 @@
 
 import { useState, Suspense } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 
-// Create a separate client component for the parts that use useSearchParams
 function SignUpForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-  });
-
+  const [formData, setFormData] = useState({ name: "", email: "", password: "", password_confirmation: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const { signup, error } = useAuth();
   const router = useRouter();
-
-  // Import useSearchParams only in this client component
-  const { useSearchParams } = require("next/navigation");
   const searchParams = useSearchParams();
-
-  // Extract redirect path and program title from URL query parameters
   const redirectPath = searchParams?.get("redirect");
   const programTitle = searchParams?.get("programTitle");
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-    }
-
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-    } else if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
-    }
-
-    if (formData.password !== formData.password_confirmation) {
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid";
+    if (!formData.password) newErrors.password = "Password is required";
+    else if (formData.password.length < 8) newErrors.password = "Password must be at least 8 characters";
+    if (formData.password !== formData.password_confirmation)
       newErrors.password_confirmation = "Passwords do not match";
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (validateForm()) {
       try {
-        await signup(formData);
-        if (redirectPath) {
-          router.push(redirectPath);
-        } else {
-          // Otherwise go to dashboard as usual
-          router.push("/dashboard");
-        }
+        // Only send name, email, and password to backend
+        await signup({ name: formData.name, email: formData.email, password: formData.password });
+        router.push(redirectPath || "/dashboard");
       } catch (err) {
-        // Error is handled by AuthContext
+        // Error handled by AuthContext
       }
     }
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleGoogleSignUp = () => {
-    // Google sign-up logic will be implemented later
-    console.log("Google Sign-Up clicked");
   };
 
   return (
@@ -102,26 +66,17 @@ function SignUpForm() {
             />
           </svg>
         </div>
-        <h2 className="text-2xl font-semibold text-gray-800">
-          Create a new account
-        </h2>
-        <p className="text-gray-500 mt-2">
-          Please fill in your information to continue
-        </p>
+        <h2 className="text-2xl font-semibold text-gray-800">Create a new account</h2>
+        <p className="text-gray-500 mt-2">Please fill in your information to continue</p>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-md text-sm">
-          {error}
-        </div>
+        <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-md text-sm">{error}</div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
             Full Name
           </label>
           <input
@@ -135,16 +90,11 @@ function SignUpForm() {
             } focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-500 transition`}
             placeholder="Enter your full name"
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-          )}
+          {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
         </div>
 
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
             Email Address
           </label>
           <input
@@ -158,16 +108,11 @@ function SignUpForm() {
             } focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-500 transition`}
             placeholder="Enter your email"
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-          )}
+          {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
         </div>
 
         <div>
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
             Password
           </label>
           <div className="relative">
@@ -190,16 +135,11 @@ function SignUpForm() {
               {showPassword ? "Hide" : "Show"}
             </button>
           </div>
-          {errors.password && (
-            <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-          )}
+          {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
         </div>
 
         <div>
-          <label
-            htmlFor="password_confirmation"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+          <label htmlFor="password_confirmation" className="block text-sm font-medium text-gray-700 mb-1">
             Confirm Password
           </label>
           <div className="relative">
@@ -210,9 +150,7 @@ function SignUpForm() {
               value={formData.password_confirmation}
               onChange={handleChange}
               className={`block w-full px-4 py-3 rounded-md border ${
-                errors.password_confirmation
-                  ? "border-red-300"
-                  : "border-gray-300"
+                errors.password_confirmation ? "border-red-300" : "border-gray-300"
               } focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-500 transition`}
               placeholder="Confirm your password"
             />
@@ -225,33 +163,27 @@ function SignUpForm() {
             </button>
           </div>
           {errors.password_confirmation && (
-            <p className="mt-1 text-sm text-red-500">
-              {errors.password_confirmation}
-            </p>
+            <p className="mt-1 text-sm text-red-500">{errors.password_confirmation}</p>
           )}
         </div>
 
-        <div>
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium text-sm"
-          >
-            Create Account
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium text-sm"
+        >
+          Create Account
+        </button>
 
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">
-              Or continue with
-            </span>
+            <span className="px-2 bg-white text-gray-500">Or continue with</span>
           </div>
         </div>
 
-        <GoogleSignInButton onClick={handleGoogleSignUp} />
+        <GoogleSignInButton />
 
         <div className="text-center">
           <p className="text-sm text-gray-600">
@@ -259,9 +191,7 @@ function SignUpForm() {
             <Link
               href={
                 redirectPath
-                  ? `/auth/signin?redirect=${encodeURIComponent(
-                      redirectPath
-                    )}&programTitle=${encodeURIComponent(programTitle || "")}`
+                  ? `/auth/signin?redirect=${encodeURIComponent(redirectPath)}&programTitle=${encodeURIComponent(programTitle || "")}`
                   : "/auth/signin"
               }
               className="text-purple-600 hover:text-purple-800 font-medium"
@@ -279,10 +209,7 @@ function SignUpForm() {
             Terms of Service
           </Link>{" "}
           and{" "}
-          <Link
-            href="/privacy"
-            className="text-purple-600 hover:text-purple-800"
-          >
+          <Link href="/privacy" className="text-purple-600 hover:text-purple-800">
             Privacy Policy
           </Link>
         </p>
@@ -291,7 +218,6 @@ function SignUpForm() {
   );
 }
 
-// Loading fallback component
 function FormSkeleton() {
   return (
     <div className="w-full max-w-md animate-pulse">
@@ -314,20 +240,14 @@ function FormSkeleton() {
   );
 }
 
-// Main SignUpPage component
 export default function SignUpPage() {
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
-      {/* Left side - Decorative area */}
       <div className="hidden md:block bg-purple-700 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
         <div className="flex flex-col justify-center h-full px-12 relative z-10">
-          <h1 className="text-4xl font-light text-white mb-6">
-            Join our platform
-          </h1>
-          <p className="text-purple-200 text-lg mb-8">
-            Create an account to access all our features
-          </p>
+          <h1 className="text-4xl font-light text-white mb-6">Join our platform</h1>
+          <p className="text-purple-200 text-lg mb-8">Create an account to access all our features</p>
           <div className="flex items-center space-x-3 text-purple-200">
             <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
               <svg
@@ -381,8 +301,6 @@ export default function SignUpPage() {
           </div>
         </div>
       </div>
-
-      {/* Right side - Form area */}
       <div className="flex items-center justify-center p-8 bg-white">
         <Suspense fallback={<FormSkeleton />}>
           <SignUpForm />

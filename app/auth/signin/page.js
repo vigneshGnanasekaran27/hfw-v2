@@ -2,11 +2,10 @@
 
 import { useState, Suspense } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 
-// Create a separate client component for parts that use useSearchParams
 function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,51 +13,29 @@ function SignInForm() {
   const [errors, setErrors] = useState({});
   const { signin, error } = useAuth();
   const router = useRouter();
-
-  // Import useSearchParams in the client component
-  const { useSearchParams } = require("next/navigation");
   const searchParams = useSearchParams();
-
   const redirectPath = searchParams?.get("redirect");
   const programTitle = searchParams?.get("programTitle");
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Email is invalid";
-    }
-
-    if (!password) {
-      newErrors.password = "Password is required";
-    }
-
+    if (!email) newErrors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email is invalid";
+    if (!password) newErrors.password = "Password is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (validateForm()) {
       try {
         await signin({ email, password });
-        if (redirectPath) {
-          router.push(redirectPath);
-        } else {
-          router.push("/dashboard");
-        }
+        router.push(redirectPath || "/dashboard");
       } catch (err) {
-        // Error is handled by AuthContext
+        // Error handled by AuthContext
       }
     }
-  };
-
-  const handleGoogleSignIn = () => {
-    // Google sign-in logic will be implemented later
-    console.log("Google Sign-In clicked");
   };
 
   return (
@@ -96,10 +73,7 @@ function SignInForm() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
             Email Address
           </label>
           <input
@@ -112,23 +86,15 @@ function SignInForm() {
             } focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-500 transition`}
             placeholder="Enter your email"
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-          )}
+          {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
         </div>
 
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password
             </label>
-            <Link
-              href="/auth/forgot_password"
-              className="text-sm text-green-600 hover:text-green-800"
-            >
+            <Link href="/auth/forgot_password" className="text-sm text-green-600 hover:text-green-800">
               Forgot password?
             </Link>
           </div>
@@ -151,32 +117,26 @@ function SignInForm() {
               {showPassword ? "Hide" : "Show"}
             </button>
           </div>
-          {errors.password && (
-            <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-          )}
+          {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
         </div>
 
-        <div>
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium text-sm"
-          >
-            {redirectPath ? "Sign In & Continue" : "Sign In"}
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium text-sm"
+        >
+          {redirectPath ? "Sign In & Continue" : "Sign In"}
+        </button>
 
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">
-              Or continue with
-            </span>
+            <span className="px-2 bg-white text-gray-500">Or continue with</span>
           </div>
         </div>
 
-        <GoogleSignInButton onClick={handleGoogleSignIn} />
+        <GoogleSignInButton />
 
         <div className="text-center">
           <p className="text-sm text-gray-600">
@@ -184,9 +144,7 @@ function SignInForm() {
             <Link
               href={
                 redirectPath
-                  ? `/auth/signup?redirect=${encodeURIComponent(
-                      redirectPath
-                    )}&programTitle=${encodeURIComponent(programTitle || "")}`
+                  ? `/auth/signup?redirect=${encodeURIComponent(redirectPath)}&programTitle=${encodeURIComponent(programTitle || "")}`
                   : "/auth/signup"
               }
               className="text-purple-600 hover:text-purple-800 font-medium"
@@ -204,10 +162,7 @@ function SignInForm() {
             Terms of Service
           </Link>{" "}
           and{" "}
-          <Link
-            href="/privacy"
-            className="text-purple-600 hover:text-purple-800"
-          >
+          <Link href="/privacy" className="text-purple-600 hover:text-purple-800">
             Privacy Policy
           </Link>
         </p>
@@ -216,7 +171,6 @@ function SignInForm() {
   );
 }
 
-// Loading fallback component
 function FormSkeleton() {
   return (
     <div className="w-full max-w-md animate-pulse">
@@ -239,20 +193,14 @@ function FormSkeleton() {
   );
 }
 
-// Main SignInPage component
 export default function SignInPage() {
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
-      {/* Left side - Decorative area */}
       <div className="hidden md:block bg-purple-700 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
         <div className="flex flex-col justify-center h-full px-12 relative z-10">
-          <h1 className="text-4xl font-light text-white mb-6">
-            Welcome to our platform
-          </h1>
-          <p className="text-purple-200 text-lg mb-8">
-            Sign in to access your personalized dashboard
-          </p>
+          <h1 className="text-4xl font-light text-white mb-6">Welcome to our platform</h1>
+          <p className="text-purple-200 text-lg mb-8">Sign in to access your personalized dashboard</p>
           <div className="flex items-center space-x-3 text-purple-200">
             <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
               <svg
@@ -306,8 +254,6 @@ export default function SignInPage() {
           </div>
         </div>
       </div>
-
-      {/* Right side - Form area */}
       <div className="flex items-center justify-center p-8 bg-white">
         <Suspense fallback={<FormSkeleton />}>
           <SignInForm />
