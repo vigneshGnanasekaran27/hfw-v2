@@ -19,6 +19,7 @@
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-markdown": "^10.1.0",
+    "react-swipeable": "^7.0.2",
     "recharts": "^2.14.1",
     "resend": "^4.0.1",
     "vanta": "^0.5.24"

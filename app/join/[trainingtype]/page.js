@@ -112,6 +112,7 @@ const JoinForm = () => {
       timeZone: "",
       formattedDateTime: "",
       timeZoneDisplay: "",
+      communityName: "",
     },
   });
 
@@ -145,6 +146,7 @@ const JoinForm = () => {
   const handleFormSubmit = async (e) => {
     if (step < 7) return;
     e.preventDefault();
+    console.log("Form submitted with training details:", formData);
 
     setShowScheduler(true);
   };
@@ -276,7 +278,7 @@ const JoinForm = () => {
     "Health Info",
     "Nutrition",
     "Lifestyle",
-    "Schedule",
+    "Schedule Trial",
     "Overview",
   ];
 
@@ -1829,7 +1831,7 @@ const JoinForm = () => {
             </button>
           ) : (
             <button
-              onClick={handleFormSubmit}
+              onClick={handleSubmit}
               className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               Submit

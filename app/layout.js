@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
             />
             <ThemeToggle />
             <ScrollToTopButton />
-            <ConstructionBanner />
+            {/* <ConstructionBanner /> */}
             {children}
           </div>
         </AuthProvider>

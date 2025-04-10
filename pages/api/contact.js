@@ -111,14 +111,26 @@ export default async function handler(req, res) {
       }),
     });
 
-    // Return success response
+    // Check if there was an error in the response
+    if (userEmailResponse.error) {
+      console.error("Email sending error:", userEmailResponse.error);
+      return res.status(400).json({
+        success: false,
+        message: "Failed to deliver email",
+        error: userEmailResponse.error
+      });
+    }
+
+    // Return success response only if email was sent successfully
     return res.status(200).json({
-      userEmailResponse,
+      success: true,
+      id: userEmailResponse.id,
       message: "Email sent successfully",
     });
   } catch (error) {
     console.error("Email sending error:", error);
     return res.status(500).json({
+      success: false,
       message: "Failed to send email",
       error: error.message || "Unknown error",
     });

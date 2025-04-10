@@ -309,6 +309,12 @@ const ReviewInformation = ({ formData }) => {
                   value={formData.scheduleInfo.formattedDateTime}
                 />
               )}
+              {formData.scheduleInfo.communityName && (
+                <InfoLabel
+                  label="Community Name"
+                  value={formData.scheduleInfo.communityName}
+                />
+              )}
             </div>
           </SectionCard>
         )}
